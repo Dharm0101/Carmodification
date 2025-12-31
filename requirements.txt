@@ -1,13 +1,12 @@
+# Core dependencies
 streamlit==1.28.1
 pandas==2.0.3
 plotly==5.18.0
+
+# Database/Excel
 openpyxl==3.1.2
-# Update requirements.txt
-echo "plotly==5.18.0" >> requirements.txt
+sqlalchemy==2.0.23
 
-# Push to GitHub
-git add requirements.txt
-git commit -m "Add plotly"
-git push origin main
-
-# Streamlit Cloud will automatically rebuild
+# Utilities
+python-dateutil==2.8.2
+pytz==2023.3

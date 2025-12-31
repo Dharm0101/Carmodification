@@ -1,32 +1,67 @@
 import streamlit as st
 import sqlite3
 import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import uuid
 import os
 import json
 from io import BytesIO
 import base64
+import hashlib
+import random
+import warnings
+warnings.filterwarnings('ignore')
+
+# Try to import ML libraries, but handle gracefully if not available
+try:
+    from sklearn.cluster import KMeans
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.metrics.pairwise import cosine_similarity
+    ML_AVAILABLE = True
+except ImportError:
+    ML_AVAILABLE = False
+    # Create dummy classes to avoid errors
+    class KMeans:
+        def __init__(self, *args, **kwargs):
+            pass
+        def fit_predict(self, X):
+            return [0] * len(X)
+    class StandardScaler:
+        def fit_transform(self, X):
+            return X
+    def cosine_similarity(a, b):
+        return 0.5
 
 # Constants
 GST_RATE = 0.18
 DB_NAME = "car_mod.db"
 
 # Initialize session state
-if 'user_email' not in st.session_state:
-    st.session_state.user_email = None
-if 'user_name' not in st.session_state:
-    st.session_state.user_name = None
-if 'selected_mods' not in st.session_state:
-    st.session_state.selected_mods = []
-if 'selected_color' not in st.session_state:
-    st.session_state.selected_color = None
-if 'selected_car' not in st.session_state:
-    st.session_state.selected_car = None
-if 'build_complete' not in st.session_state:
-    st.session_state.build_complete = False
+def init_session_state():
+    if 'user_email' not in st.session_state:
+        st.session_state.user_email = None
+    if 'user_name' not in st.session_state:
+        st.session_state.user_name = None
+    if 'selected_mods' not in st.session_state:
+        st.session_state.selected_mods = []
+    if 'selected_color' not in st.session_state:
+        st.session_state.selected_color = None
+    if 'selected_car' not in st.session_state:
+        st.session_state.selected_car = None
+    if 'build_complete' not in st.session_state:
+        st.session_state.build_complete = False
+    if 'view_cart' not in st.session_state:
+        st.session_state.view_cart = False
+    if 'notifications' not in st.session_state:
+        st.session_state.notifications = []
+    if 'dark_mode' not in st.session_state:
+        st.session_state.dark_mode = False
+    if 'admin_mode' not in st.session_state:
+        st.session_state.admin_mode = False
+    if 'current_page' not in st.session_state:
+        st.session_state.current_page = "home"
+
+init_session_state()
 
 # Database connection helper
 def get_db_connection():
@@ -37,6 +72,7 @@ def get_db_connection():
 # Create necessary directories
 os.makedirs("bills", exist_ok=True)
 os.makedirs("exports", exist_ok=True)
+os.makedirs("uploads", exist_ok=True)
 
 # Utility functions
 def valid_email(email):
@@ -50,6 +86,12 @@ def valid_phone(phone):
 def safe_text(text):
     import re
     return re.sub(r"[^A-Za-z0-9]", "_", text)
+
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def generate_referral_code(email):
+    return hashlib.md5(email.encode()).hexdigest()[:8].upper()
 
 def calculate_totals(mods, color, customer_email=None):
     """Calculate subtotal, discounts, GST, and total"""
@@ -66,18 +108,34 @@ def calculate_totals(mods, color, customer_email=None):
     discount_percent = 0
     discount_amount = 0
     
-    if len(mods) >= 3:
+    # Volume discount
+    if len(mods) >= 5:
+        discount_percent += 15
+    elif len(mods) >= 3:
         discount_percent += 10
     
+    # Loyalty discount
     if customer_email:
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT total_visits FROM customers WHERE email = ?", (customer_email,))
+        cursor.execute("SELECT total_visits, loyalty_points FROM customers WHERE email = ?", (customer_email,))
         customer = cursor.fetchone()
         conn.close()
         
-        if customer and customer['total_visits'] > 1:
-            discount_percent += 5
+        if customer:
+            if customer['total_visits'] > 5:
+                discount_percent += 10
+            elif customer['total_visits'] > 1:
+                discount_percent += 5
+    
+    # Festival discount (seasonal)
+    current_month = datetime.now().month
+    festival_months = [1, 10, 12]  # Jan (New Year), Oct (Diwali), Dec (Christmas)
+    if current_month in festival_months:
+        discount_percent += 5
+    
+    # Cap discount at 30%
+    discount_percent = min(discount_percent, 30)
     
     if discount_percent > 0:
         discount_amount = subtotal * (discount_percent / 100)
@@ -120,23 +178,41 @@ st.markdown("""
         border-radius: 10px;
         padding: 1rem;
         margin-bottom: 1rem;
+        background-color: white;
         transition: all 0.3s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
     .mod-card:hover {
         border-color: #667eea;
-        box-shadow: 0 4px 8px rgba(102, 126, 234, 0.1);
+        box-shadow: 0 4px 8px rgba(102, 126, 234, 0.15);
+        transform: translateY(-2px);
     }
     .mod-card.selected {
         border-color: #667eea;
-        background-color: rgba(102, 126, 234, 0.05);
+        background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+        box-shadow: 0 6px 12px rgba(102, 126, 234, 0.2);
     }
     .price-tag {
         font-weight: bold;
         color: #764ba2;
         font-size: 1.2em;
     }
+    .discount-badge {
+        background-color: #28a745;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.8em;
+        margin-left: 8px;
+    }
     .stButton button {
         width: 100%;
+        transition: all 0.3s;
+        border-radius: 8px;
+    }
+    .stButton button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     .success-box {
         background-color: #d4edda;
@@ -152,77 +228,638 @@ st.markdown("""
         padding: 1rem;
         margin: 1rem 0;
     }
+    .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: #dc3545;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .feature-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .car-3d-view {
+        border: 2px solid #dee2e6;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 1rem 0;
+    }
+    .risk-high { color: #dc3545; font-weight: bold; }
+    .risk-medium { color: #ffc107; font-weight: bold; }
+    .risk-low { color: #28a745; font-weight: bold; }
 </style>
 """, unsafe_allow_html=True)
 
-# Header
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    st.markdown("""
-    <div class="main-header">
-        <h1>🚗 Custom Car Modification Studio</h1>
-        <p>Transform your vehicle with premium modifications</p>
-    </div>
-    """, unsafe_allow_html=True)
+# Notification system
+def add_notification(message, type="info"):
+    """Add notification to session state"""
+    notification = {
+        "id": len(st.session_state.notifications),
+        "message": message,
+        "type": type,
+        "time": datetime.now().strftime("%H:%M"),
+        "read": False
+    }
+    st.session_state.notifications.insert(0, notification)
 
-# Sidebar - User Info & Navigation
-with st.sidebar:
-    st.image("https://img.icons8.com/color/96/000000/car.png", width=100)
+def show_notifications():
+    """Display notifications dropdown"""
+    with st.sidebar:
+        if st.session_state.notifications:
+            col1, col2 = st.columns([3, 1])
+            with col1:
+                st.subheader("🔔 Notifications")
+            with col2:
+                if st.button("Clear All"):
+                    st.session_state.notifications = []
+                    st.rerun()
+            
+            unread_count = sum(1 for n in st.session_state.notifications if not n["read"])
+            if unread_count > 0:
+                st.info(f"{unread_count} unread notifications")
+            
+            for notification in st.session_state.notifications[:5]:
+                icon = "🔵" if notification["type"] == "info" else "🟢" if notification["type"] == "success" else "🔴"
+                col1, col2 = st.columns([4, 1])
+                with col1:
+                    st.write(f"{icon} {notification['message']}")
+                    st.caption(f"{notification['time']}")
+                with col2:
+                    if not notification["read"] and st.button("✓", key=f"read_{notification['id']}"):
+                        notification["read"] = True
+                        st.rerun()
+
+# Enhanced Header
+def show_header():
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.markdown("""
+        <div class="main-header">
+            <h1>🚗 Custom Car Modification Studio</h1>
+            <p>Transform your vehicle with premium modifications</p>
+        </div>
+        """, unsafe_allow_html=True)
     
-    if st.session_state.user_email:
-        st.success(f"Welcome, {st.session_state.user_name}!")
-        st.write(f"Email: {st.session_state.user_email}")
+    # Top navigation bar
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
+        if st.button("🏠 Home", use_container_width=True):
+            st.session_state.current_page = "home"
+            st.rerun()
+    with col2:
+        if st.button("🔧 Build", use_container_width=True):
+            st.session_state.current_page = "build"
+            st.rerun()
+    with col3:
+        cart_count = len(st.session_state.selected_mods) + (1 if st.session_state.selected_color else 0)
+        if st.button(f"🛒 Cart ({cart_count})", use_container_width=True):
+            st.session_state.view_cart = True
+            st.rerun()
+    with col4:
+        if st.button("🤖 AI Rec", use_container_width=True):
+            st.session_state.current_page = "ai_recommend"
+            st.rerun()
+    with col5:
+        if st.button("⚠️ Risk", use_container_width=True):
+            st.session_state.current_page = "risk_analysis"
+            st.rerun()
+
+# Enhanced Sidebar
+def show_sidebar():
+    with st.sidebar:
+        if st.session_state.user_email:
+            # User profile section
+            st.markdown(f"""
+            <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+                <h4>👤 {st.session_state.user_name}</h4>
+                <p>{st.session_state.user_email}</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Quick stats
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT total_visits, total_spent, loyalty_points 
+                FROM customers WHERE email = ?
+            """, (st.session_state.user_email,))
+            stats = cursor.fetchone()
+            conn.close()
+            
+            if stats:
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.metric("🏢 Visits", stats['total_visits'])
+                    st.metric("⭐ Points", stats['loyalty_points'])
+                with col2:
+                    st.metric("💰 Spent", f"₹{stats['total_spent']:.2f}")
+            
+            st.markdown("---")
         
-        # Get customer stats
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("""
-            SELECT total_visits, total_spent, loyalty_points 
-            FROM customers WHERE email = ?
-        """, (st.session_state.user_email,))
-        stats = cursor.fetchone()
-        conn.close()
+        # Navigation
+        st.subheader("📱 Navigation")
         
-        if stats:
+        if st.session_state.user_email:
+            menu_items = [
+                ("🏠 Dashboard", "home"),
+                ("🔧 Build & Configure", "build"),
+                ("💰 Pricing", "pricing"),
+                ("📊 Analytics", "reports"),
+                ("📅 Appointments", "appointments"),
+                ("👤 Profile", "profile"),
+                ("👥 Customer Type", "customer_class"),
+                ("📤 Export Data", "export"),
+                ("⚙️ Settings", "settings")
+            ]
+        else:
+            menu_items = [
+                ("🏠 Home", "home"),
+                ("💰 Pricing", "pricing"),
+                ("🔐 Login/Register", "auth")
+            ]
+        
+        for item_name, item_page in menu_items:
+            if st.button(item_name, use_container_width=True):
+                st.session_state.current_page = item_page
+                st.rerun()
+        
+        st.markdown("---")
+        
+        # Quick actions
+        if st.session_state.user_email:
+            st.subheader("⚡ Quick Actions")
             col1, col2 = st.columns(2)
             with col1:
-                st.metric("Visits", stats['total_visits'])
-                st.metric("Loyalty Points", stats['loyalty_points'])
+                if st.button("📋 New Build", use_container_width=True):
+                    st.session_state.current_page = "build"
+                    st.rerun()
+                if st.button("📅 Book", use_container_width=True):
+                    st.session_state.current_page = "appointments"
+                    st.rerun()
             with col2:
-                st.metric("Total Spent", f"₹{stats['total_spent']:.2f}")
+                if st.button("🎮 3D View", use_container_width=True):
+                    st.session_state.current_page = "preview"
+                    st.rerun()
+                if st.button("🚪 Logout", use_container_width=True, type="secondary"):
+                    st.session_state.user_email = None
+                    st.session_state.user_name = None
+                    st.session_state.selected_mods = []
+                    st.session_state.selected_color = None
+                    st.session_state.selected_car = None
+                    add_notification("Logged out successfully", "info")
+                    st.rerun()
         
-        if st.button("🚪 Logout"):
-            st.session_state.user_email = None
-            st.session_state.user_name = None
-            st.session_state.selected_mods = []
-            st.session_state.selected_color = None
-            st.session_state.selected_car = None
-            st.rerun()
-    else:
-        st.info("Please login or register to access all features")
+        # Show notifications
+        if st.session_state.user_email and len(st.session_state.notifications) > 0:
+            show_notifications()
+
+# 1. AI RECOMMENDATION ENGINE
+class AIRecommendationEngine:
+    def __init__(self):
+        self.conn = get_db_connection()
+        
+    def get_user_preferences(self, user_email):
+        """Extract user preferences from purchase history"""
+        cursor = self.conn.cursor()
+        
+        # Get user's purchase history
+        cursor.execute("""
+            SELECT bi.mod_category, COUNT(*) as frequency, 
+                   AVG(bi.price) as avg_spent
+            FROM bill_items bi
+            JOIN bills b ON bi.bill_id = b.bill_id
+            WHERE b.customer_email = ?
+            GROUP BY bi.mod_category
+        """, (user_email,))
+        
+        preferences = cursor.fetchall()
+        
+        # Get user's car info
+        cursor.execute("""
+            SELECT car_model, car_make, car_year 
+            FROM cars 
+            WHERE customer_email = ?
+            LIMIT 1
+        """, (user_email,))
+        car_info = cursor.fetchone()
+        
+        return preferences, car_info
     
-    st.markdown("---")
+    def get_all_modifications(self):
+        """Get all available modifications"""
+        cursor = self.conn.cursor()
+        cursor.execute("""
+            SELECT mod_id, name, price, category, description
+            FROM modifications 
+            WHERE is_active = 1
+        """)
+        return cursor.fetchall()
     
-    # Navigation
-    st.subheader("Navigation")
-    pages = [
-        ("🏠 Home", "home"),
-        ("🔧 New Build", "build"),
-        ("💰 Pricing", "pricing"),
-        ("👤 Profile", "profile"),
-        ("📅 Appointments", "appointments"),
-        ("📊 Reports", "reports"),
-        ("📤 Export Data", "export")
-    ]
+    def calculate_modification_score(self, mod, user_prefs, car_info):
+        """Calculate AI score for a modification (0-100)"""
+        score = 50  # Base score
+        
+        # 1. Category preference boost
+        for pref in user_prefs:
+            if pref['mod_category'] == mod['category']:
+                score += pref['frequency'] * 5  # More purchases = higher preference
+        
+        # 2. Price range suitability
+        total_spent = sum(p['avg_spent'] for p in user_prefs)
+        avg_spent = total_spent / len(user_prefs) if user_prefs else 0
+        
+        if avg_spent > 0:
+            price_ratio = mod['price'] / (avg_spent * 1.5)
+            if 0.5 <= price_ratio <= 1.5:  # Within comfortable price range
+                score += 20
+            elif price_ratio < 0.5:  # Cheaper than usual
+                score += 10
+            else:  # More expensive
+                score -= 10
+        
+        # 3. Car model compatibility
+        if car_info:
+            car_age = datetime.now().year - (car_info['car_year'] or datetime.now().year)
+            
+            # Performance mods for newer cars
+            if mod['category'] == 'Performance' and car_age < 5:
+                score += 10
+            
+            # Safety mods for older cars
+            if mod['category'] == 'Safety' and car_age > 5:
+                score += 10
+        
+        return min(max(score, 0), 100)  # Clamp between 0-100
     
-    if not st.session_state.user_email:
-        pages = [("🏠 Home", "home"), ("💰 Pricing", "pricing"), ("🔐 Login/Register", "auth")]
+    def get_personalized_recommendations(self, user_email, limit=5):
+        """Get AI-powered personalized recommendations"""
+        user_prefs, car_info = self.get_user_preferences(user_email)
+        all_mods = self.get_all_modifications()
+        
+        recommendations = []
+        for mod in all_mods:
+            score = self.calculate_modification_score(mod, user_prefs, car_info)
+            
+            if score >= 60:  # Only recommend if score > 60%
+                recommendations.append({
+                    'mod_id': mod['mod_id'],
+                    'name': mod['name'],
+                    'category': mod['category'],
+                    'price': mod['price'],
+                    'ai_score': score,
+                    'reason': self.generate_recommendation_reason(mod, user_prefs, car_info, score)
+                })
+        
+        # Sort by AI score and return top N
+        recommendations.sort(key=lambda x: x['ai_score'], reverse=True)
+        return recommendations[:limit]
     
-    selected_page = st.radio("Go to:", [page[0] for page in pages])
+    def generate_recommendation_reason(self, mod, user_prefs, car_info, score):
+        """Generate human-readable reason for recommendation"""
+        reasons = []
+        
+        # Category preference reason
+        for pref in user_prefs:
+            if pref['mod_category'] == mod['category']:
+                reasons.append(f"Matches your preference for {mod['category']} modifications")
+                break
+        
+        # Price reason
+        if mod['price'] < 1000:
+            reasons.append("Budget-friendly option")
+        elif mod['price'] > 3000:
+            reasons.append("Premium upgrade for enhanced experience")
+        
+        # Car compatibility reason
+        if car_info:
+            if mod['category'] == 'Performance' and car_info.get('car_year', 0) > 2020:
+                reasons.append("Ideal for newer car models")
+        
+        return " | ".join(reasons[:2]) if reasons else "Great value addition"
     
-    # Map page names to functions
-    page_dict = {page[0]: page[1] for page in pages}
-    current_page = page_dict[selected_page]
+    def __del__(self):
+        self.conn.close()
+
+# 2. MODIFICATION RISK SCORE CALCULATOR
+class ModificationRiskCalculator:
+    """Calculate risk score for modifications (1-10 scale)"""
+    
+    RISK_FACTORS = {
+        'warranty_void': 3.0,
+        'insurance_impact': 2.5,
+        'installation_complexity': 2.0,
+        'maintenance_cost': 1.5,
+        'resale_impact': 1.0,
+        'legal_compliance': 3.0
+    }
+    
+    @staticmethod
+    def calculate_modification_risk(modification_data, car_data, user_data):
+        """Calculate overall risk score (1-10)"""
+        risk_scores = []
+        
+        # 1. Warranty Risk
+        warranty_risk = ModificationRiskCalculator._calculate_warranty_risk(
+            modification_data['category'], 
+            car_data.get('car_year', datetime.now().year)
+        )
+        risk_scores.append(warranty_risk * ModificationRiskCalculator.RISK_FACTORS['warranty_void'])
+        
+        # 2. Insurance Impact
+        insurance_risk = ModificationRiskCalculator._calculate_insurance_risk(
+            modification_data['category'], 
+            modification_data.get('price', 0)
+        )
+        risk_scores.append(insurance_risk * ModificationRiskCalculator.RISK_FACTORS['insurance_impact'])
+        
+        # 3. Installation Complexity
+        complexity_risk = ModificationRiskCalculator._calculate_complexity_risk(
+            modification_data['category']
+        )
+        risk_scores.append(complexity_risk * ModificationRiskCalculator.RISK_FACTORS['installation_complexity'])
+        
+        # 4. Maintenance Cost Impact
+        maintenance_risk = ModificationRiskCalculator._calculate_maintenance_risk(
+            modification_data['category']
+        )
+        risk_scores.append(maintenance_risk * ModificationRiskCalculator.RISK_FACTORS['maintenance_cost'])
+        
+        # 5. Resale Value Impact
+        resale_risk = ModificationRiskCalculator._calculate_resale_risk(
+            modification_data['category'], 
+            car_data.get('car_make', '')
+        )
+        risk_scores.append(resale_risk * ModificationRiskCalculator.RISK_FACTORS['resale_impact'])
+        
+        # 6. Legal Compliance
+        legal_risk = ModificationRiskCalculator._calculate_legal_risk(
+            modification_data['category'], 
+            car_data.get('car_year', datetime.now().year)
+        )
+        risk_scores.append(legal_risk * ModificationRiskCalculator.RISK_FACTORS['legal_compliance'])
+        
+        # Calculate weighted average
+        total_weight = sum(ModificationRiskCalculator.RISK_FACTORS.values())
+        weighted_risk = sum(risk_scores) / total_weight
+        
+        # Normalize to 1-10 scale
+        normalized_risk = min(max(weighted_risk * 2, 1), 10)
+        
+        return round(normalized_risk, 1)
+    
+    @staticmethod
+    def _calculate_warranty_risk(mod_category, car_year):
+        """Calculate warranty void risk (0-5 scale)"""
+        warranty_risks = {
+            'Performance': 4.5 if car_year < 3 else 3.0,
+            'Technology': 2.0,
+            'Safety': 1.0,
+            'Comfort': 1.5,
+            'Aesthetic': 0.5,
+            'Color': 0.1
+        }
+        return warranty_risks.get(mod_category, 2.0)
+    
+    @staticmethod
+    def _calculate_insurance_risk(mod_category, price):
+        """Calculate insurance premium impact (0-5 scale)"""
+        if price > 50000:
+            risk = 4.0
+        elif price > 20000:
+            risk = 3.0
+        elif price > 5000:
+            risk = 2.0
+        else:
+            risk = 1.0
+        
+        # Category adjustments
+        if mod_category == 'Performance':
+            risk += 1.0
+        elif mod_category == 'Safety':
+            risk -= 0.5
+        
+        return min(max(risk, 0), 5)
+    
+    @staticmethod
+    def _calculate_complexity_risk(mod_category):
+        """Calculate installation complexity (0-5 scale)"""
+        complexity = {
+            'Performance': 4.0,
+            'Technology': 3.5,
+            'Safety': 3.0,
+            'Comfort': 2.5,
+            'Aesthetic': 2.0,
+            'Color': 1.5
+        }
+        return complexity.get(mod_category, 2.5)
+    
+    @staticmethod
+    def _calculate_maintenance_risk(mod_category):
+        """Calculate maintenance cost impact (0-5 scale)"""
+        maintenance = {
+            'Performance': 3.5,
+            'Technology': 3.0,
+            'Safety': 2.0,
+            'Comfort': 2.5,
+            'Aesthetic': 1.5,
+            'Color': 1.0
+        }
+        return maintenance.get(mod_category, 2.0)
+    
+    @staticmethod
+    def _calculate_resale_risk(mod_category, car_make):
+        """Calculate resale value impact (0-5 scale)"""
+        # Premium brands benefit more from mods
+        premium_brands = ['Mercedes', 'BMW', 'Audi', 'Porsche', 'Lexus']
+        is_premium = any(brand.lower() in str(car_make).lower() for brand in premium_brands)
+        
+        resale_impact = {
+            'Performance': 2.5 if is_premium else 3.5,
+            'Technology': 2.0,
+            'Safety': 1.0,
+            'Comfort': 1.5,
+            'Aesthetic': 3.0 if is_premium else 2.0,
+            'Color': 4.0  # Color changes can significantly impact resale
+        }
+        return resale_impact.get(mod_category, 2.5)
+    
+    @staticmethod
+    def _calculate_legal_risk(mod_category, car_year):
+        """Calculate legal compliance risk (0-5 scale)"""
+        legal_risks = {
+            'Performance': 3.5 if car_year < 10 else 4.0,  # Older cars have more restrictions
+            'Technology': 1.0,
+            'Safety': 0.5,
+            'Comfort': 1.0,
+            'Aesthetic': 2.0,
+            'Color': 3.0  # Color changes require RTO approval
+        }
+        return legal_risks.get(mod_category, 2.0)
+    
+    @staticmethod
+    def get_risk_interpretation(risk_score):
+        """Interpret the risk score"""
+        if risk_score <= 3:
+            return {
+                "level": "Low Risk",
+                "color": "#28a745",
+                "description": "Safe modification with minimal impact",
+                "recommendation": "Recommended for all users"
+            }
+        elif risk_score <= 6:
+            return {
+                "level": "Medium Risk",
+                "color": "#ffc107",
+                "description": "Moderate impact on warranty/insurance",
+                "recommendation": "Consult with our experts before proceeding"
+            }
+        else:
+            return {
+                "level": "High Risk",
+                "color": "#dc3545",
+                "description": "Significant impact on warranty, insurance, and legality",
+                "recommendation": "Professional consultation mandatory"
+            }
+
+# 3. CUSTOMER CLASSIFICATION SYSTEM
+class CustomerClassifier:
+    """Automatically classify customers into types"""
+    
+    CUSTOMER_TYPES = {
+        0: {
+            "name": "Performance Seeker",
+            "description": "Focuses on speed, power, and handling improvements",
+            "icon": "⚡",
+            "color": "#dc3545",
+            "preferred_categories": ["Performance", "Safety"],
+            "avg_spend_range": "High (₹50,000+)",
+            "typical_mods": ["Turbocharger", "ECU Remap", "Sports Suspension"]
+        },
+        1: {
+            "name": "Daily Comfort",
+            "description": "Prioritizes comfort, convenience, and reliability",
+            "icon": "🛋️",
+            "color": "#28a745",
+            "preferred_categories": ["Comfort", "Technology"],
+            "avg_spend_range": "Medium (₹20,000-₹50,000)",
+            "typical_mods": ["Premium Seats", "Climate Control", "Audio System"]
+        },
+        2: {
+            "name": "Luxury / Aesthetic",
+            "description": "Focuses on looks, luxury features, and visual appeal",
+            "icon": "💎",
+            "color": "#6f42c1",
+            "preferred_categories": ["Aesthetic", "Color", "Comfort"],
+            "avg_spend_range": "High (₹50,000+)",
+            "typical_mods": ["Custom Paint", "Body Kits", "Leather Interior"]
+        }
+    }
+    
+    def __init__(self):
+        self.conn = get_db_connection()
+        
+    def extract_customer_features(self, customer_email):
+        """Extract features for classification"""
+        cursor = self.conn.cursor()
+        
+        features = {}
+        
+        # 1. Spending patterns
+        cursor.execute("""
+            SELECT 
+                COUNT(DISTINCT b.bill_id) as total_orders,
+                SUM(b.total) as total_spent,
+                AVG(b.total) as avg_order_value
+            FROM bills b
+            WHERE b.customer_email = ?
+        """, (customer_email,))
+        
+        spending = cursor.fetchone()
+        features['total_orders'] = spending['total_orders'] or 0
+        features['total_spent'] = spending['total_spent'] or 0
+        features['avg_order_value'] = spending['avg_order_value'] or 0
+        
+        # 2. Category preferences
+        cursor.execute("""
+            SELECT 
+                bi.mod_category,
+                COUNT(*) as mod_count,
+                SUM(bi.total_price) as category_spent
+            FROM bill_items bi
+            JOIN bills b ON bi.bill_id = b.bill_id
+            WHERE b.customer_email = ?
+            GROUP BY bi.mod_category
+        """, (customer_email,))
+        
+        categories = cursor.fetchall()
+        
+        # Initialize category features
+        all_categories = ['Performance', 'Aesthetic', 'Technology', 'Safety', 'Comfort', 'Color']
+        for cat in all_categories:
+            features[f'cat_{cat.lower()}_count'] = 0
+            features[f'cat_{cat.lower()}_spent'] = 0
+        
+        # Fill category data
+        for cat in categories:
+            cat_name = cat['mod_category'].lower()
+            features[f'cat_{cat_name}_count'] = cat['mod_count']
+            features[f'cat_{cat_name}_spent'] = cat['category_spent']
+        
+        return features
+    
+    def classify_customer(self, customer_email):
+        """Classify customer using rule-based system"""
+        features = self.extract_customer_features(customer_email)
+        
+        # Rule-based classification
+        performance_ratio = features.get('cat_performance_spent', 0) / max(features.get('total_spent', 1), 1)
+        aesthetic_ratio = features.get('cat_aesthetic_spent', 0) / max(features.get('total_spent', 1), 1)
+        comfort_ratio = features.get('cat_comfort_spent', 0) / max(features.get('total_spent', 1), 1)
+        
+        # Determine dominant preference
+        if performance_ratio > 0.4:
+            return self.CUSTOMER_TYPES[0]  # Performance Seeker
+        elif aesthetic_ratio > 0.3:
+            return self.CUSTOMER_TYPES[2]  # Luxury/Aesthetic
+        else:
+            return self.CUSTOMER_TYPES[1]  # Daily Comfort
+    
+    def get_recommendations_for_type(self, customer_type_idx):
+        """Get modification recommendations based on customer type"""
+        recommendations = {
+            0: {  # Performance Seeker
+                "must_have": ["Stage 2 ECU Remap", "Performance Exhaust", "Sports Suspension"],
+                "recommended": ["Turbocharger Kit", "Advanced Brake System", "Lightweight Wheels"],
+                "budget_friendly": ["Air Intake System", "Performance Chip", "Strut Bar"]
+            },
+            1: {  # Daily Comfort
+                "must_have": ["Premium Leather Seats", "Dual Zone Climate Control", "Premium Sound System"],
+                "recommended": ["Heated Seats", "Noise Insulation", "Adaptive Cruise Control"],
+                "budget_friendly": ["Seat Covers", "Steering Wheel Cover", "Car Organizer"]
+            },
+            2: {  # Luxury / Aesthetic
+                "must_have": ["Ceramic Coating", "Custom Paint Job", "LED Headlight Kit"],
+                "recommended": ["Body Kit", "Chrome Accessories", "Ambient Lighting"],
+                "budget_friendly": ["Vinyl Wrap", "Alloy Wheel Covers", "Window Tinting"]
+            }
+        }
+        
+        return recommendations.get(customer_type_idx, recommendations[1])
+    
+    def __del__(self):
+        self.conn.close()
 
 # Authentication Page
 def auth_page():
@@ -250,7 +887,7 @@ def auth_page():
                     if customer:
                         st.session_state.user_email = email
                         st.session_state.user_name = customer['name']
-                        st.success(f"Welcome back, {customer['name']}!")
+                        add_notification(f"Welcome back, {customer['name']}!", "success")
                         st.rerun()
                     else:
                         st.error("Customer not found. Please register first.")
@@ -292,7 +929,7 @@ def auth_page():
                         
                         st.session_state.user_email = email
                         st.session_state.user_name = name
-                        st.success("Registration successful! Welcome to our studio!")
+                        add_notification("Registration successful! Welcome to our studio!", "success")
                         conn.close()
                         st.rerun()
                     except sqlite3.IntegrityError:
@@ -412,7 +1049,6 @@ def build_page():
                 car_year = st.number_input("Year", min_value=1900, max_value=datetime.now().year + 1, step=1)
             with col2:
                 car_color = st.text_input("Current Color")
-                registration_date = st.date_input("Registration Date")
             
             if st.button("Add Car", type="primary"):
                 if not car_model:
@@ -423,7 +1059,7 @@ def build_page():
                         VALUES (?, ?, ?, ?, ?)
                     """, (st.session_state.user_email, car_model, car_make, car_year, car_color))
                     conn.commit()
-                    st.success(f"Car '{car_model}' added successfully!")
+                    add_notification(f"Car '{car_model}' added successfully!", "success")
                     st.rerun()
     else:
         # Car selection
@@ -453,7 +1089,7 @@ def build_page():
                         VALUES (?, ?, ?, ?, ?)
                     """, (st.session_state.user_email, new_car_model, new_car_make, new_car_year, new_car_color))
                     conn.commit()
-                    st.success(f"Car '{new_car_model}' added successfully!")
+                    add_notification(f"Car '{new_car_model}' added successfully!", "success")
                     st.rerun()
     
     # Get modifications
@@ -482,8 +1118,6 @@ def build_page():
     # Create tabs for each category
     tabs = st.tabs([f"🏎️ {cat}" for cat in categories.keys()])
     
-    selected_mods_ids = []
-    
     for tab, (category, mods_list) in zip(tabs, categories.items()):
         with tab:
             cols = st.columns(2)
@@ -506,10 +1140,12 @@ def build_page():
                                 m for m in st.session_state.selected_mods 
                                 if m['mod_id'] != mod['mod_id']
                             ]
+                            add_notification(f"Removed {mod['name']} from cart", "info")
                             st.rerun()
                     else:
                         if st.button(f"✅ Select", key=f"select_{mod['mod_id']}"):
                             st.session_state.selected_mods.append(mod)
+                            add_notification(f"Added {mod['name']} to cart", "success")
                             st.rerun()
     
     st.markdown("---")
@@ -534,10 +1170,12 @@ def build_page():
                 if is_selected:
                     if st.button(f"❌ Remove Color", key=f"remove_color_{color['mod_id']}"):
                         st.session_state.selected_color = None
+                        add_notification(f"Removed color selection", "info")
                         st.rerun()
                 else:
                     if st.button(f"🎨 Select Color", key=f"select_color_{color['mod_id']}"):
                         st.session_state.selected_color = color
+                        add_notification(f"Selected {color['name']} color", "success")
                         st.rerun()
     else:
         st.info("No colors available at the moment")
@@ -715,6 +1353,7 @@ Visit again for more modifications!
                     'filename': bill_filename
                 }
                 
+                add_notification("Purchase completed successfully!", "success")
                 st.success("✅ Purchase completed successfully!")
                 st.balloons()
                 
@@ -813,28 +1452,24 @@ def pricing_page():
     
     st.markdown("---")
     
-    # Price comparison chart
+    # Price comparison using Streamlit charts
     if categories:
-        st.subheader("📊 Price Comparison by Category")
+        st.subheader("📊 Price Statistics by Category")
         
-        # Prepare data for chart
-        chart_data = []
+        # Prepare data for display
+        price_data = []
         for category, mods_list in categories.items():
-            for mod in mods_list:
-                chart_data.append({
-                    'Category': category,
-                    'Modification': mod['name'],
-                    'Price': mod['price']
-                })
+            prices = [mod['price'] for mod in mods_list]
+            price_data.append({
+                'Category': category,
+                'Min Price': f"₹{min(prices):,.2f}",
+                'Max Price': f"₹{max(prices):,.2f}",
+                'Avg Price': f"₹{sum(prices)/len(prices):,.2f}",
+                'Count': len(prices)
+            })
         
-        df = pd.DataFrame(chart_data)
-        
-        # Create box plot
-        fig = px.box(df, x='Category', y='Price', 
-                     title='Price Distribution by Category',
-                     color='Category')
-        fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        df = pd.DataFrame(price_data)
+        st.dataframe(df, use_container_width=True)
 
 # Profile Page
 def profile_page():
@@ -1009,6 +1644,7 @@ def appointments_page():
                          appointment_time.strftime("%H:%M"), service_type, notes))
                     
                     conn.commit()
+                    add_notification("Appointment scheduled successfully!", "success")
                     st.success("✅ Appointment scheduled successfully!")
     
     with tab2:
@@ -1098,22 +1734,17 @@ def reports_page():
         if monthly_data:
             df_monthly = pd.DataFrame(monthly_data, columns=['Month', 'Bills', 'Total_Spent', 'Avg_Bill'])
             
+            # Display data table
+            st.dataframe(df_monthly, use_container_width=True)
+            
+            # Simple charts using Streamlit's built-in charts
             col1, col2 = st.columns(2)
             with col1:
-                # Bar chart for monthly spending
-                fig1 = px.bar(df_monthly, x='Month', y='Total_Spent',
-                             title='Monthly Spending',
-                             labels={'Total_Spent': 'Amount (₹)', 'Month': 'Month'},
-                             color='Total_Spent')
-                st.plotly_chart(fig1, use_container_width=True)
-            
+                st.subheader("Monthly Spending")
+                st.bar_chart(df_monthly.set_index('Month')['Total_Spent'])
             with col2:
-                # Line chart for average bill
-                fig2 = px.line(df_monthly, x='Month', y='Avg_Bill',
-                              title='Average Bill Amount Trend',
-                              labels={'Avg_Bill': 'Average Bill (₹)', 'Month': 'Month'},
-                              markers=True)
-                st.plotly_chart(fig2, use_container_width=True)
+                st.subheader("Average Bill Trend")
+                st.line_chart(df_monthly.set_index('Month')['Avg_Bill'])
             
             # Statistics
             st.subheader("📈 Spending Statistics")
@@ -1152,27 +1783,19 @@ def reports_page():
             df_mods = pd.DataFrame(mod_data, 
                                   columns=['Category', 'Modification', 'Times_Purchased', 'Total_Spent'])
             
+            # Display data
+            st.dataframe(df_mods, use_container_width=True, hide_index=True)
+            
+            # Simple visualization
             col1, col2 = st.columns(2)
             with col1:
-                # Pie chart for categories
-                fig3 = px.pie(df_mods, names='Category', values='Total_Spent',
-                             title='Spending by Category')
-                st.plotly_chart(fig3, use_container_width=True)
-            
+                st.subheader("Spending by Category")
+                category_summary = df_mods.groupby('Category')['Total_Spent'].sum()
+                st.bar_chart(category_summary)
             with col2:
-                # Bar chart for top modifications
-                top_mods = df_mods.nlargest(10, 'Total_Spent')
-                fig4 = px.bar(top_mods, x='Modification', y='Total_Spent',
-                             title='Top 10 Modifications by Spending',
-                             labels={'Total_Spent': 'Amount (₹)', 'Modification': 'Modification'})
-                fig4.update_layout(xaxis_tickangle=-45)
-                st.plotly_chart(fig4, use_container_width=True)
-            
-            # Data table
-            st.subheader("📋 All Modifications")
-            st.dataframe(df_mods, use_container_width=True)
-        else:
-            st.info("No modification data available.")
+                st.subheader("Top Modifications")
+                top_mods = df_mods.nlargest(5, 'Total_Spent')
+                st.bar_chart(top_mods.set_index('Modification')['Total_Spent'])
     
     with tab3:
         st.subheader("⭐ Loyalty Status")
@@ -1350,24 +1973,737 @@ def export_page():
         st.subheader("📋 Data Preview")
         st.dataframe(df.head(10), use_container_width=True)
 
+# AI Recommendations Page
+def ai_recommendations_page():
+    if not st.session_state.user_email:
+        st.warning("Please login to get AI recommendations")
+        return
+    
+    st.title("🤖 AI-Powered Modification Recommendations")
+    
+    # Initialize AI engine
+    ai_engine = AIRecommendationEngine()
+    
+    # Get recommendations
+    recommendations = ai_engine.get_personalized_recommendations(st.session_state.user_email, limit=6)
+    
+    if recommendations:
+        st.markdown(f"### Personalized Recommendations for {st.session_state.user_name}")
+        st.caption("Based on your purchase history, preferences, and car details")
+        
+        # Display recommendations in a grid
+        cols = st.columns(2)
+        
+        for idx, rec in enumerate(recommendations):
+            with cols[idx % 2]:
+                # Get risk score
+                conn = get_db_connection()
+                cursor = conn.cursor()
+                cursor.execute("SELECT car_model, car_make, car_year FROM cars WHERE customer_email = ? LIMIT 1", 
+                             (st.session_state.user_email,))
+                car_data = cursor.fetchone() or {}
+                conn.close()
+                
+                risk_score = ModificationRiskCalculator.calculate_modification_risk(
+                    {"category": rec['category'], "price": rec['price']},
+                    car_data,
+                    {"email": st.session_state.user_email}
+                )
+                risk_info = ModificationRiskCalculator.get_risk_interpretation(risk_score)
+                
+                # Determine risk class
+                if risk_score <= 3:
+                    risk_class = "risk-low"
+                elif risk_score <= 6:
+                    risk_class = "risk-medium"
+                else:
+                    risk_class = "risk-high"
+                
+                # Display card
+                st.markdown(f"""
+                <div class="mod-card" style="border-left: 4px solid {risk_info['color']};">
+                    <h4>{rec['name']}</h4>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="price-tag">₹{rec['price']:,.2f}</span>
+                        <span style="background-color: {risk_info['color']}20; color: {risk_info['color']}; 
+                              padding: 2px 8px; border-radius: 12px; font-size: 0.8em;">
+                            Risk: {risk_score}/10
+                        </span>
+                    </div>
+                    <p><small>📊 AI Match: {rec['ai_score']}%</small></p>
+                    <p><small>🎯 {rec['reason']}</small></p>
+                    <p><small>⚠️ {risk_info['description']}</small></p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                # Add to cart button
+                if st.button(f"➕ Add to Cart", key=f"ai_add_{rec['mod_id']}", use_container_width=True):
+                    # Add to selected mods
+                    mod_info = {
+                        'mod_id': rec['mod_id'],
+                        'name': rec['name'],
+                        'price': rec['price'],
+                        'category': rec['category']
+                    }
+                    if mod_info not in st.session_state.selected_mods:
+                        st.session_state.selected_mods.append(mod_info)
+                        add_notification(f"Added {rec['name']} to cart", "success")
+                        st.success(f"Added {rec['name']} to cart!")
+                        st.rerun()
+    else:
+        st.info("We need more data about your preferences. Make your first purchase to get personalized recommendations!")
+        
+        # Show popular modifications
+        st.markdown("### Popular Among Customers")
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT m.mod_id, m.name, m.price, m.category, m.description
+            FROM modifications m
+            WHERE m.is_active = 1
+            ORDER BY m.price DESC
+            LIMIT 6
+        """)
+        
+        popular_mods = cursor.fetchall()
+        conn.close()
+        
+        cols = st.columns(2)
+        for idx, mod in enumerate(popular_mods):
+            with cols[idx % 2]:
+                st.markdown(f"""
+                <div class="mod-card">
+                    <h4>{mod['name']}</h4>
+                    <p class="price-tag">₹{mod['price']:,.2f}</p>
+                    <p><small>{mod['description'] or 'No description'}</small></p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                if st.button(f"➕ Add", key=f"pop_add_{mod['mod_id']}", use_container_width=True):
+                    mod_info = {
+                        'mod_id': mod['mod_id'],
+                        'name': mod['name'],
+                        'price': mod['price'],
+                        'category': mod['category']
+                    }
+                    if mod_info not in st.session_state.selected_mods:
+                        st.session_state.selected_mods.append(mod_info)
+                        add_notification(f"Added {mod['name']} to cart", "success")
+                        st.success(f"Added {mod['name']} to cart!")
+                        st.rerun()
+
+# Risk Analysis Page
+def risk_analysis_page():
+    if not st.session_state.user_email:
+        st.warning("Please login to view risk analysis")
+        return
+    
+    st.title("⚠️ Modification Risk Analysis")
+    
+    # Get customer's selected modifications
+    if not st.session_state.selected_mods:
+        st.info("Please select some modifications first to analyze their risk.")
+        if st.button("Go to Build Page"):
+            st.session_state.current_page = "build"
+            st.rerun()
+        return
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Get car information
+    cursor.execute("SELECT car_model, car_make, car_year FROM cars WHERE customer_email = ? LIMIT 1", 
+                  (st.session_state.user_email,))
+    car_data = cursor.fetchone() or {}
+    
+    # Get customer information
+    cursor.execute("SELECT total_visits, total_spent FROM customers WHERE email = ?", 
+                  (st.session_state.user_email,))
+    customer_data = cursor.fetchone() or {}
+    
+    st.markdown(f"### Risk Analysis for {car_data.get('car_model', 'Your Car')}")
+    
+    # Overall risk assessment
+    st.subheader("📊 Overall Risk Assessment")
+    
+    total_risk = 0
+    high_risk_count = 0
+    risk_details = []
+    
+    for mod in st.session_state.selected_mods:
+        mod_data = {
+            'category': mod['category'],
+            'price': mod['price'],
+            'name': mod['name']
+        }
+        
+        risk_score = ModificationRiskCalculator.calculate_modification_risk(
+            mod_data, car_data, customer_data
+        )
+        
+        risk_info = ModificationRiskCalculator.get_risk_interpretation(risk_score)
+        
+        risk_details.append({
+            'modification': mod['name'],
+            'category': mod['category'],
+            'risk_score': risk_score,
+            'risk_level': risk_info['level'],
+            'color': risk_info['color'],
+            'details': risk_info['description']
+        })
+        
+        total_risk += risk_score
+        if risk_score > 6:
+            high_risk_count += 1
+    
+    avg_risk = total_risk / len(st.session_state.selected_mods) if st.session_state.selected_mods else 0
+    
+    # Overall risk metrics
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        overall_risk_info = ModificationRiskCalculator.get_risk_interpretation(avg_risk)
+        st.metric("Average Risk", f"{avg_risk:.1f}/10", 
+                 delta=overall_risk_info['level'], delta_color="inverse")
+    with col2:
+        st.metric("High Risk Mods", high_risk_count)
+    with col3:
+        st.metric("Total Mods", len(st.session_state.selected_mods))
+    
+    # Risk breakdown
+    st.subheader("📈 Risk Breakdown by Modification")
+    
+    # Create DataFrame for display
+    risk_df = pd.DataFrame(risk_details)
+    
+    # Display risk table
+    st.dataframe(risk_df[['modification', 'category', 'risk_score', 'risk_level']], 
+                 use_container_width=True)
+    
+    # Visual risk representation
+    st.subheader("🎯 Risk Distribution")
+    
+    # Create simple bar chart using Streamlit
+    if not risk_df.empty:
+        chart_data = risk_df.set_index('modification')['risk_score']
+        st.bar_chart(chart_data)
+    
+    # Detailed risk analysis
+    st.subheader("🔍 Detailed Risk Analysis")
+    
+    for detail in risk_details:
+        with st.expander(f"{detail['modification']} - Risk: {detail['risk_score']}/10 ({detail['risk_level']})"):
+            col1, col2 = st.columns(2)
+            with col1:
+                st.markdown(f"**Category:** {detail['category']}")
+                st.markdown(f"**Risk Level:** <span style='color:{detail['color']};font-weight:bold'>{detail['risk_level']}</span>", 
+                           unsafe_allow_html=True)
+                st.markdown(f"**Score:** {detail['risk_score']}/10")
+            with col2:
+                # Show individual risk factors
+                st.markdown("**Risk Factors:**")
+                
+                # Calculate individual factors
+                warranty_risk = ModificationRiskCalculator._calculate_warranty_risk(
+                    detail['category'], car_data.get('car_year', datetime.now().year)
+                )
+                
+                insurance_risk = ModificationRiskCalculator._calculate_insurance_risk(
+                    detail['category'], next((m['price'] for m in st.session_state.selected_mods if m['name'] == detail['modification']), 0)
+                )
+                
+                st.write(f"• Warranty Impact: {warranty_risk:.1f}/5")
+                st.write(f"• Insurance Impact: {insurance_risk:.1f}/5")
+                st.write(f"• Legal Compliance: {ModificationRiskCalculator._calculate_legal_risk(detail['category'], car_data.get('car_year', datetime.now().year)):.1f}/5")
+            
+            st.markdown(f"**Recommendation:** {ModificationRiskCalculator.get_risk_interpretation(detail['risk_score'])['recommendation']}")
+    
+    # Risk mitigation suggestions
+    st.subheader("🛡️ Risk Mitigation Suggestions")
+    
+    if high_risk_count > 0:
+        st.warning(f"You have {high_risk_count} high-risk modifications selected.")
+        
+        suggestions = []
+        
+        if any(d['risk_score'] > 8 for d in risk_details):
+            suggestions.append("⚠️ Consider removing modifications with risk score > 8")
+        
+        if any(d['category'] == 'Performance' and d['risk_score'] > 6 for d in risk_details):
+            suggestions.append("⚡ High-performance mods may void warranty. Get written approval from dealership.")
+        
+        if any(d['category'] == 'Color' for d in risk_details):
+            suggestions.append("🎨 Color changes require RTO approval. We can help with documentation.")
+        
+        for suggestion in suggestions:
+            st.info(suggestion)
+    
+    # Insurance impact estimate
+    st.subheader("💰 Estimated Insurance Impact")
+    
+    total_mod_value = sum(mod['price'] for mod in st.session_state.selected_mods)
+    insurance_increase = total_mod_value * 0.15  # 15% increase estimate
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("Total Modification Value", f"₹{total_mod_value:,.2f}")
+    with col2:
+        st.metric("Estimated Premium Increase", f"₹{insurance_increase:,.2f}/year")
+    
+    st.caption("Note: Actual premium may vary based on insurance provider and policy terms.")
+    
+    conn.close()
+
+# Customer Classification Page
+def customer_classification_page():
+    if not st.session_state.user_email:
+        st.warning("Please login to view customer classification")
+        return
+    
+    st.title("👤 Customer Classification & Insights")
+    
+    # Initialize classifier
+    classifier = CustomerClassifier()
+    
+    # Classify customer
+    with st.spinner("Analyzing your profile..."):
+        customer_type = classifier.classify_customer(st.session_state.user_email)
+    
+    # Display classification result
+    col1, col2 = st.columns([1, 2])
+    
+    with col1:
+        st.markdown(f"""
+        <div style="text-align: center; padding: 2rem; background: {customer_type['color']}20; 
+             border-radius: 10px; border: 2px solid {customer_type['color']};">
+            <h1 style="font-size: 4rem; margin: 0;">{customer_type['icon']}</h1>
+            <h3>{customer_type['name']}</h3>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown(f"### {customer_type['name']}")
+        st.write(customer_type['description'])
+        
+        st.markdown("**Preferred Categories:**")
+        for cat in customer_type['preferred_categories']:
+            st.write(f"• {cat}")
+        
+        st.markdown(f"**Average Spend:** {customer_type['avg_spend_range']}")
+        
+        st.markdown("**Typical Modifications:**")
+        for mod in customer_type['typical_mods'][:3]:
+            st.write(f"• {mod}")
+    
+    st.markdown("---")
+    
+    # Get customer type index
+    customer_type_idx = next(
+        (key for key, value in CustomerClassifier.CUSTOMER_TYPES.items() 
+         if value['name'] == customer_type['name']),
+        1
+    )
+    
+    # Get recommendations for this customer type
+    recommendations = classifier.get_recommendations_for_type(customer_type_idx)
+    
+    st.subheader("🎯 Recommended Modifications For You")
+    
+    tabs = st.tabs(["Must Have", "Recommended", "Budget Friendly"])
+    
+    with tabs[0]:
+        for mod in recommendations['must_have']:
+            col1, col2 = st.columns([3, 1])
+            with col1:
+                st.write(f"✅ {mod}")
+            with col2:
+                if st.button("🔍 Find", key=f"must_{mod}"):
+                    add_notification(f"Searching for {mod}", "info")
+    
+    with tabs[1]:
+        for mod in recommendations['recommended']:
+            col1, col2 = st.columns([3, 1])
+            with col1:
+                st.write(f"⭐ {mod}")
+            with col2:
+                if st.button("🔍 Find", key=f"rec_{mod}"):
+                    add_notification(f"Searching for {mod}", "info")
+    
+    with tabs[2]:
+        for mod in recommendations['budget_friendly']:
+            col1, col2 = st.columns([3, 1])
+            with col1:
+                st.write(f"💰 {mod}")
+            with col2:
+                if st.button("🔍 Find", key=f"budget_{mod}"):
+                    add_notification(f"Searching for {mod}", "info")
+    
+    st.markdown("---")
+    
+    # Customer insights
+    st.subheader("📊 Your Modification Profile")
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Get spending by category
+    cursor.execute("""
+        SELECT 
+            bi.mod_category,
+            COUNT(*) as mod_count,
+            SUM(bi.total_price) as total_spent,
+            AVG(bi.price) as avg_price
+        FROM bill_items bi
+        JOIN bills b ON bi.bill_id = b.bill_id
+        WHERE b.customer_email = ?
+        GROUP BY bi.mod_category
+        ORDER BY total_spent DESC
+    """, (st.session_state.user_email,))
+    
+    category_data = cursor.fetchall()
+    
+    if category_data:
+        # Create summary table
+        summary_data = []
+        for row in category_data:
+            summary_data.append({
+                'Category': row['mod_category'],
+                'Modifications': row['mod_count'],
+                'Total Spent': f"₹{row['total_spent']:,.2f}",
+                'Average Price': f"₹{row['avg_price']:,.2f}"
+            })
+        
+        df_summary = pd.DataFrame(summary_data)
+        st.dataframe(df_summary, use_container_width=True)
+        
+        # Simple chart
+        if len(summary_data) > 0:
+            st.subheader("📈 Spending Distribution")
+            chart_data = pd.DataFrame({
+                'Category': [item['Category'] for item in summary_data],
+                'Spent': [float(item['Total Spent'].replace('₹', '').replace(',', '')) 
+                         for item in summary_data]
+            })
+            st.bar_chart(chart_data.set_index('Category')['Spent'])
+        
+        # Spending statistics
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            total_mods = sum(row['mod_count'] for row in category_data)
+            st.metric("Total Modifications", total_mods)
+        with col2:
+            total_spent = sum(row['total_spent'] for row in category_data)
+            st.metric("Total Spent on Mods", f"₹{total_spent:,.2f}")
+        with col3:
+            avg_per_mod = total_spent / total_mods if total_mods > 0 else 0
+            st.metric("Average per Mod", f"₹{avg_per_mod:,.2f}")
+    else:
+        st.info("No modification history yet. Start building to see your profile!")
+    
+    conn.close()
+
+# 3D Car Preview Page
+def car_3d_preview_page():
+    if not st.session_state.user_email:
+        st.warning("Please login to use 3D Preview")
+        return
+    
+    st.title("🎮 3D Car Customization Preview")
+    
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        st.markdown("### Visualize Your Modifications")
+        
+        # Car model selection
+        car_models = ["Sedan", "SUV", "Sports Car", "Hatchback", "Pickup Truck"]
+        selected_model = st.selectbox("Select Car Model", car_models)
+        
+        # Color picker
+        selected_color = st.color_picker("Choose Car Color", "#FF0000")
+        
+        # Modification visualization
+        st.markdown("### Applied Modifications")
+        if st.session_state.selected_mods:
+            for mod in st.session_state.selected_mods:
+                st.write(f"✅ {mod['name']}")
+        
+        # 3D visualization placeholder
+        st.markdown("""
+        <div class="car-3d-view" style="height: 400px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);">
+            <div style="text-align: center;">
+                <h3>🚗 3D Preview</h3>
+                <p>Selected Model: <strong>{}</strong></p>
+                <div style="width: 100px; height: 100px; background-color: {}; margin: 20px auto; border-radius: 10px;"></div>
+                <p>Selected Color</p>
+                <p>Modifications Applied: <strong>{}</strong></p>
+            </div>
+        </div>
+        """.format(selected_model, selected_color, len(st.session_state.selected_mods)), unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("### Modification Effects")
+        
+        # Performance metrics
+        if st.session_state.selected_mods:
+            performance_boost = sum(1 for mod in st.session_state.selected_mods if mod['category'] == 'Performance') * 15
+            aesthetics_boost = sum(1 for mod in st.session_state.selected_mods if mod['category'] == 'Aesthetic') * 10
+            tech_boost = sum(1 for mod in st.session_state.selected_mods if mod['category'] == 'Technology') * 12
+            
+            st.metric("🚀 Performance Boost", f"+{performance_boost}%")
+            st.metric("🎨 Aesthetics Boost", f"+{aesthetics_boost}%")
+            st.metric("⚡ Tech Boost", f"+{tech_boost}%")
+        
+        # Estimated value increase
+        if st.session_state.selected_mods:
+            total_investment = sum(mod['price'] for mod in st.session_state.selected_mods)
+            value_increase = total_investment * 0.3  # 30% value increase
+            st.metric("📈 Estimated Value Increase", f"₹{value_increase:,.2f}")
+
+# Cart Page
+def show_cart_page():
+    st.title("🛒 Your Cart")
+    
+    if not st.session_state.selected_mods and not st.session_state.selected_color:
+        st.info("Your cart is empty. Start adding modifications!")
+        if st.button("Go to Build Page", type="primary"):
+            st.session_state.view_cart = False
+            st.session_state.current_page = "build"
+            st.rerun()
+        return
+    
+    # Show selected items
+    st.subheader("Selected Items")
+    
+    total_price = 0
+    
+    # Modifications
+    if st.session_state.selected_mods:
+        st.markdown("### 🔧 Modifications")
+        for mod in st.session_state.selected_mods:
+            col1, col2, col3 = st.columns([3, 1, 1])
+            with col1:
+                st.write(f"• {mod['name']}")
+            with col2:
+                st.write(f"₹{mod['price']:,.2f}")
+            with col3:
+                if st.button("❌", key=f"remove_mod_{mod['mod_id']}"):
+                    st.session_state.selected_mods.remove(mod)
+                    add_notification(f"Removed {mod['name']} from cart", "info")
+                    st.rerun()
+            total_price += mod['price']
+    
+    # Color
+    if st.session_state.selected_color:
+        st.markdown("### 🎨 Color")
+        col1, col2, col3 = st.columns([3, 1, 1])
+        with col1:
+            st.write(f"• {st.session_state.selected_color['name']}")
+        with col2:
+            st.write(f"₹{st.session_state.selected_color['price']:,.2f}")
+        with col3:
+            if st.button("❌", key="remove_color"):
+                st.session_state.selected_color = None
+                add_notification(f"Removed color selection", "info")
+                st.rerun()
+        total_price += st.session_state.selected_color['price']
+    
+    st.markdown("---")
+    
+    # Price summary
+    totals = calculate_totals(st.session_state.selected_mods, 
+                             st.session_state.selected_color,
+                             st.session_state.user_email)
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("### 💰 Price Summary")
+        st.write(f"**Subtotal:** ₹{totals['subtotal']:,.2f}")
+        if totals['discount_percent'] > 0:
+            st.write(f"**Discount ({totals['discount_percent']}%):** -₹{totals['discount_amount']:,.2f}")
+            st.write(f"**After Discount:** ₹{totals['subtotal_after_discount']:,.2f}")
+        st.write(f"**GST (18%):** ₹{totals['gst']:,.2f}")
+        st.markdown(f"### **Total:** ₹{totals['total']:,.2f}")
+    
+    with col2:
+        st.markdown("### ⚡ Quick Actions")
+        if st.button("🔄 Update Cart", use_container_width=True):
+            st.rerun()
+        if st.button("📝 Continue Building", use_container_width=True):
+            st.session_state.view_cart = False
+            st.session_state.current_page = "build"
+            st.rerun()
+        if st.button("⚠️ Check Risk Analysis", use_container_width=True):
+            st.session_state.view_cart = False
+            st.session_state.current_page = "risk_analysis"
+            st.rerun()
+        if st.button("💳 Proceed to Checkout", type="primary", use_container_width=True):
+            if st.session_state.user_email:
+                st.session_state.view_cart = False
+                st.session_state.current_page = "build"  # This will show payment section
+                st.rerun()
+            else:
+                st.warning("Please login to checkout")
+                st.session_state.current_page = "auth"
+                st.rerun()
+
+# Settings Page
+def settings_page():
+    st.title("⚙️ Settings")
+    
+    if not st.session_state.user_email:
+        st.warning("Please login to access settings")
+        return
+    
+    tab1, tab2, tab3 = st.tabs(["Account", "Preferences", "Notifications"])
+    
+    with tab1:
+        st.subheader("Account Settings")
+        
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM customers WHERE email = ?", (st.session_state.user_email,))
+        customer = cursor.fetchone()
+        
+        if customer:
+            with st.form("update_account"):
+                col1, col2 = st.columns(2)
+                with col1:
+                    name = st.text_input("Full Name", value=customer['name'])
+                    email = st.text_input("Email", value=customer['email'], disabled=True)
+                    phone = st.text_input("Phone", value=customer['phone'] or "")
+                with col2:
+                    address = st.text_area("Address", value=customer['address'] or "")
+                    city = st.text_input("City", value=customer['city'] or "")
+                    state = st.text_input("State", value=customer['state'] or "")
+                    pincode = st.text_input("Pincode", value=customer['pincode'] or "")
+                
+                if st.form_submit_button("Update Profile"):
+                    cursor.execute("""
+                        UPDATE customers 
+                        SET name = ?, phone = ?, address = ?, city = ?, state = ?, pincode = ?
+                        WHERE email = ?
+                    """, (name, phone, address, city, state, pincode, st.session_state.user_email))
+                    conn.commit()
+                    st.session_state.user_name = name
+                    add_notification("Profile updated successfully!", "success")
+                    st.success("Profile updated!")
+        
+        conn.close()
+    
+    with tab2:
+        st.subheader("Preferences")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            dark_mode = st.checkbox("Dark Mode", value=st.session_state.dark_mode)
+            if dark_mode != st.session_state.dark_mode:
+                st.session_state.dark_mode = dark_mode
+                add_notification("Theme preference updated", "info")
+            
+            email_notifications = st.checkbox("Email Notifications", value=True)
+            sms_notifications = st.checkbox("SMS Notifications", value=False)
+        
+        with col2:
+            currency = st.selectbox("Currency", ["₹ INR", "$ USD", "€ EUR", "£ GBP"])
+            language = st.selectbox("Language", ["English", "Hindi", "Spanish", "French"])
+            
+            if st.button("Save Preferences"):
+                add_notification("Preferences saved!", "success")
+                st.success("Preferences saved!")
+    
+    with tab3:
+        st.subheader("Notification Settings")
+        
+        st.write("Configure what notifications you want to receive:")
+        
+        notification_types = {
+            "Order Updates": True,
+            "Promotional Offers": True,
+            "Appointment Reminders": True,
+            "New Features": False,
+            "Security Alerts": True
+        }
+        
+        for notif_type, default_value in notification_types.items():
+            st.checkbox(notif_type, value=default_value)
+        
+        if st.button("Update Notification Settings"):
+            add_notification("Notification settings updated", "success")
+            st.success("Notification settings updated!")
+
 # Main app router
 def main():
-    if current_page == "home":
+    show_header()
+    show_sidebar()
+    
+    # Check for cart view first
+    if st.session_state.view_cart:
+        show_cart_page()
+        return
+    
+    # Map page names to functions
+    page_functions = {
+        "home": home_page,
+        "auth": auth_page,
+        "build": build_page,
+        "pricing": pricing_page,
+        "profile": profile_page,
+        "appointments": appointments_page,
+        "reports": reports_page,
+        "export": export_page,
+        "preview": car_3d_preview_page,
+        "ai_recommend": ai_recommendations_page,
+        "risk_analysis": risk_analysis_page,
+        "customer_class": customer_classification_page,
+        "settings": settings_page
+    }
+    
+    # Get current page from session state
+    current_page = st.session_state.current_page
+    
+    if current_page in page_functions:
+        page_functions[current_page]()
+    else:
         home_page()
-    elif current_page == "auth":
-        auth_page()
-    elif current_page == "build":
-        build_page()
-    elif current_page == "pricing":
-        pricing_page()
-    elif current_page == "profile":
-        profile_page()
-    elif current_page == "appointments":
-        appointments_page()
-    elif current_page == "reports":
-        reports_page()
-    elif current_page == "export":
-        export_page()
+
+# Update database tables
+def update_database_tables():
+    """Update database with new tables"""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Create wallet transactions table
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS wallet_transactions (
+        transaction_id TEXT PRIMARY KEY,
+        customer_email TEXT NOT NULL,
+        amount REAL NOT NULL,
+        payment_method TEXT NOT NULL,
+        description TEXT,
+        timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (customer_email) REFERENCES customers(email)
+    )
+    """)
+    
+    # Create community posts table
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS community_posts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_email TEXT NOT NULL,
+        title TEXT NOT NULL,
+        content TEXT NOT NULL,
+        category TEXT NOT NULL,
+        likes INTEGER DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_email) REFERENCES customers(email)
+    )
+    """)
+    
+    conn.commit()
+    conn.close()
+
+# Run database update on startup
+update_database_tables()
 
 if __name__ == "__main__":
     main()

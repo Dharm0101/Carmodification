@@ -1,3 +1,9 @@
-pandas==2.0.3
-plotly==5.18.0
+# Requirements for CarModification Streamlit app
+streamlit==1.25.3
+
+# Optional dependencies used by the app
+pandas==2.2.2
+plotly==5.20.0
 openpyxl==3.1.2
+
+# Note: sqlite3 is part of the Python standard library and does not need to be listed

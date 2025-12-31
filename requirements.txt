@@ -2,3 +2,12 @@ streamlit==1.28.1
 pandas==2.0.3
 plotly==5.18.0
 openpyxl==3.1.2
+# Update requirements.txt
+echo "plotly==5.18.0" >> requirements.txt
+
+# Push to GitHub
+git add requirements.txt
+git commit -m "Add plotly"
+git push origin main
+
+# Streamlit Cloud will automatically rebuild

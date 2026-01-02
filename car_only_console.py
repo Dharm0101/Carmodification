@@ -1,2057 +1,1636 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "829c3fd4-d2c8-45bf-a9ce-d94e2574c699",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "================================================================================\n",
-      "CAR MODIFICATION STUDIO MANAGEMENT SYSTEM\n",
-      "================================================================================\n",
-      "\n",
-      "================================================================================\n",
-      "                                   MAIN MENU                                    \n",
-      "================================================================================\n",
-      "\n",
-      "Please select an option:\n",
-      "1. Customer Login\n",
-      "2. Customer Registration\n",
-      "3. Admin Dashboard\n",
-      "4. Exit\n",
-      "0. Exit/Go Back\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Enter your choice:  1\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "================================================================================\n",
-      "                                 CUSTOMER LOGIN                                 \n",
-      "================================================================================\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Email:  fenil@gmail.com\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Welcome back, Fenil!\n",
-      "\n",
-      "================================================================================\n",
-      "                            WELCOME fenil@gmail.com                             \n",
-      "================================================================================\n",
-      "\n",
-      "Please select an option:\n",
-      "1. Add New Car\n",
-      "2. View My Cars\n",
-      "3. View All Modifications\n",
-      "4. Create New Build\n",
-      "5. View My Profile\n",
-      "6. View Reports & Analytics\n",
-      "7. AI Recommendations\n",
-      "8. Risk Analysis\n",
-      "9. Customer Classification\n",
-      "10. Export My Data\n",
-      "11. Schedule Appointment\n",
-      "12. View Appointments\n",
-      "13. Logout\n",
-      "0. Exit/Go Back\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Enter your choice:  6\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "================================================================================\n",
-      "                                  YOUR REPORTS                                  \n",
-      "================================================================================\n",
-      "Monthly Spending (Last 6 months):\n",
-      "------------------------------------------------------------\n",
-      "Month      Bills      Total Spent          Avg Bill       \n",
-      "------------------------------------------------------------\n",
-      "2026-01    1          $253,936.00          $253,936.00    \n",
-      "\n",
-      "Statistics:\n",
-      "  Total Spent (6 months): $253,936.00\n",
-      "  Average Monthly: $253,936.00\n",
-      "  Highest Month: 2026-01 ($253,936.00)\n",
-      "\n",
-      "Spending by Category:\n",
-      "------------------------------------------------------------\n",
-      "Category        Mods       Total Spent          Avg Price      \n",
-      "------------------------------------------------------------\n",
-      "Performance     3          $130,000.00          $43,333.33     \n",
-      "Aesthetic       3          $90,000.00           $30,000.00     \n",
-      "Color           1          $30,000.00           $30,000.00     \n",
-      "Technology      2          $19,000.00           $9,500.00      \n",
-      "\n",
-      "Summary:\n",
-      "  Total Modifications: 9\n",
-      "  Total Spent on Mods: $269,000.00\n",
-      "  Average per Mod: $29,888.89\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Press Enter to continue... 9\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "================================================================================\n",
-      "                            WELCOME fenil@gmail.com                             \n",
-      "================================================================================\n",
-      "\n",
-      "Please select an option:\n",
-      "1. Add New Car\n",
-      "2. View My Cars\n",
-      "3. View All Modifications\n",
-      "4. Create New Build\n",
-      "5. View My Profile\n",
-      "6. View Reports & Analytics\n",
-      "7. AI Recommendations\n",
-      "8. Risk Analysis\n",
-      "9. Customer Classification\n",
-      "10. Export My Data\n",
-      "11. Schedule Appointment\n",
-      "12. View Appointments\n",
-      "13. Logout\n",
-      "0. Exit/Go Back\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Enter your choice:  9\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "================================================================================\n",
-      "                            CUSTOMER CLASSIFICATION                             \n",
-      "================================================================================\n",
-      "Customer Type: Performance Seeker\n",
-      "\n",
-      "Description: Focuses on speed, power, and handling improvements\n",
-      "\n",
-      "Characteristics:\n",
-      "  • Preferred Categories: Performance, Safety\n",
-      "  • Average Spend Range: High ($50,000+)\n",
-      "  • Typical Modifications: Turbocharger, ECU Remap, Sports Suspension\n",
-      "\n",
-      "Recommended Modifications:\n",
-      "  Must Have:\n",
-      "    • Turbocharger Kit\n",
-      "    • Performance Exhaust\n",
-      "    • Sports Suspension\n",
-      "\n",
-      "  Recommended:\n",
-      "    • ECU Remap\n",
-      "    • Advanced Brake System\n",
-      "    • Lightweight Wheels\n",
-      "\n",
-      "  Budget Friendly:\n",
-      "    • Air Intake System\n",
-      "    • Performance Chip\n",
-      "    • Strut Bar\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Press Enter to continue... \n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "================================================================================\n",
-      "                            WELCOME fenil@gmail.com                             \n",
-      "================================================================================\n",
-      "\n",
-      "Please select an option:\n",
-      "1. Add New Car\n",
-      "2. View My Cars\n",
-      "3. View All Modifications\n",
-      "4. Create New Build\n",
-      "5. View My Profile\n",
-      "6. View Reports & Analytics\n",
-      "7. AI Recommendations\n",
-      "8. Risk Analysis\n",
-      "9. Customer Classification\n",
-      "10. Export My Data\n",
-      "11. Schedule Appointment\n",
-      "12. View Appointments\n",
-      "13. Logout\n",
-      "0. Exit/Go Back\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Enter your choice:  5\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "================================================================================\n",
-      "                                  YOUR PROFILE                                  \n",
-      "================================================================================\n",
-      "Personal Information:\n",
-      "----------------------------------------\n",
-      "Name: Fenil\n",
-      "Email: fenil@gmail.com\n",
-      "Phone: 8574961236\n",
-      "Address: Silver Heights\n",
-      "City: Rajkot\n",
-      "State: Guj\n",
-      "Pincode: Not provided\n",
-      "\n",
-      "Statistics:\n",
-      "----------------------------------------\n",
-      "Total Visits: 1\n",
-      "Total Spent: $253,936.00\n",
-      "Loyalty Points: 2539\n",
-      "First Visit: 2026-01-01 04:38:49\n",
-      "Last Visit: 2026-01-01 04:40:48\n",
-      "\n",
-      "Loyalty Progress: 2539/100 points\n",
-      "Progress: ████████████████████ 100.0%\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Press Enter to continue... \n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "================================================================================\n",
-      "                            WELCOME fenil@gmail.com                             \n",
-      "================================================================================\n",
-      "\n",
-      "Please select an option:\n",
-      "1. Add New Car\n",
-      "2. View My Cars\n",
-      "3. View All Modifications\n",
-      "4. Create New Build\n",
-      "5. View My Profile\n",
-      "6. View Reports & Analytics\n",
-      "7. AI Recommendations\n",
-      "8. Risk Analysis\n",
-      "9. Customer Classification\n",
-      "10. Export My Data\n",
-      "11. Schedule Appointment\n",
-      "12. View Appointments\n",
-      "13. Logout\n",
-      "0. Exit/Go Back\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Enter your choice:  2\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "================================================================================\n",
-      "                                   YOUR CARS                                    \n",
-      "================================================================================\n",
-      "ID    Model                Make            Year     Color          \n",
-      "----------------------------------------------------------------------\n",
-      "1     Volvo XC 90          Volvo           2023     Grey           \n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Press Enter to continue... \n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "================================================================================\n",
-      "                            WELCOME fenil@gmail.com                             \n",
-      "================================================================================\n",
-      "\n",
-      "Please select an option:\n",
-      "1. Add New Car\n",
-      "2. View My Cars\n",
-      "3. View All Modifications\n",
-      "4. Create New Build\n",
-      "5. View My Profile\n",
-      "6. View Reports & Analytics\n",
-      "7. AI Recommendations\n",
-      "8. Risk Analysis\n",
-      "9. Customer Classification\n",
-      "10. Export My Data\n",
-      "11. Schedule Appointment\n",
-      "12. View Appointments\n",
-      "13. Logout\n",
-      "0. Exit/Go Back\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Enter your choice:  10\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "================================================================================\n",
-      "                                  EXPORT DATA                                   \n",
-      "================================================================================\n",
-      "1. Purchase History (CSV)\n",
-      "2. Customer Profile (CSV)\n",
-      "3. Complete Data (Excel)\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Select data to export:  3\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "Data exported to: exports/complete_data_fenil@gmail.com_20260101_101745.xlsx\n",
-      "Sheets: Profile, Cars, Purchases, Modifications\n"
-     ]
+import sqlite3
+import pandas as pd
+from datetime import datetime, timedelta
+import uuid
+import os
+import json
+import hashlib
+import warnings
+import re  # Added import
+warnings.filterwarnings('ignore')
+
+# Constants
+GST_RATE = 0.18
+DB_NAME = "car_mod.db"
+
+# Database connection helper
+def get_db_connection():
+    conn = sqlite3.connect(DB_NAME)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+# Initialize database with all tables
+def initialize_database():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Create customers table
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS customers (
+        email TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        phone TEXT,
+        address TEXT,
+        city TEXT,
+        state TEXT,
+        pincode TEXT,
+        total_visits INTEGER DEFAULT 0,
+        total_spent REAL DEFAULT 0,
+        loyalty_points INTEGER DEFAULT 0,
+        first_visit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        last_visit TIMESTAMP,
+        referral_code TEXT
+    )
+    ''')
+    
+    # Create cars table
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS cars (
+        car_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        customer_email TEXT NOT NULL,
+        car_model TEXT NOT NULL,
+        car_make TEXT,
+        car_year INTEGER,
+        car_color TEXT,
+        FOREIGN KEY (customer_email) REFERENCES customers(email)
+    )
+    ''')
+    
+    # Create modifications table
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS modifications (
+        mod_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        price REAL NOT NULL,
+        category TEXT NOT NULL,
+        description TEXT,
+        is_active INTEGER DEFAULT 1
+    )
+    ''')
+    
+    # Create bills table
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS bills (
+        bill_id TEXT PRIMARY KEY,
+        customer_email TEXT NOT NULL,
+        car_id INTEGER,
+        bill_date TIMESTAMP,
+        bill_number INTEGER,
+        subtotal REAL,
+        discount REAL,
+        discount_percent REAL,
+        gst REAL,
+        gst_rate REAL,
+        total REAL,
+        payment_method TEXT,
+        notes TEXT,
+        FOREIGN KEY (customer_email) REFERENCES customers(email),
+        FOREIGN KEY (car_id) REFERENCES cars(car_id)
+    )
+    ''')
+    
+    # Create bill_items table
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS bill_items (
+        item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        bill_id TEXT NOT NULL,
+        mod_id INTEGER,
+        mod_name TEXT NOT NULL,
+        mod_category TEXT NOT NULL,
+        price REAL,
+        total_price REAL,
+        FOREIGN KEY (bill_id) REFERENCES bills(bill_id)
+    )
+    ''')
+    
+    # Create appointments table
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS appointments (
+        appointment_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        customer_email TEXT NOT NULL,
+        car_id INTEGER,
+        appointment_date DATE,
+        appointment_time TIME,
+        service_type TEXT,
+        notes TEXT,
+        status TEXT DEFAULT 'Scheduled',
+        FOREIGN KEY (customer_email) REFERENCES customers(email),
+        FOREIGN KEY (car_id) REFERENCES cars(car_id)
+    )
+    ''')
+    
+    # Insert sample modifications if empty
+    cursor.execute("SELECT COUNT(*) FROM modifications")
+    if cursor.fetchone()[0] == 0:
+        sample_mods = [
+            ("Turbocharger Kit", 50000, "Performance", "Increase engine power by 40%"),
+            ("ECU Remap", 20000, "Performance", "Optimize engine performance"),
+            ("Sports Suspension", 30000, "Performance", "Improved handling and stability"),
+            ("Premium Leather Seats", 45000, "Comfort", "Full leather interior upgrade"),
+            ("Premium Sound System", 35000, "Technology", "High-end audio system"),
+            ("LED Headlights", 15000, "Aesthetic", "Bright LED headlight kit"),
+            ("Ceramic Coating", 25000, "Aesthetic", "Paint protection coating"),
+            ("Red Metallic Paint", 30000, "Color", "Premium metallic red color"),
+            ("Blue Pearl Paint", 32000, "Color", "Pearl finish blue color"),
+            ("Black Matte Paint", 35000, "Color", "Matte black finish"),
+            ("Performance Exhaust", 28000, "Performance", "Enhanced exhaust system"),
+            ("Carbon Fiber Hood", 40000, "Aesthetic", "Lightweight carbon fiber hood"),
+            ("Sunroof", 35000, "Comfort", "Electric sunroof installation"),
+            ("Backup Camera", 12000, "Technology", "Rear view camera system"),
+            ("Parking Sensors", 8000, "Technology", "Front and rear parking sensors"),
+            ("Alloy Wheels", 25000, "Aesthetic", "18-inch alloy wheels"),
+            ("Window Tinting", 7000, "Aesthetic", "Premium window tinting"),
+            ("Dash Cam", 5000, "Technology", "Front and rear dash camera"),
+            ("Ambient Lighting", 9000, "Aesthetic", "Interior ambient lighting"),
+            ("Remote Start", 11000, "Technology", "Keyless remote start system")
+        ]
+        cursor.executemany("INSERT INTO modifications (name, price, category, description) VALUES (?, ?, ?, ?)", sample_mods)
+    
+    conn.commit()
+    conn.close()
+
+# Utility functions
+def valid_email(email):
+    return bool(re.match(r"^[\w\.-]+@[\w\.-]+\.\w+$", email))
+
+def valid_phone(phone):
+    return bool(re.match(r"^\+?[0-9\s\-]{10,15}$", phone))
+
+def safe_text(text):
+    return re.sub(r"[^A-Za-z0-9]", "_", text)
+
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def calculate_totals(mods, color, customer_email=None):
+    """Calculate subtotal, discounts, GST, and total"""
+    subtotal = 0
+    
+    for mod in mods:
+        subtotal += mod['price']
+    
+    if color:
+        subtotal += color['price']
+    
+    discount_percent = 0
+    discount_amount = 0
+    
+    # Volume discount
+    if len(mods) >= 5:
+        discount_percent += 15
+    elif len(mods) >= 3:
+        discount_percent += 10
+    
+    # Loyalty discount
+    if customer_email:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT total_visits, loyalty_points FROM customers WHERE email = ?", (customer_email,))
+        customer = cursor.fetchone()
+        conn.close()
+        
+        if customer:
+            if customer['total_visits'] > 5:
+                discount_percent += 10
+            elif customer['total_visits'] > 1:
+                discount_percent += 5
+    
+    # Festival discount
+    current_month = datetime.now().month
+    festival_months = [1, 10, 12]
+    if current_month in festival_months:
+        discount_percent += 5
+    
+    discount_percent = min(discount_percent, 30)
+    
+    if discount_percent > 0:
+        discount_amount = subtotal * (discount_percent / 100)
+        subtotal -= discount_amount
+    
+    gst = subtotal * GST_RATE
+    total = subtotal + gst
+    
+    return {
+        'subtotal': subtotal + discount_amount,
+        'discount_percent': discount_percent,
+        'discount_amount': discount_amount,
+        'subtotal_after_discount': subtotal,
+        'gst': gst,
+        'total': total
     }
-   ],
-   "source": [
-    "import sqlite3\n",
-    "import pandas as pd\n",
-    "from datetime import datetime, timedelta\n",
-    "import uuid\n",
-    "import os\n",
-    "import json\n",
-    "import hashlib\n",
-    "import warnings\n",
-    "warnings.filterwarnings('ignore')\n",
-    "\n",
-    "# Constants\n",
-    "GST_RATE = 0.18\n",
-    "DB_NAME = \"car_mod.db\"\n",
-    "\n",
-    "# Database connection helper\n",
-    "def get_db_connection():\n",
-    "    conn = sqlite3.connect(DB_NAME)\n",
-    "    conn.row_factory = sqlite3.Row\n",
-    "    return conn\n",
-    "\n",
-    "# Initialize database with all tables\n",
-    "def initialize_database():\n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    \n",
-    "    # Create customers table\n",
-    "    cursor.execute('''\n",
-    "    CREATE TABLE IF NOT EXISTS customers (\n",
-    "        email TEXT PRIMARY KEY,\n",
-    "        name TEXT NOT NULL,\n",
-    "        phone TEXT,\n",
-    "        address TEXT,\n",
-    "        city TEXT,\n",
-    "        state TEXT,\n",
-    "        pincode TEXT,\n",
-    "        total_visits INTEGER DEFAULT 0,\n",
-    "        total_spent REAL DEFAULT 0,\n",
-    "        loyalty_points INTEGER DEFAULT 0,\n",
-    "        first_visit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n",
-    "        last_visit TIMESTAMP,\n",
-    "        referral_code TEXT\n",
-    "    )\n",
-    "    ''')\n",
-    "    \n",
-    "    # Create cars table\n",
-    "    cursor.execute('''\n",
-    "    CREATE TABLE IF NOT EXISTS cars (\n",
-    "        car_id INTEGER PRIMARY KEY AUTOINCREMENT,\n",
-    "        customer_email TEXT NOT NULL,\n",
-    "        car_model TEXT NOT NULL,\n",
-    "        car_make TEXT,\n",
-    "        car_year INTEGER,\n",
-    "        car_color TEXT,\n",
-    "        FOREIGN KEY (customer_email) REFERENCES customers(email)\n",
-    "    )\n",
-    "    ''')\n",
-    "    \n",
-    "    # Create modifications table\n",
-    "    cursor.execute('''\n",
-    "    CREATE TABLE IF NOT EXISTS modifications (\n",
-    "        mod_id INTEGER PRIMARY KEY AUTOINCREMENT,\n",
-    "        name TEXT NOT NULL,\n",
-    "        price REAL NOT NULL,\n",
-    "        category TEXT NOT NULL,\n",
-    "        description TEXT,\n",
-    "        is_active INTEGER DEFAULT 1\n",
-    "    )\n",
-    "    ''')\n",
-    "    \n",
-    "    # Create bills table\n",
-    "    cursor.execute('''\n",
-    "    CREATE TABLE IF NOT EXISTS bills (\n",
-    "        bill_id TEXT PRIMARY KEY,\n",
-    "        customer_email TEXT NOT NULL,\n",
-    "        car_id INTEGER,\n",
-    "        bill_date TIMESTAMP,\n",
-    "        bill_number INTEGER,\n",
-    "        subtotal REAL,\n",
-    "        discount REAL,\n",
-    "        discount_percent REAL,\n",
-    "        gst REAL,\n",
-    "        gst_rate REAL,\n",
-    "        total REAL,\n",
-    "        payment_method TEXT,\n",
-    "        notes TEXT,\n",
-    "        FOREIGN KEY (customer_email) REFERENCES customers(email),\n",
-    "        FOREIGN KEY (car_id) REFERENCES cars(car_id)\n",
-    "    )\n",
-    "    ''')\n",
-    "    \n",
-    "    # Create bill_items table\n",
-    "    cursor.execute('''\n",
-    "    CREATE TABLE IF NOT EXISTS bill_items (\n",
-    "        item_id INTEGER PRIMARY KEY AUTOINCREMENT,\n",
-    "        bill_id TEXT NOT NULL,\n",
-    "        mod_id INTEGER,\n",
-    "        mod_name TEXT NOT NULL,\n",
-    "        mod_category TEXT NOT NULL,\n",
-    "        price REAL,\n",
-    "        total_price REAL,\n",
-    "        FOREIGN KEY (bill_id) REFERENCES bills(bill_id)\n",
-    "    )\n",
-    "    ''')\n",
-    "    \n",
-    "    # Create appointments table\n",
-    "    cursor.execute('''\n",
-    "    CREATE TABLE IF NOT EXISTS appointments (\n",
-    "        appointment_id INTEGER PRIMARY KEY AUTOINCREMENT,\n",
-    "        customer_email TEXT NOT NULL,\n",
-    "        car_id INTEGER,\n",
-    "        appointment_date DATE,\n",
-    "        appointment_time TIME,\n",
-    "        service_type TEXT,\n",
-    "        notes TEXT,\n",
-    "        status TEXT DEFAULT 'Scheduled',\n",
-    "        FOREIGN KEY (customer_email) REFERENCES customers(email),\n",
-    "        FOREIGN KEY (car_id) REFERENCES cars(car_id)\n",
-    "    )\n",
-    "    ''')\n",
-    "    \n",
-    "    # Insert sample modifications if empty\n",
-    "    cursor.execute(\"SELECT COUNT(*) FROM modifications\")\n",
-    "    if cursor.fetchone()[0] == 0:\n",
-    "        sample_mods = [\n",
-    "            (\"Turbocharger Kit\", 50000, \"Performance\", \"Increase engine power by 40%\"),\n",
-    "            (\"ECU Remap\", 20000, \"Performance\", \"Optimize engine performance\"),\n",
-    "            (\"Sports Suspension\", 30000, \"Performance\", \"Improved handling and stability\"),\n",
-    "            (\"Premium Leather Seats\", 45000, \"Comfort\", \"Full leather interior upgrade\"),\n",
-    "            (\"Premium Sound System\", 35000, \"Technology\", \"High-end audio system\"),\n",
-    "            (\"LED Headlights\", 15000, \"Aesthetic\", \"Bright LED headlight kit\"),\n",
-    "            (\"Ceramic Coating\", 25000, \"Aesthetic\", \"Paint protection coating\"),\n",
-    "            (\"Red Metallic Paint\", 30000, \"Color\", \"Premium metallic red color\"),\n",
-    "            (\"Blue Pearl Paint\", 32000, \"Color\", \"Pearl finish blue color\"),\n",
-    "            (\"Black Matte Paint\", 35000, \"Color\", \"Matte black finish\"),\n",
-    "            (\"Performance Exhaust\", 28000, \"Performance\", \"Enhanced exhaust system\"),\n",
-    "            (\"Carbon Fiber Hood\", 40000, \"Aesthetic\", \"Lightweight carbon fiber hood\"),\n",
-    "            (\"Sunroof\", 35000, \"Comfort\", \"Electric sunroof installation\"),\n",
-    "            (\"Backup Camera\", 12000, \"Technology\", \"Rear view camera system\"),\n",
-    "            (\"Parking Sensors\", 8000, \"Technology\", \"Front and rear parking sensors\"),\n",
-    "            (\"Alloy Wheels\", 25000, \"Aesthetic\", \"18-inch alloy wheels\"),\n",
-    "            (\"Window Tinting\", 7000, \"Aesthetic\", \"Premium window tinting\"),\n",
-    "            (\"Dash Cam\", 5000, \"Technology\", \"Front and rear dash camera\"),\n",
-    "            (\"Ambient Lighting\", 9000, \"Aesthetic\", \"Interior ambient lighting\"),\n",
-    "            (\"Remote Start\", 11000, \"Technology\", \"Keyless remote start system\")\n",
-    "        ]\n",
-    "        cursor.executemany(\"INSERT INTO modifications (name, price, category, description) VALUES (?, ?, ?, ?)\", sample_mods)\n",
-    "    \n",
-    "    conn.commit()\n",
-    "    conn.close()\n",
-    "\n",
-    "# Utility functions\n",
-    "def valid_email(email):\n",
-    "    import re\n",
-    "    return bool(re.match(r\"^[\\w\\.-]+@[\\w\\.-]+\\.\\w+$\", email))\n",
-    "\n",
-    "def valid_phone(phone):\n",
-    "    import re\n",
-    "    return bool(re.match(r\"^\\+?[0-9\\s\\-]{10,15}$\", phone))\n",
-    "\n",
-    "def safe_text(text):\n",
-    "    import re\n",
-    "    return re.sub(r\"[^A-Za-z0-9]\", \"_\", text)\n",
-    "\n",
-    "def hash_password(password):\n",
-    "    return hashlib.sha256(password.encode()).hexdigest()\n",
-    "\n",
-    "def calculate_totals(mods, color, customer_email=None):\n",
-    "    \"\"\"Calculate subtotal, discounts, GST, and total\"\"\"\n",
-    "    subtotal = 0\n",
-    "    \n",
-    "    for mod in mods:\n",
-    "        subtotal += mod['price']\n",
-    "    \n",
-    "    if color:\n",
-    "        subtotal += color['price']\n",
-    "    \n",
-    "    discount_percent = 0\n",
-    "    discount_amount = 0\n",
-    "    \n",
-    "    # Volume discount\n",
-    "    if len(mods) >= 5:\n",
-    "        discount_percent += 15\n",
-    "    elif len(mods) >= 3:\n",
-    "        discount_percent += 10\n",
-    "    \n",
-    "    # Loyalty discount\n",
-    "    if customer_email:\n",
-    "        conn = get_db_connection()\n",
-    "        cursor = conn.cursor()\n",
-    "        cursor.execute(\"SELECT total_visits, loyalty_points FROM customers WHERE email = ?\", (customer_email,))\n",
-    "        customer = cursor.fetchone()\n",
-    "        conn.close()\n",
-    "        \n",
-    "        if customer:\n",
-    "            if customer['total_visits'] > 5:\n",
-    "                discount_percent += 10\n",
-    "            elif customer['total_visits'] > 1:\n",
-    "                discount_percent += 5\n",
-    "    \n",
-    "    # Festival discount\n",
-    "    current_month = datetime.now().month\n",
-    "    festival_months = [1, 10, 12]\n",
-    "    if current_month in festival_months:\n",
-    "        discount_percent += 5\n",
-    "    \n",
-    "    discount_percent = min(discount_percent, 30)\n",
-    "    \n",
-    "    if discount_percent > 0:\n",
-    "        discount_amount = subtotal * (discount_percent / 100)\n",
-    "        subtotal -= discount_amount\n",
-    "    \n",
-    "    gst = subtotal * GST_RATE\n",
-    "    total = subtotal + gst\n",
-    "    \n",
-    "    return {\n",
-    "        'subtotal': subtotal + discount_amount,\n",
-    "        'discount_percent': discount_percent,\n",
-    "        'discount_amount': discount_amount,\n",
-    "        'subtotal_after_discount': subtotal,\n",
-    "        'gst': gst,\n",
-    "        'total': total\n",
-    "    }\n",
-    "\n",
-    "# AI Recommendation Engine\n",
-    "class AIRecommendationEngine:\n",
-    "    def __init__(self):\n",
-    "        self.conn = get_db_connection()\n",
-    "        \n",
-    "    def get_personalized_recommendations(self, user_email, limit=5):\n",
-    "        \"\"\"Get AI-powered personalized recommendations\"\"\"\n",
-    "        cursor = self.conn.cursor()\n",
-    "        \n",
-    "        # Get user preferences from purchase history\n",
-    "        cursor.execute(\"\"\"\n",
-    "            SELECT bi.mod_category, COUNT(*) as frequency, \n",
-    "                   AVG(bi.price) as avg_spent\n",
-    "            FROM bill_items bi\n",
-    "            JOIN bills b ON bi.bill_id = b.bill_id\n",
-    "            WHERE b.customer_email = ?\n",
-    "            GROUP BY bi.mod_category\n",
-    "        \"\"\", (user_email,))\n",
-    "        user_prefs = cursor.fetchall()\n",
-    "        \n",
-    "        # Get car info\n",
-    "        cursor.execute(\"SELECT car_model, car_make, car_year FROM cars WHERE customer_email = ? LIMIT 1\", (user_email,))\n",
-    "        car_info = cursor.fetchone()\n",
-    "        \n",
-    "        # Get all active modifications\n",
-    "        cursor.execute(\"SELECT mod_id, name, price, category, description FROM modifications WHERE is_active = 1\")\n",
-    "        all_mods = cursor.fetchall()\n",
-    "        \n",
-    "        recommendations = []\n",
-    "        for mod in all_mods:\n",
-    "            score = 50  # Base score\n",
-    "            \n",
-    "            # 1. Category preference boost\n",
-    "            for pref in user_prefs:\n",
-    "                if pref['mod_category'] == mod['category']:\n",
-    "                    score += pref['frequency'] * 5\n",
-    "            \n",
-    "            # 2. Price range suitability\n",
-    "            if user_prefs:\n",
-    "                total_spent = sum(p['avg_spent'] for p in user_prefs)\n",
-    "                avg_spent = total_spent / len(user_prefs) if user_prefs else 0\n",
-    "                \n",
-    "                if avg_spent > 0:\n",
-    "                    price_ratio = mod['price'] / (avg_spent * 1.5)\n",
-    "                    if 0.5 <= price_ratio <= 1.5:\n",
-    "                        score += 20\n",
-    "                    elif price_ratio < 0.5:\n",
-    "                        score += 10\n",
-    "                    else:\n",
-    "                        score -= 10\n",
-    "            \n",
-    "            # 3. Car model compatibility\n",
-    "            if car_info:\n",
-    "                car_age = datetime.now().year - (car_info['car_year'] or datetime.now().year)\n",
-    "                \n",
-    "                # Performance mods for newer cars\n",
-    "                if mod['category'] == 'Performance' and car_age < 5:\n",
-    "                    score += 10\n",
-    "                \n",
-    "                # Safety mods for older cars\n",
-    "                if mod['category'] == 'Safety' and car_age > 5:\n",
-    "                    score += 10\n",
-    "            \n",
-    "            # Only recommend if score >= 60\n",
-    "            if score >= 60:\n",
-    "                recommendations.append({\n",
-    "                    'mod_id': mod['mod_id'],\n",
-    "                    'name': mod['name'],\n",
-    "                    'category': mod['category'],\n",
-    "                    'price': mod['price'],\n",
-    "                    'ai_score': min(score, 100),\n",
-    "                    'description': mod['description']\n",
-    "                })\n",
-    "        \n",
-    "        # Sort by AI score and return top N\n",
-    "        recommendations.sort(key=lambda x: x['ai_score'], reverse=True)\n",
-    "        return recommendations[:limit]\n",
-    "    \n",
-    "    def get_recommendation_reason(self, mod, user_prefs, car_info, score):\n",
-    "        \"\"\"Generate reason for recommendation\"\"\"\n",
-    "        reasons = []\n",
-    "        \n",
-    "        for pref in user_prefs:\n",
-    "            if pref['mod_category'] == mod['category']:\n",
-    "                reasons.append(f\"Matches your preference for {mod['category']} modifications\")\n",
-    "                break\n",
-    "        \n",
-    "        if mod['price'] < 1000:\n",
-    "            reasons.append(\"Budget-friendly option\")\n",
-    "        elif mod['price'] > 3000:\n",
-    "            reasons.append(\"Premium upgrade for enhanced experience\")\n",
-    "        \n",
-    "        if car_info:\n",
-    "            if mod['category'] == 'Performance' and car_info.get('car_year', 0) > 2020:\n",
-    "                reasons.append(\"Ideal for newer car models\")\n",
-    "        \n",
-    "        return \" | \".join(reasons[:2]) if reasons else \"Great value addition\"\n",
-    "    \n",
-    "    def __del__(self):\n",
-    "        self.conn.close()\n",
-    "\n",
-    "# Modification Risk Calculator\n",
-    "class ModificationRiskCalculator:\n",
-    "    \"\"\"Calculate risk score for modifications (1-10 scale)\"\"\"\n",
-    "    \n",
-    "    RISK_FACTORS = {\n",
-    "        'warranty_void': 3.0,\n",
-    "        'insurance_impact': 2.5,\n",
-    "        'installation_complexity': 2.0,\n",
-    "        'maintenance_cost': 1.5,\n",
-    "        'resale_impact': 1.0,\n",
-    "        'legal_compliance': 3.0\n",
-    "    }\n",
-    "    \n",
-    "    @staticmethod\n",
-    "    def calculate_modification_risk(modification_data, car_data):\n",
-    "        \"\"\"Calculate overall risk score (1-10)\"\"\"\n",
-    "        risk_scores = []\n",
-    "        \n",
-    "        # 1. Warranty Risk\n",
-    "        warranty_risk = ModificationRiskCalculator._calculate_warranty_risk(\n",
-    "            modification_data['category'], \n",
-    "            car_data.get('car_year', datetime.now().year)\n",
-    "        )\n",
-    "        risk_scores.append(warranty_risk * ModificationRiskCalculator.RISK_FACTORS['warranty_void'])\n",
-    "        \n",
-    "        # 2. Insurance Impact\n",
-    "        insurance_risk = ModificationRiskCalculator._calculate_insurance_risk(\n",
-    "            modification_data['category'], \n",
-    "            modification_data.get('price', 0)\n",
-    "        )\n",
-    "        risk_scores.append(insurance_risk * ModificationRiskCalculator.RISK_FACTORS['insurance_impact'])\n",
-    "        \n",
-    "        # 3. Installation Complexity\n",
-    "        complexity_risk = ModificationRiskCalculator._calculate_complexity_risk(\n",
-    "            modification_data['category']\n",
-    "        )\n",
-    "        risk_scores.append(complexity_risk * ModificationRiskCalculator.RISK_FACTORS['installation_complexity'])\n",
-    "        \n",
-    "        # 4. Maintenance Cost Impact\n",
-    "        maintenance_risk = ModificationRiskCalculator._calculate_maintenance_risk(\n",
-    "            modification_data['category']\n",
-    "        )\n",
-    "        risk_scores.append(maintenance_risk * ModificationRiskCalculator.RISK_FACTORS['maintenance_cost'])\n",
-    "        \n",
-    "        # 5. Resale Value Impact\n",
-    "        resale_risk = ModificationRiskCalculator._calculate_resale_risk(\n",
-    "            modification_data['category'], \n",
-    "            car_data.get('car_make', '')\n",
-    "        )\n",
-    "        risk_scores.append(resale_risk * ModificationRiskCalculator.RISK_FACTORS['resale_impact'])\n",
-    "        \n",
-    "        # 6. Legal Compliance\n",
-    "        legal_risk = ModificationRiskCalculator._calculate_legal_risk(\n",
-    "            modification_data['category'], \n",
-    "            car_data.get('car_year', datetime.now().year)\n",
-    "        )\n",
-    "        risk_scores.append(legal_risk * ModificationRiskCalculator.RISK_FACTORS['legal_compliance'])\n",
-    "        \n",
-    "        # Calculate weighted average\n",
-    "        total_weight = sum(ModificationRiskCalculator.RISK_FACTORS.values())\n",
-    "        weighted_risk = sum(risk_scores) / total_weight\n",
-    "        \n",
-    "        # Normalize to 1-10 scale\n",
-    "        normalized_risk = min(max(weighted_risk * 2, 1), 10)\n",
-    "        \n",
-    "        return round(normalized_risk, 1)\n",
-    "    \n",
-    "    @staticmethod\n",
-    "    def _calculate_warranty_risk(mod_category, car_year):\n",
-    "        \"\"\"Calculate warranty void risk (0-5 scale)\"\"\"\n",
-    "        warranty_risks = {\n",
-    "            'Performance': 4.5 if car_year < 3 else 3.0,\n",
-    "            'Technology': 2.0,\n",
-    "            'Safety': 1.0,\n",
-    "            'Comfort': 1.5,\n",
-    "            'Aesthetic': 0.5,\n",
-    "            'Color': 0.1\n",
-    "        }\n",
-    "        return warranty_risks.get(mod_category, 2.0)\n",
-    "    \n",
-    "    @staticmethod\n",
-    "    def _calculate_insurance_risk(mod_category, price):\n",
-    "        \"\"\"Calculate insurance premium impact (0-5 scale)\"\"\"\n",
-    "        if price > 50000:\n",
-    "            risk = 4.0\n",
-    "        elif price > 20000:\n",
-    "            risk = 3.0\n",
-    "        elif price > 5000:\n",
-    "            risk = 2.0\n",
-    "        else:\n",
-    "            risk = 1.0\n",
-    "        \n",
-    "        # Category adjustments\n",
-    "        if mod_category == 'Performance':\n",
-    "            risk += 1.0\n",
-    "        elif mod_category == 'Safety':\n",
-    "            risk -= 0.5\n",
-    "        \n",
-    "        return min(max(risk, 0), 5)\n",
-    "    \n",
-    "    @staticmethod\n",
-    "    def _calculate_complexity_risk(mod_category):\n",
-    "        \"\"\"Calculate installation complexity (0-5 scale)\"\"\"\n",
-    "        complexity = {\n",
-    "            'Performance': 4.0,\n",
-    "            'Technology': 3.5,\n",
-    "            'Safety': 3.0,\n",
-    "            'Comfort': 2.5,\n",
-    "            'Aesthetic': 2.0,\n",
-    "            'Color': 1.5\n",
-    "        }\n",
-    "        return complexity.get(mod_category, 2.5)\n",
-    "    \n",
-    "    @staticmethod\n",
-    "    def _calculate_maintenance_risk(mod_category):\n",
-    "        \"\"\"Calculate maintenance cost impact (0-5 scale)\"\"\"\n",
-    "        maintenance = {\n",
-    "            'Performance': 3.5,\n",
-    "            'Technology': 3.0,\n",
-    "            'Safety': 2.0,\n",
-    "            'Comfort': 2.5,\n",
-    "            'Aesthetic': 1.5,\n",
-    "            'Color': 1.0\n",
-    "        }\n",
-    "        return maintenance.get(mod_category, 2.0)\n",
-    "    \n",
-    "    @staticmethod\n",
-    "    def _calculate_resale_risk(mod_category, car_make):\n",
-    "        \"\"\"Calculate resale value impact (0-5 scale)\"\"\"\n",
-    "        premium_brands = ['Mercedes', 'BMW', 'Audi', 'Porsche', 'Lexus']\n",
-    "        is_premium = any(brand.lower() in str(car_make).lower() for brand in premium_brands)\n",
-    "        \n",
-    "        resale_impact = {\n",
-    "            'Performance': 2.5 if is_premium else 3.5,\n",
-    "            'Technology': 2.0,\n",
-    "            'Safety': 1.0,\n",
-    "            'Comfort': 1.5,\n",
-    "            'Aesthetic': 3.0 if is_premium else 2.0,\n",
-    "            'Color': 4.0\n",
-    "        }\n",
-    "        return resale_impact.get(mod_category, 2.5)\n",
-    "    \n",
-    "    @staticmethod\n",
-    "    def _calculate_legal_risk(mod_category, car_year):\n",
-    "        \"\"\"Calculate legal compliance risk (0-5 scale)\"\"\"\n",
-    "        legal_risks = {\n",
-    "            'Performance': 3.5 if car_year < 10 else 4.0,\n",
-    "            'Technology': 1.0,\n",
-    "            'Safety': 0.5,\n",
-    "            'Comfort': 1.0,\n",
-    "            'Aesthetic': 2.0,\n",
-    "            'Color': 3.0\n",
-    "        }\n",
-    "        return legal_risks.get(mod_category, 2.0)\n",
-    "    \n",
-    "    @staticmethod\n",
-    "    def get_risk_interpretation(risk_score):\n",
-    "        \"\"\"Interpret the risk score\"\"\"\n",
-    "        if risk_score <= 3:\n",
-    "            return {\n",
-    "                \"level\": \"Low Risk\",\n",
-    "                \"description\": \"Safe modification with minimal impact\",\n",
-    "                \"recommendation\": \"Recommended for all users\"\n",
-    "            }\n",
-    "        elif risk_score <= 6:\n",
-    "            return {\n",
-    "                \"level\": \"Medium Risk\",\n",
-    "                \"description\": \"Moderate impact on warranty/insurance\",\n",
-    "                \"recommendation\": \"Consult with our experts before proceeding\"\n",
-    "            }\n",
-    "        else:\n",
-    "            return {\n",
-    "                \"level\": \"High Risk\",\n",
-    "                \"description\": \"Significant impact on warranty, insurance, and legality\",\n",
-    "                \"recommendation\": \"Professional consultation mandatory\"\n",
-    "            }\n",
-    "\n",
-    "# Customer Classification System\n",
-    "class CustomerClassifier:\n",
-    "    \"\"\"Automatically classify customers into types\"\"\"\n",
-    "    \n",
-    "    CUSTOMER_TYPES = {\n",
-    "        0: {\n",
-    "            \"name\": \"Performance Seeker\",\n",
-    "            \"description\": \"Focuses on speed, power, and handling improvements\",\n",
-    "            \"preferred_categories\": [\"Performance\", \"Safety\"],\n",
-    "            \"avg_spend_range\": \"High ($50,000+)\",\n",
-    "            \"typical_mods\": [\"Turbocharger\", \"ECU Remap\", \"Sports Suspension\"]\n",
-    "        },\n",
-    "        1: {\n",
-    "            \"name\": \"Daily Comfort\",\n",
-    "            \"description\": \"Prioritizes comfort, convenience, and reliability\",\n",
-    "            \"preferred_categories\": [\"Comfort\", \"Technology\"],\n",
-    "            \"avg_spend_range\": \"Medium ($20,000-$50,000)\",\n",
-    "            \"typical_mods\": [\"Premium Seats\", \"Climate Control\", \"Audio System\"]\n",
-    "        },\n",
-    "        2: {\n",
-    "            \"name\": \"Luxury / Aesthetic\",\n",
-    "            \"description\": \"Focuses on looks, luxury features, and visual appeal\",\n",
-    "            \"preferred_categories\": [\"Aesthetic\", \"Color\", \"Comfort\"],\n",
-    "            \"avg_spend_range\": \"High ($50,000+)\",\n",
-    "            \"typical_mods\": [\"Custom Paint\", \"Body Kits\", \"Leather Interior\"]\n",
-    "        }\n",
-    "    }\n",
-    "    \n",
-    "    def __init__(self):\n",
-    "        self.conn = get_db_connection()\n",
-    "        \n",
-    "    def extract_customer_features(self, customer_email):\n",
-    "        \"\"\"Extract features for classification\"\"\"\n",
-    "        cursor = self.conn.cursor()\n",
-    "        \n",
-    "        features = {}\n",
-    "        \n",
-    "        # 1. Spending patterns\n",
-    "        cursor.execute(\"\"\"\n",
-    "            SELECT \n",
-    "                COUNT(DISTINCT b.bill_id) as total_orders,\n",
-    "                SUM(b.total) as total_spent,\n",
-    "                AVG(b.total) as avg_order_value\n",
-    "            FROM bills b\n",
-    "            WHERE b.customer_email = ?\n",
-    "        \"\"\", (customer_email,))\n",
-    "        \n",
-    "        spending = cursor.fetchone()\n",
-    "        features['total_orders'] = spending['total_orders'] or 0\n",
-    "        features['total_spent'] = spending['total_spent'] or 0\n",
-    "        features['avg_order_value'] = spending['avg_order_value'] or 0\n",
-    "        \n",
-    "        # 2. Category preferences\n",
-    "        cursor.execute(\"\"\"\n",
-    "            SELECT \n",
-    "                bi.mod_category,\n",
-    "                COUNT(*) as mod_count,\n",
-    "                SUM(bi.total_price) as category_spent\n",
-    "            FROM bill_items bi\n",
-    "            JOIN bills b ON bi.bill_id = b.bill_id\n",
-    "            WHERE b.customer_email = ?\n",
-    "            GROUP BY bi.mod_category\n",
-    "        \"\"\", (customer_email,))\n",
-    "        \n",
-    "        categories = cursor.fetchall()\n",
-    "        \n",
-    "        # Initialize category features\n",
-    "        all_categories = ['Performance', 'Aesthetic', 'Technology', 'Safety', 'Comfort', 'Color']\n",
-    "        for cat in all_categories:\n",
-    "            features[f'cat_{cat.lower()}_count'] = 0\n",
-    "            features[f'cat_{cat.lower()}_spent'] = 0\n",
-    "        \n",
-    "        # Fill category data\n",
-    "        for cat in categories:\n",
-    "            cat_name = cat['mod_category'].lower()\n",
-    "            features[f'cat_{cat_name}_count'] = cat['mod_count']\n",
-    "            features[f'cat_{cat_name}_spent'] = cat['category_spent']\n",
-    "        \n",
-    "        return features\n",
-    "    \n",
-    "    def classify_customer(self, customer_email):\n",
-    "        \"\"\"Classify customer using rule-based system\"\"\"\n",
-    "        features = self.extract_customer_features(customer_email)\n",
-    "        \n",
-    "        # Rule-based classification\n",
-    "        performance_ratio = features.get('cat_performance_spent', 0) / max(features.get('total_spent', 1), 1)\n",
-    "        aesthetic_ratio = features.get('cat_aesthetic_spent', 0) / max(features.get('total_spent', 1), 1)\n",
-    "        comfort_ratio = features.get('cat_comfort_spent', 0) / max(features.get('total_spent', 1), 1)\n",
-    "        \n",
-    "        # Determine dominant preference\n",
-    "        if performance_ratio > 0.4:\n",
-    "            return self.CUSTOMER_TYPES[0]  # Performance Seeker\n",
-    "        elif aesthetic_ratio > 0.3:\n",
-    "            return self.CUSTOMER_TYPES[2]  # Luxury/Aesthetic\n",
-    "        else:\n",
-    "            return self.CUSTOMER_TYPES[1]  # Daily Comfort\n",
-    "    \n",
-    "    def get_recommendations_for_type(self, customer_type_idx):\n",
-    "        \"\"\"Get modification recommendations based on customer type\"\"\"\n",
-    "        recommendations = {\n",
-    "            0: {  # Performance Seeker\n",
-    "                \"must_have\": [\"Turbocharger Kit\", \"Performance Exhaust\", \"Sports Suspension\"],\n",
-    "                \"recommended\": [\"ECU Remap\", \"Advanced Brake System\", \"Lightweight Wheels\"],\n",
-    "                \"budget_friendly\": [\"Air Intake System\", \"Performance Chip\", \"Strut Bar\"]\n",
-    "            },\n",
-    "            1: {  # Daily Comfort\n",
-    "                \"must_have\": [\"Premium Leather Seats\", \"Premium Sound System\", \"Sunroof\"],\n",
-    "                \"recommended\": [\"Climate Control\", \"Noise Insulation\", \"Backup Camera\"],\n",
-    "                \"budget_friendly\": [\"Seat Covers\", \"Steering Wheel Cover\", \"Car Organizer\"]\n",
-    "            },\n",
-    "            2: {  # Luxury / Aesthetic\n",
-    "                \"must_have\": [\"Ceramic Coating\", \"Custom Paint Job\", \"LED Headlight Kit\"],\n",
-    "                \"recommended\": [\"Body Kit\", \"Carbon Fiber Hood\", \"Ambient Lighting\"],\n",
-    "                \"budget_friendly\": [\"Window Tinting\", \"Alloy Wheel Covers\", \"Dash Cam\"]\n",
-    "            }\n",
-    "        }\n",
-    "        \n",
-    "        return recommendations.get(customer_type_idx, recommendations[1])\n",
-    "    \n",
-    "    def __del__(self):\n",
-    "        self.conn.close()\n",
-    "\n",
-    "# Console Interface Functions\n",
-    "def display_header(title):\n",
-    "    print(\"\\n\" + \"=\"*80)\n",
-    "    print(f\"{title:^80}\")\n",
-    "    print(\"=\"*80)\n",
-    "\n",
-    "def display_menu(options):\n",
-    "    print(\"\\nPlease select an option:\")\n",
-    "    for i, (option, _) in enumerate(options, 1):\n",
-    "        print(f\"{i}. {option}\")\n",
-    "    print(\"0. Exit/Go Back\")\n",
-    "    \n",
-    "    while True:\n",
-    "        try:\n",
-    "            choice = int(input(\"\\nEnter your choice: \"))\n",
-    "            if 0 <= choice <= len(options):\n",
-    "                return choice\n",
-    "            else:\n",
-    "                print(f\"Please enter a number between 0 and {len(options)}\")\n",
-    "        except ValueError:\n",
-    "            print(\"Please enter a valid number\")\n",
-    "\n",
-    "def register_customer():\n",
-    "    display_header(\"NEW CUSTOMER REGISTRATION\")\n",
-    "    \n",
-    "    while True:\n",
-    "        name = input(\"Full Name: \").strip()\n",
-    "        if name:\n",
-    "            break\n",
-    "        print(\"Name is required!\")\n",
-    "    \n",
-    "    while True:\n",
-    "        email = input(\"Email: \").strip()\n",
-    "        if valid_email(email):\n",
-    "            break\n",
-    "        print(\"Invalid email format!\")\n",
-    "    \n",
-    "    phone = input(\"Phone (optional): \").strip()\n",
-    "    if phone and not valid_phone(phone):\n",
-    "        print(\"Warning: Phone number format may be invalid\")\n",
-    "    \n",
-    "    address = input(\"Address (optional): \").strip()\n",
-    "    city = input(\"City (optional): \").strip()\n",
-    "    state = input(\"State (optional): \").strip()\n",
-    "    pincode = input(\"Pincode (optional): \").strip()\n",
-    "    \n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    \n",
-    "    try:\n",
-    "        cursor.execute(\"\"\"\n",
-    "            INSERT INTO customers (email, name, phone, address, city, state, pincode) \n",
-    "            VALUES (?, ?, ?, ?, ?, ?, ?)\n",
-    "        \"\"\", (email, name, phone, address, city, state, pincode))\n",
-    "        conn.commit()\n",
-    "        print(f\"\\nRegistration successful! Welcome {name}!\")\n",
-    "        return email\n",
-    "    except sqlite3.IntegrityError:\n",
-    "        print(\"\\nEmail already registered! Please login instead.\")\n",
-    "        return None\n",
-    "    finally:\n",
-    "        conn.close()\n",
-    "\n",
-    "def login_customer():\n",
-    "    display_header(\"CUSTOMER LOGIN\")\n",
-    "    \n",
-    "    email = input(\"Email: \").strip()\n",
-    "    \n",
-    "    if not valid_email(email):\n",
-    "        print(\"Invalid email format!\")\n",
-    "        return None\n",
-    "    \n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    cursor.execute(\"SELECT name FROM customers WHERE email = ?\", (email,))\n",
-    "    customer = cursor.fetchone()\n",
-    "    conn.close()\n",
-    "    \n",
-    "    if customer:\n",
-    "        print(f\"\\nWelcome back, {customer['name']}!\")\n",
-    "        return email\n",
-    "    else:\n",
-    "        print(\"\\nCustomer not found. Please register first.\")\n",
-    "        return None\n",
-    "\n",
-    "def add_car(customer_email):\n",
-    "    display_header(\"ADD NEW CAR\")\n",
-    "    \n",
-    "    while True:\n",
-    "        car_model = input(\"Car Model*: \").strip()\n",
-    "        if car_model:\n",
-    "            break\n",
-    "        print(\"Car Model is required!\")\n",
-    "    \n",
-    "    car_make = input(\"Car Make (optional): \").strip()\n",
-    "    \n",
-    "    while True:\n",
-    "        car_year = input(\"Year (optional, press Enter to skip): \").strip()\n",
-    "        if not car_year:\n",
-    "            car_year = None\n",
-    "            break\n",
-    "        try:\n",
-    "            car_year = int(car_year)\n",
-    "            if 1900 <= car_year <= datetime.now().year + 1:\n",
-    "                break\n",
-    "            print(f\"Year must be between 1900 and {datetime.now().year + 1}\")\n",
-    "        except ValueError:\n",
-    "            print(\"Please enter a valid year\")\n",
-    "    \n",
-    "    car_color = input(\"Current Color (optional): \").strip()\n",
-    "    \n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    \n",
-    "    try:\n",
-    "        cursor.execute(\"\"\"\n",
-    "            INSERT INTO cars (customer_email, car_model, car_make, car_year, car_color) \n",
-    "            VALUES (?, ?, ?, ?, ?)\n",
-    "        \"\"\", (customer_email, car_model, car_make, car_year, car_color))\n",
-    "        conn.commit()\n",
-    "        print(f\"\\nCar '{car_model}' added successfully!\")\n",
-    "    except Exception as e:\n",
-    "        print(f\"\\nError: {e}\")\n",
-    "    finally:\n",
-    "        conn.close()\n",
-    "\n",
-    "def list_cars(customer_email):\n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    cursor.execute(\"\"\"\n",
-    "        SELECT car_id, car_model, car_make, car_year, car_color \n",
-    "        FROM cars \n",
-    "        WHERE customer_email = ?\n",
-    "        ORDER BY car_year DESC\n",
-    "    \"\"\", (customer_email,))\n",
-    "    cars = cursor.fetchall()\n",
-    "    conn.close()\n",
-    "    \n",
-    "    if cars:\n",
-    "        display_header(\"YOUR CARS\")\n",
-    "        print(f\"{'ID':<5} {'Model':<20} {'Make':<15} {'Year':<8} {'Color':<15}\")\n",
-    "        print(\"-\"*70)\n",
-    "        for car in cars:\n",
-    "            print(f\"{car['car_id']:<5} {car['car_model']:<20} {car['car_make'] or 'N/A':<15} \"\n",
-    "                  f\"{car['car_year'] or 'N/A':<8} {car['car_color'] or 'N/A':<15}\")\n",
-    "        return cars\n",
-    "    else:\n",
-    "        print(\"\\nNo cars found. Please add a car first.\")\n",
-    "        return []\n",
-    "\n",
-    "def list_modifications():\n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    cursor.execute(\"\"\"\n",
-    "        SELECT mod_id, name, price, category, description \n",
-    "        FROM modifications \n",
-    "        WHERE is_active = 1 \n",
-    "        ORDER BY category, price DESC\n",
-    "    \"\"\")\n",
-    "    mods = cursor.fetchall()\n",
-    "    conn.close()\n",
-    "    \n",
-    "    display_header(\"AVAILABLE MODIFICATIONS\")\n",
-    "    \n",
-    "    categories = {}\n",
-    "    for mod in mods:\n",
-    "        category = mod['category']\n",
-    "        if category not in categories:\n",
-    "            categories[category] = []\n",
-    "        categories[category].append(mod)\n",
-    "    \n",
-    "    for category, mods_list in categories.items():\n",
-    "        print(f\"\\n{category.upper()}:\")\n",
-    "        print(\"-\"*80)\n",
-    "        for mod in mods_list:\n",
-    "            print(f\"ID: {mod['mod_id']:3d} | ${mod['price']:8,.2f} | {mod['name']:30} | \"\n",
-    "                  f\"{mod['description'] or 'No description'}\")\n",
-    "    \n",
-    "    return mods\n",
-    "\n",
-    "def select_modifications():\n",
-    "    all_mods = list_modifications()\n",
-    "    selected_mods = []\n",
-    "    \n",
-    "    while True:\n",
-    "        try:\n",
-    "            mod_id = int(input(\"\\nEnter modification ID to add (0 to finish): \"))\n",
-    "            \n",
-    "            if mod_id == 0:\n",
-    "                break\n",
-    "            \n",
-    "            selected_mod = next((mod for mod in all_mods if mod['mod_id'] == mod_id), None)\n",
-    "            if selected_mod:\n",
-    "                selected_mods.append({\n",
-    "                    'mod_id': selected_mod['mod_id'],\n",
-    "                    'name': selected_mod['name'],\n",
-    "                    'price': selected_mod['price'],\n",
-    "                    'category': selected_mod['category']\n",
-    "                })\n",
-    "                print(f\"Added: {selected_mod['name']}\")\n",
-    "            else:\n",
-    "                print(\"Invalid modification ID!\")\n",
-    "        except ValueError:\n",
-    "            print(\"Please enter a valid number\")\n",
-    "    \n",
-    "    return selected_mods\n",
-    "\n",
-    "def create_build(customer_email):\n",
-    "    display_header(\"CREATE NEW BUILD\")\n",
-    "    \n",
-    "    # List and select car\n",
-    "    cars = list_cars(customer_email)\n",
-    "    if not cars:\n",
-    "        return\n",
-    "    \n",
-    "    while True:\n",
-    "        try:\n",
-    "            car_choice = int(input(\"\\nSelect car ID: \"))\n",
-    "            selected_car = next((car for car in cars if car['car_id'] == car_choice), None)\n",
-    "            if selected_car:\n",
-    "                break\n",
-    "            print(\"Invalid car selection!\")\n",
-    "        except ValueError:\n",
-    "            print(\"Please enter a valid number\")\n",
-    "    \n",
-    "    # Select modifications\n",
-    "    selected_mods = select_modifications()\n",
-    "    \n",
-    "    if not selected_mods:\n",
-    "        print(\"\\nNo modifications selected!\")\n",
-    "        return\n",
-    "    \n",
-    "    # Calculate totals\n",
-    "    totals = calculate_totals(selected_mods, None, customer_email)\n",
-    "    \n",
-    "    # Display summary\n",
-    "    display_header(\"BUILD SUMMARY\")\n",
-    "    print(f\"Car: {selected_car['car_model']}\")\n",
-    "    \n",
-    "    print(\"\\nSelected Modifications:\")\n",
-    "    for mod in selected_mods:\n",
-    "        print(f\"  • {mod['name']} - ${mod['price']:,.2f}\")\n",
-    "    \n",
-    "    print(f\"\\nSubtotal: ${totals['subtotal']:,.2f}\")\n",
-    "    if totals['discount_percent'] > 0:\n",
-    "        print(f\"Discount ({totals['discount_percent']}%): -${totals['discount_amount']:,.2f}\")\n",
-    "        print(f\"After Discount: ${totals['subtotal_after_discount']:,.2f}\")\n",
-    "    print(f\"GST ({GST_RATE*100}%): ${totals['gst']:,.2f}\")\n",
-    "    print(f\"Total: ${totals['total']:,.2f}\")\n",
-    "    \n",
-    "    # Loyalty points info\n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    cursor.execute(\"SELECT loyalty_points FROM customers WHERE email = ?\", (customer_email,))\n",
-    "    loyalty_points = cursor.fetchone()['loyalty_points']\n",
-    "    conn.close()\n",
-    "    \n",
-    "    points_to_earn = int(totals['total'] / 100)\n",
-    "    print(f\"\\nLoyalty Points:\")\n",
-    "    print(f\"  Current: {loyalty_points}\")\n",
-    "    print(f\"  To earn: {points_to_earn}\")\n",
-    "    print(f\"  Total after purchase: {loyalty_points + points_to_earn}\")\n",
-    "    \n",
-    "    # Confirm purchase\n",
-    "    confirm = input(\"\\nComplete purchase? (yes/no): \").strip().lower()\n",
-    "    if confirm in ['yes', 'y']:\n",
-    "        save_bill(customer_email, selected_car['car_id'], selected_mods, None, totals)\n",
-    "        print(\"\\nPurchase completed successfully!\")\n",
-    "    else:\n",
-    "        print(\"\\nPurchase cancelled.\")\n",
-    "\n",
-    "def save_bill(customer_email, car_id, mods, color, totals):\n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    \n",
-    "    # Generate bill ID and number\n",
-    "    bill_id = f\"BILL-{datetime.now().strftime('%Y%m%d')}-{str(uuid.uuid4())[:6].upper()}\"\n",
-    "    bill_date = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n",
-    "    \n",
-    "    cursor.execute(\"SELECT MAX(bill_number) FROM bills\")\n",
-    "    result = cursor.fetchone()[0]\n",
-    "    bill_number = (result or 0) + 1\n",
-    "    \n",
-    "    # Get customer name\n",
-    "    cursor.execute(\"SELECT name FROM customers WHERE email = ?\", (customer_email,))\n",
-    "    customer_name = cursor.fetchone()['name']\n",
-    "    \n",
-    "    # Get car model\n",
-    "    cursor.execute(\"SELECT car_model FROM cars WHERE car_id = ?\", (car_id,))\n",
-    "    car_model = cursor.fetchone()['car_model']\n",
-    "    \n",
-    "    # Save bill\n",
-    "    cursor.execute(\"\"\"\n",
-    "        INSERT INTO bills (bill_id, customer_email, car_id, bill_date, bill_number, \n",
-    "                         subtotal, discount, discount_percent, gst, gst_rate, total, \n",
-    "                         payment_method, notes)\n",
-    "        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n",
-    "    \"\"\", (bill_id, customer_email, car_id, bill_date, bill_number,\n",
-    "         totals['subtotal'], totals['discount_amount'], totals['discount_percent'], \n",
-    "         totals['gst'], GST_RATE, totals['total'], \"Cash\", \"Console purchase\"))\n",
-    "    \n",
-    "    # Save bill items\n",
-    "    for mod in mods:\n",
-    "        cursor.execute(\"\"\"\n",
-    "            INSERT INTO bill_items (bill_id, mod_id, mod_name, mod_category, price, total_price)\n",
-    "            VALUES (?, ?, ?, ?, ?, ?)\n",
-    "        \"\"\", (bill_id, mod['mod_id'], mod['name'], mod['category'], mod['price'], mod['price']))\n",
-    "    \n",
-    "    # Update customer\n",
-    "    cursor.execute(\"\"\"\n",
-    "        UPDATE customers \n",
-    "        SET total_visits = total_visits + 1,\n",
-    "            total_spent = total_spent + ?,\n",
-    "            last_visit = CURRENT_TIMESTAMP,\n",
-    "            loyalty_points = loyalty_points + ?\n",
-    "        WHERE email = ?\n",
-    "    \"\"\", (totals['total'], int(totals['total'] / 100), customer_email))\n",
-    "    \n",
-    "    conn.commit()\n",
-    "    \n",
-    "    # Generate bill file\n",
-    "    os.makedirs(\"bills\", exist_ok=True)\n",
-    "    bill_filename = f\"bills/{datetime.now().strftime('%Y%m%d')}_{bill_number}_{safe_text(customer_name)}.txt\"\n",
-    "    \n",
-    "    bill_content = f\"\"\"\n",
-    "{'='*70}\n",
-    "{'CUSTOM CAR MODIFICATION STUDIO':^70}\n",
-    "{'='*70}\n",
-    "{'Bill No:':<15} {bill_number}\n",
-    "{'Bill ID:':<15} {bill_id}\n",
-    "{'Date:':<15} {bill_date}\n",
-    "{'='*70}\n",
-    "{'Customer:':<15} {customer_name}\n",
-    "{'Email:':<15} {customer_email}\n",
-    "{'Car:':<15} {car_model}\n",
-    "{'Payment:':<15} Cash\n",
-    "{'='*70}\n",
-    "{'MODIFICATIONS':^70}\n",
-    "{'-'*70}\n",
-    "\"\"\"\n",
-    "    \n",
-    "    item_no = 1\n",
-    "    for mod in mods:\n",
-    "        bill_content += f\"{item_no:<5} {mod['name']:<40} ${mod['price']:>8.2f} ${mod['price']:>8.2f}\\n\"\n",
-    "        item_no += 1\n",
-    "    \n",
-    "    bill_content += f\"\"\"\n",
-    "{'-'*70}\n",
-    "{'Subtotal:':<55} ${totals['subtotal']:>10.2f}\n",
-    "{'Discount:':<55} -${totals['discount_amount']:>10.2f}\n",
-    "{'GST ({GST_RATE*100:.0f}%):':<55} ${totals['gst']:>10.2f}\n",
-    "{'='*70}\n",
-    "{'TOTAL AMOUNT:':<55} ${totals['total']:>10.2f}\n",
-    "{'='*70}\n",
-    "Thank you for your business!\n",
-    "Visit again for more modifications!\n",
-    "\"\"\"\n",
-    "    \n",
-    "    with open(bill_filename, 'w', encoding='utf-8') as f:\n",
-    "        f.write(bill_content)\n",
-    "    \n",
-    "    conn.close()\n",
-    "    \n",
-    "    print(f\"\\nBill saved to: {bill_filename}\")\n",
-    "    print(f\"Bill Number: {bill_number}\")\n",
-    "    print(f\"Bill ID: {bill_id}\")\n",
-    "\n",
-    "def view_profile(customer_email):\n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    \n",
-    "    cursor.execute(\"\"\"\n",
-    "        SELECT name, email, phone, address, city, state, pincode,\n",
-    "               total_visits, total_spent, loyalty_points,\n",
-    "               first_visit, last_visit\n",
-    "        FROM customers\n",
-    "        WHERE email = ?\n",
-    "    \"\"\", (customer_email,))\n",
-    "    customer = cursor.fetchone()\n",
-    "    \n",
-    "    if customer:\n",
-    "        display_header(\"YOUR PROFILE\")\n",
-    "        \n",
-    "        print(\"Personal Information:\")\n",
-    "        print(\"-\"*40)\n",
-    "        print(f\"Name: {customer['name']}\")\n",
-    "        print(f\"Email: {customer['email']}\")\n",
-    "        print(f\"Phone: {customer['phone'] or 'Not provided'}\")\n",
-    "        print(f\"Address: {customer['address'] or 'Not provided'}\")\n",
-    "        print(f\"City: {customer['city'] or 'Not provided'}\")\n",
-    "        print(f\"State: {customer['state'] or 'Not provided'}\")\n",
-    "        print(f\"Pincode: {customer['pincode'] or 'Not provided'}\")\n",
-    "        \n",
-    "        print(\"\\nStatistics:\")\n",
-    "        print(\"-\"*40)\n",
-    "        print(f\"Total Visits: {customer['total_visits']}\")\n",
-    "        print(f\"Total Spent: ${customer['total_spent']:,.2f}\")\n",
-    "        print(f\"Loyalty Points: {customer['loyalty_points']}\")\n",
-    "        print(f\"First Visit: {customer['first_visit']}\")\n",
-    "        print(f\"Last Visit: {customer['last_visit']}\")\n",
-    "        \n",
-    "        # Progress to next loyalty tier\n",
-    "        progress = min(customer['loyalty_points'] / 100, 1.0)\n",
-    "        print(f\"\\nLoyalty Progress: {customer['loyalty_points']}/100 points\")\n",
-    "        print(f\"Progress: {'█' * int(progress * 20)}{'░' * (20 - int(progress * 20))} {progress*100:.1f}%\")\n",
-    "    else:\n",
-    "        print(\"\\nProfile not found!\")\n",
-    "    \n",
-    "    conn.close()\n",
-    "\n",
-    "def view_reports(customer_email):\n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    \n",
-    "    display_header(\"YOUR REPORTS\")\n",
-    "    \n",
-    "    # Monthly spending\n",
-    "    cursor.execute(\"\"\"\n",
-    "        SELECT strftime('%Y-%m', bill_date) as month,\n",
-    "               COUNT(*) as bills,\n",
-    "               SUM(total) as total_spent,\n",
-    "               AVG(total) as avg_bill\n",
-    "        FROM bills\n",
-    "        WHERE customer_email = ? AND bill_date >= DATE('now', '-6 months')\n",
-    "        GROUP BY strftime('%Y-%m', bill_date)\n",
-    "        ORDER BY month\n",
-    "    \"\"\", (customer_email,))\n",
-    "    \n",
-    "    monthly_data = cursor.fetchall()\n",
-    "    \n",
-    "    if monthly_data:\n",
-    "        print(\"Monthly Spending (Last 6 months):\")\n",
-    "        print(\"-\"*60)\n",
-    "        print(f\"{'Month':<10} {'Bills':<10} {'Total Spent':<20} {'Avg Bill':<15}\")\n",
-    "        print(\"-\"*60)\n",
-    "        for data in monthly_data:\n",
-    "            print(f\"{data['month']:<10} {data['bills']:<10} ${data['total_spent']:<19,.2f} ${data['avg_bill']:<14,.2f}\")\n",
-    "        \n",
-    "        # Statistics\n",
-    "        total_spent = sum(data['total_spent'] for data in monthly_data)\n",
-    "        avg_monthly = total_spent / len(monthly_data) if monthly_data else 0\n",
-    "        max_month = max(monthly_data, key=lambda x: x['total_spent']) if monthly_data else None\n",
-    "        \n",
-    "        print(f\"\\nStatistics:\")\n",
-    "        print(f\"  Total Spent (6 months): ${total_spent:,.2f}\")\n",
-    "        print(f\"  Average Monthly: ${avg_monthly:,.2f}\")\n",
-    "        if max_month:\n",
-    "            print(f\"  Highest Month: {max_month['month']} (${max_month['total_spent']:,.2f})\")\n",
-    "    else:\n",
-    "        print(\"No spending data available for the last 6 months.\")\n",
-    "    \n",
-    "    # Category preferences\n",
-    "    cursor.execute(\"\"\"\n",
-    "        SELECT bi.mod_category, COUNT(*) as mod_count, \n",
-    "               SUM(bi.total_price) as total_spent,\n",
-    "               AVG(bi.price) as avg_price\n",
-    "        FROM bill_items bi\n",
-    "        JOIN bills b ON bi.bill_id = b.bill_id\n",
-    "        WHERE b.customer_email = ?\n",
-    "        GROUP BY bi.mod_category\n",
-    "        ORDER BY total_spent DESC\n",
-    "    \"\"\", (customer_email,))\n",
-    "    \n",
-    "    category_data = cursor.fetchall()\n",
-    "    \n",
-    "    if category_data:\n",
-    "        print(\"\\nSpending by Category:\")\n",
-    "        print(\"-\"*60)\n",
-    "        print(f\"{'Category':<15} {'Mods':<10} {'Total Spent':<20} {'Avg Price':<15}\")\n",
-    "        print(\"-\"*60)\n",
-    "        for data in category_data:\n",
-    "            print(f\"{data['mod_category']:<15} {data['mod_count']:<10} \"\n",
-    "                  f\"${data['total_spent']:<19,.2f} ${data['avg_price']:<14,.2f}\")\n",
-    "        \n",
-    "        total_mods = sum(data['mod_count'] for data in category_data)\n",
-    "        total_spent = sum(data['total_spent'] for data in category_data)\n",
-    "        print(f\"\\nSummary:\")\n",
-    "        print(f\"  Total Modifications: {total_mods}\")\n",
-    "        print(f\"  Total Spent on Mods: ${total_spent:,.2f}\")\n",
-    "        if total_mods > 0:\n",
-    "            print(f\"  Average per Mod: ${total_spent/total_mods:,.2f}\")\n",
-    "    else:\n",
-    "        print(\"\\nNo modification history yet.\")\n",
-    "    \n",
-    "    conn.close()\n",
-    "\n",
-    "def ai_recommendations(customer_email):\n",
-    "    display_header(\"AI RECOMMENDATIONS\")\n",
-    "    \n",
-    "    ai_engine = AIRecommendationEngine()\n",
-    "    recommendations = ai_engine.get_personalized_recommendations(customer_email, limit=5)\n",
-    "    \n",
-    "    if recommendations:\n",
-    "        print(\"Personalized recommendations for you:\")\n",
-    "        print(\"-\"*80)\n",
-    "        print(f\"{'Name':<30} {'Category':<15} {'Price':<15} {'AI Score':<10}\")\n",
-    "        print(\"-\"*80)\n",
-    "        \n",
-    "        for rec in recommendations:\n",
-    "            print(f\"{rec['name']:<30} {rec['category']:<15} ${rec['price']:<14,.2f} {rec['ai_score']:<9}%\")\n",
-    "        \n",
-    "        print(\"\\nWould you like to add any of these to a new build?\")\n",
-    "        for i, rec in enumerate(recommendations, 1):\n",
-    "            print(f\"{i}. {rec['name']} (${rec['price']:,.2f})\")\n",
-    "        \n",
-    "        try:\n",
-    "            choice = int(input(\"\\nSelect recommendation to add (0 to skip): \"))\n",
-    "            if 1 <= choice <= len(recommendations):\n",
-    "                selected_rec = recommendations[choice-1]\n",
-    "                print(f\"\\nAdded {selected_rec['name']} to your build list.\")\n",
-    "                # Here you could implement adding to a build\n",
-    "        except ValueError:\n",
-    "            pass\n",
-    "    else:\n",
-    "        print(\"\\nWe need more data about your preferences.\")\n",
-    "        print(\"Make your first purchase to get personalized recommendations!\")\n",
-    "\n",
-    "def risk_analysis(customer_email):\n",
-    "    display_header(\"RISK ANALYSIS\")\n",
-    "    \n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    \n",
-    "    # Get recent modifications\n",
-    "    cursor.execute(\"\"\"\n",
-    "        SELECT bi.mod_name, bi.mod_category, bi.price\n",
-    "        FROM bill_items bi\n",
-    "        JOIN bills b ON bi.bill_id = b.bill_id\n",
-    "        WHERE b.customer_email = ?\n",
-    "        ORDER BY b.bill_date DESC\n",
-    "        LIMIT 10\n",
-    "    \"\"\", (customer_email,))\n",
-    "    \n",
-    "    recent_mods = cursor.fetchall()\n",
-    "    \n",
-    "    if not recent_mods:\n",
-    "        print(\"No modifications found for analysis.\")\n",
-    "        conn.close()\n",
-    "        return\n",
-    "    \n",
-    "    # Get car info\n",
-    "    cursor.execute(\"SELECT car_model, car_make, car_year FROM cars WHERE customer_email = ? LIMIT 1\", \n",
-    "                  (customer_email,))\n",
-    "    car_data = cursor.fetchone() or {}\n",
-    "    \n",
-    "    print(f\"Risk Analysis for your modifications on {car_data.get('car_model', 'your car')}:\")\n",
-    "    print(\"-\"*80)\n",
-    "    \n",
-    "    total_risk = 0\n",
-    "    high_risk_count = 0\n",
-    "    risk_details = []\n",
-    "    \n",
-    "    for mod in recent_mods:\n",
-    "        mod_data = {\n",
-    "            'category': mod['mod_category'],\n",
-    "            'price': mod['price'],\n",
-    "            'name': mod['mod_name']\n",
-    "        }\n",
-    "        \n",
-    "        risk_score = ModificationRiskCalculator.calculate_modification_risk(mod_data, car_data)\n",
-    "        risk_info = ModificationRiskCalculator.get_risk_interpretation(risk_score)\n",
-    "        \n",
-    "        risk_details.append({\n",
-    "            'modification': mod['mod_name'],\n",
-    "            'category': mod['mod_category'],\n",
-    "            'risk_score': risk_score,\n",
-    "            'risk_level': risk_info['level']\n",
-    "        })\n",
-    "        \n",
-    "        total_risk += risk_score\n",
-    "        if risk_score > 6:\n",
-    "            high_risk_count += 1\n",
-    "    \n",
-    "    # Display risk details\n",
-    "    print(f\"{'Modification':<30} {'Category':<15} {'Risk Score':<12} {'Risk Level':<15}\")\n",
-    "    print(\"-\"*80)\n",
-    "    for detail in risk_details:\n",
-    "        print(f\"{detail['modification']:<30} {detail['category']:<15} \"\n",
-    "              f\"{detail['risk_score']:<11}/10 {detail['risk_level']:<15}\")\n",
-    "    \n",
-    "    # Overall statistics\n",
-    "    avg_risk = total_risk / len(recent_mods) if recent_mods else 0\n",
-    "    print(f\"\\nOverall Statistics:\")\n",
-    "    print(f\"  Average Risk: {avg_risk:.1f}/10\")\n",
-    "    print(f\"  High Risk Modifications: {high_risk_count}\")\n",
-    "    print(f\"  Total Modifications Analyzed: {len(recent_mods)}\")\n",
-    "    \n",
-    "    # Risk interpretation\n",
-    "    if avg_risk <= 3:\n",
-    "        print(\"\\nOverall Risk Assessment: LOW\")\n",
-    "        print(\"Your modifications are generally safe with minimal impact.\")\n",
-    "    elif avg_risk <= 6:\n",
-    "        print(\"\\nOverall Risk Assessment: MEDIUM\")\n",
-    "        print(\"Some modifications may affect warranty or insurance.\")\n",
-    "    else:\n",
-    "        print(\"\\nOverall Risk Assessment: HIGH\")\n",
-    "        print(\"Several modifications have significant impact. Consider consultation.\")\n",
-    "    \n",
-    "    # Suggestions\n",
-    "    if high_risk_count > 0:\n",
-    "        print(\"\\nRecommendations:\")\n",
-    "        if any(d['risk_score'] > 8 for d in risk_details):\n",
-    "            print(\"  • Consider removing modifications with risk score > 8\")\n",
-    "        if any(d['category'] == 'Performance' and d['risk_score'] > 6 for d in risk_details):\n",
-    "            print(\"  • High-performance mods may void warranty\")\n",
-    "        if any(d['category'] == 'Color' for d in risk_details):\n",
-    "            print(\"  • Color changes may require RTO approval\")\n",
-    "    \n",
-    "    conn.close()\n",
-    "\n",
-    "def customer_classification(customer_email):\n",
-    "    display_header(\"CUSTOMER CLASSIFICATION\")\n",
-    "    \n",
-    "    classifier = CustomerClassifier()\n",
-    "    customer_type = classifier.classify_customer(customer_email)\n",
-    "    \n",
-    "    if isinstance(customer_type, dict):\n",
-    "        # Already got customer type dict\n",
-    "        pass\n",
-    "    else:\n",
-    "        # Get customer type dict from classification result\n",
-    "        type_idx = next((key for key, value in CustomerClassifier.CUSTOMER_TYPES.items() \n",
-    "                        if value['name'] == customer_type), 1)\n",
-    "        customer_type = CustomerClassifier.CUSTOMER_TYPES.get(type_idx, CustomerClassifier.CUSTOMER_TYPES[1])\n",
-    "    \n",
-    "    print(f\"Customer Type: {customer_type['name']}\")\n",
-    "    print(f\"\\nDescription: {customer_type['description']}\")\n",
-    "    \n",
-    "    print(\"\\nCharacteristics:\")\n",
-    "    print(f\"  • Preferred Categories: {', '.join(customer_type['preferred_categories'])}\")\n",
-    "    print(f\"  • Average Spend Range: {customer_type['avg_spend_range']}\")\n",
-    "    print(f\"  • Typical Modifications: {', '.join(customer_type['typical_mods'][:3])}\")\n",
-    "    \n",
-    "    # Get recommendations for this type\n",
-    "    type_idx = next((key for key, value in CustomerClassifier.CUSTOMER_TYPES.items() \n",
-    "                    if value['name'] == customer_type['name']), 1)\n",
-    "    recommendations = classifier.get_recommendations_for_type(type_idx)\n",
-    "    \n",
-    "    print(\"\\nRecommended Modifications:\")\n",
-    "    print(\"  Must Have:\")\n",
-    "    for mod in recommendations['must_have'][:3]:\n",
-    "        print(f\"    • {mod}\")\n",
-    "    \n",
-    "    print(\"\\n  Recommended:\")\n",
-    "    for mod in recommendations['recommended'][:3]:\n",
-    "        print(f\"    • {mod}\")\n",
-    "    \n",
-    "    print(\"\\n  Budget Friendly:\")\n",
-    "    for mod in recommendations['budget_friendly'][:3]:\n",
-    "        print(f\"    • {mod}\")\n",
-    "\n",
-    "def export_data(customer_email):\n",
-    "    display_header(\"EXPORT DATA\")\n",
-    "    \n",
-    "    conn = get_db_connection()\n",
-    "    \n",
-    "    print(\"1. Purchase History (CSV)\")\n",
-    "    print(\"2. Customer Profile (CSV)\")\n",
-    "    print(\"3. Complete Data (Excel)\")\n",
-    "    \n",
-    "    try:\n",
-    "        choice = int(input(\"\\nSelect data to export: \"))\n",
-    "        \n",
-    "        os.makedirs(\"exports\", exist_ok=True)\n",
-    "        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')\n",
-    "        \n",
-    "        if choice == 1:\n",
-    "            # Purchase History\n",
-    "            df = pd.read_sql_query(\"\"\"\n",
-    "                SELECT b.bill_date, b.bill_id, b.total, b.payment_method,\n",
-    "                       c.car_model, bi.mod_name, bi.mod_category, bi.price\n",
-    "                FROM bills b\n",
-    "                LEFT JOIN cars c ON b.car_id = c.car_id\n",
-    "                LEFT JOIN bill_items bi ON b.bill_id = bi.bill_id\n",
-    "                WHERE b.customer_email = ?\n",
-    "                ORDER BY b.bill_date DESC\n",
-    "            \"\"\", conn, params=(customer_email,))\n",
-    "            \n",
-    "            if not df.empty:\n",
-    "                filename = f\"exports/purchase_history_{customer_email}_{timestamp}.csv\"\n",
-    "                df.to_csv(filename, index=False)\n",
-    "                print(f\"\\nData exported to: {filename}\")\n",
-    "                print(f\"Records: {len(df)}\")\n",
-    "            else:\n",
-    "                print(\"\\nNo purchase history found.\")\n",
-    "        \n",
-    "        elif choice == 2:\n",
-    "            # Customer Profile\n",
-    "            df = pd.read_sql_query(\"\"\"\n",
-    "                SELECT name, email, phone, address, city, state, pincode,\n",
-    "                       total_visits, total_spent, loyalty_points,\n",
-    "                       first_visit, last_visit\n",
-    "                FROM customers\n",
-    "                WHERE email = ?\n",
-    "            \"\"\", conn, params=(customer_email,))\n",
-    "            \n",
-    "            if not df.empty:\n",
-    "                filename = f\"exports/profile_{customer_email}_{timestamp}.csv\"\n",
-    "                df.to_csv(filename, index=False)\n",
-    "                print(f\"\\nData exported to: {filename}\")\n",
-    "            else:\n",
-    "                print(\"\\nProfile not found.\")\n",
-    "        \n",
-    "        elif choice == 3:\n",
-    "            # Complete Data (Excel with multiple sheets)\n",
-    "            try:\n",
-    "                import openpyxl\n",
-    "                \n",
-    "                # Get customer data\n",
-    "                profile_df = pd.read_sql_query(\"\"\"\n",
-    "                    SELECT name, email, phone, address, city, state, pincode,\n",
-    "                           total_visits, total_spent, loyalty_points,\n",
-    "                           first_visit, last_visit\n",
-    "                    FROM customers\n",
-    "                    WHERE email = ?\n",
-    "                \"\"\", conn, params=(customer_email,))\n",
-    "                \n",
-    "                # Get cars data\n",
-    "                cars_df = pd.read_sql_query(\"\"\"\n",
-    "                    SELECT car_model, car_make, car_year, car_color\n",
-    "                    FROM cars\n",
-    "                    WHERE customer_email = ?\n",
-    "                \"\"\", conn, params=(customer_email,))\n",
-    "                \n",
-    "                # Get bills data\n",
-    "                bills_df = pd.read_sql_query(\"\"\"\n",
-    "                    SELECT b.bill_date, b.bill_id, b.total, b.payment_method, c.car_model\n",
-    "                    FROM bills b\n",
-    "                    LEFT JOIN cars c ON b.car_id = c.car_id\n",
-    "                    WHERE b.customer_email = ?\n",
-    "                \"\"\", conn, params=(customer_email,))\n",
-    "                \n",
-    "                # Get modifications data\n",
-    "                mods_df = pd.read_sql_query(\"\"\"\n",
-    "                    SELECT bi.mod_name, bi.mod_category, bi.price, b.bill_date\n",
-    "                    FROM bill_items bi\n",
-    "                    JOIN bills b ON bi.bill_id = b.bill_id\n",
-    "                    WHERE b.customer_email = ?\n",
-    "                \"\"\", conn, params=(customer_email,))\n",
-    "                \n",
-    "                # Create Excel file\n",
-    "                filename = f\"exports/complete_data_{customer_email}_{timestamp}.xlsx\"\n",
-    "                with pd.ExcelWriter(filename, engine='openpyxl') as writer:\n",
-    "                    if not profile_df.empty:\n",
-    "                        profile_df.to_excel(writer, sheet_name='Profile', index=False)\n",
-    "                    if not cars_df.empty:\n",
-    "                        cars_df.to_excel(writer, sheet_name='Cars', index=False)\n",
-    "                    if not bills_df.empty:\n",
-    "                        bills_df.to_excel(writer, sheet_name='Purchases', index=False)\n",
-    "                    if not mods_df.empty:\n",
-    "                        mods_df.to_excel(writer, sheet_name='Modifications', index=False)\n",
-    "                \n",
-    "                print(f\"\\nData exported to: {filename}\")\n",
-    "                print(\"Sheets: Profile, Cars, Purchases, Modifications\")\n",
-    "                \n",
-    "            except ImportError:\n",
-    "                print(\"\\nError: openpyxl is required for Excel export.\")\n",
-    "                print(\"Install it using: pip install openpyxl\")\n",
-    "        \n",
-    "        else:\n",
-    "            print(\"\\nInvalid choice.\")\n",
-    "    \n",
-    "    except ValueError:\n",
-    "        print(\"\\nPlease enter a valid number\")\n",
-    "    \n",
-    "    conn.close()\n",
-    "\n",
-    "def schedule_appointment(customer_email):\n",
-    "    display_header(\"SCHEDULE APPOINTMENT\")\n",
-    "    \n",
-    "    cars = list_cars(customer_email)\n",
-    "    if not cars:\n",
-    "        return\n",
-    "    \n",
-    "    while True:\n",
-    "        try:\n",
-    "            car_choice = int(input(\"\\nSelect car ID: \"))\n",
-    "            selected_car = next((car for car in cars if car['car_id'] == car_choice), None)\n",
-    "            if selected_car:\n",
-    "                break\n",
-    "            print(\"Invalid car selection!\")\n",
-    "        except ValueError:\n",
-    "            print(\"Please enter a valid number\")\n",
-    "    \n",
-    "    # Get appointment details\n",
-    "    while True:\n",
-    "        appointment_date = input(\"Appointment Date (YYYY-MM-DD): \").strip()\n",
-    "        try:\n",
-    "            datetime.strptime(appointment_date, '%Y-%m-%d')\n",
-    "            break\n",
-    "        except ValueError:\n",
-    "            print(\"Invalid date format! Use YYYY-MM-DD\")\n",
-    "    \n",
-    "    while True:\n",
-    "        appointment_time = input(\"Appointment Time (HH:MM): \").strip()\n",
-    "        try:\n",
-    "            datetime.strptime(appointment_time, '%H:%M')\n",
-    "            break\n",
-    "        except ValueError:\n",
-    "            print(\"Invalid time format! Use HH:MM\")\n",
-    "    \n",
-    "    service_type = input(\"Service Type (Modification/Consultation/Maintenance/Repair/Inspection/Other): \").strip()\n",
-    "    notes = input(\"Notes (optional): \").strip()\n",
-    "    \n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    \n",
-    "    try:\n",
-    "        cursor.execute(\"\"\"\n",
-    "            INSERT INTO appointments (customer_email, car_id, appointment_date, \n",
-    "                                    appointment_time, service_type, notes, status)\n",
-    "            VALUES (?, ?, ?, ?, ?, ?, 'Scheduled')\n",
-    "        \"\"\", (customer_email, selected_car['car_id'], appointment_date, \n",
-    "             appointment_time, service_type, notes))\n",
-    "        \n",
-    "        conn.commit()\n",
-    "        print(f\"\\nAppointment scheduled successfully!\")\n",
-    "        print(f\"Date: {appointment_date} at {appointment_time}\")\n",
-    "        print(f\"Car: {selected_car['car_model']}\")\n",
-    "        print(f\"Service: {service_type}\")\n",
-    "    except Exception as e:\n",
-    "        print(f\"\\nError: {e}\")\n",
-    "    finally:\n",
-    "        conn.close()\n",
-    "\n",
-    "def view_appointments(customer_email):\n",
-    "    display_header(\"YOUR APPOINTMENTS\")\n",
-    "    \n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    \n",
-    "    cursor.execute(\"\"\"\n",
-    "        SELECT a.appointment_date, a.appointment_time, a.service_type,\n",
-    "               a.status, a.notes, c.car_model\n",
-    "        FROM appointments a\n",
-    "        LEFT JOIN cars c ON a.car_id = c.car_id\n",
-    "        WHERE a.customer_email = ?\n",
-    "        ORDER BY a.appointment_date DESC, a.appointment_time DESC\n",
-    "    \"\"\", (customer_email,))\n",
-    "    \n",
-    "    appointments = cursor.fetchall()\n",
-    "    \n",
-    "    if appointments:\n",
-    "        print(f\"{'Date':<12} {'Time':<8} {'Service':<20} {'Status':<15} {'Car':<15} {'Notes':<20}\")\n",
-    "        print(\"-\"*100)\n",
-    "        for appt in appointments:\n",
-    "            print(f\"{appt['appointment_date']:<12} {appt['appointment_time']:<8} \"\n",
-    "                  f\"{appt['service_type'][:18]:<20} {appt['status']:<15} \"\n",
-    "                  f\"{appt['car_model'][:13]:<15} {appt['notes'][:18] if appt['notes'] else 'N/A':<20}\")\n",
-    "    else:\n",
-    "        print(\"No appointments found.\")\n",
-    "    \n",
-    "    conn.close()\n",
-    "\n",
-    "def admin_dashboard():\n",
-    "    display_header(\"ADMIN DASHBOARD\")\n",
-    "    \n",
-    "    conn = get_db_connection()\n",
-    "    cursor = conn.cursor()\n",
-    "    \n",
-    "    # Get statistics\n",
-    "    cursor.execute(\"SELECT COUNT(*) as total_customers FROM customers\")\n",
-    "    total_customers = cursor.fetchone()['total_customers']\n",
-    "    \n",
-    "    cursor.execute(\"SELECT COUNT(*) as total_bills FROM bills\")\n",
-    "    total_bills = cursor.fetchone()['total_bills']\n",
-    "    \n",
-    "    cursor.execute(\"SELECT SUM(total) as total_revenue FROM bills\")\n",
-    "    total_revenue = cursor.fetchone()['total_revenue'] or 0\n",
-    "    \n",
-    "    cursor.execute(\"SELECT COUNT(*) as total_mods FROM modifications WHERE is_active = 1\")\n",
-    "    total_mods = cursor.fetchone()['total_mods']\n",
-    "    \n",
-    "    cursor.execute(\"SELECT COUNT(*) as total_appointments FROM appointments WHERE status = 'Scheduled'\")\n",
-    "    active_appointments = cursor.fetchone()['total_appointments']\n",
-    "    \n",
-    "    print(f\"Total Customers: {total_customers}\")\n",
-    "    print(f\"Total Bills: {total_bills}\")\n",
-    "    print(f\"Total Revenue: ${total_revenue:,.2f}\")\n",
-    "    print(f\"Available Modifications: {total_mods}\")\n",
-    "    print(f\"Active Appointments: {active_appointments}\")\n",
-    "    \n",
-    "    # Recent bills\n",
-    "    print(\"\\nRecent Bills:\")\n",
-    "    print(\"-\"*60)\n",
-    "    cursor.execute(\"\"\"\n",
-    "        SELECT b.bill_number, b.bill_date, b.total, c.name, ca.car_model\n",
-    "        FROM bills b\n",
-    "        JOIN customers c ON b.customer_email = c.email\n",
-    "        LEFT JOIN cars ca ON b.car_id = ca.car_id\n",
-    "        ORDER BY b.bill_date DESC\n",
-    "        LIMIT 10\n",
-    "    \"\"\")\n",
-    "    \n",
-    "    recent_bills = cursor.fetchall()\n",
-    "    if recent_bills:\n",
-    "        for bill in recent_bills:\n",
-    "            print(f\"Bill #{bill['bill_number']}: {bill['bill_date']} - ${bill['total']:,.2f} - \"\n",
-    "                  f\"{bill['name']} - {bill['car_model']}\")\n",
-    "    else:\n",
-    "        print(\"No bills found.\")\n",
-    "    \n",
-    "    conn.close()\n",
-    "\n",
-    "# Main Application\n",
-    "def main():\n",
-    "    initialize_database()\n",
-    "    \n",
-    "    print(\"\\n\" + \"=\"*80)\n",
-    "    print(\"CAR MODIFICATION STUDIO MANAGEMENT SYSTEM\")\n",
-    "    print(\"=\"*80)\n",
-    "    \n",
-    "    current_user = None\n",
-    "    \n",
-    "    while True:\n",
-    "        if not current_user:\n",
-    "            # Main menu for non-logged in users\n",
-    "            display_header(\"MAIN MENU\")\n",
-    "            choice = display_menu([\n",
-    "                (\"Customer Login\", None),\n",
-    "                (\"Customer Registration\", None),\n",
-    "                (\"Admin Dashboard\", None),\n",
-    "                (\"Exit\", None)\n",
-    "            ])\n",
-    "            \n",
-    "            if choice == 1:\n",
-    "                current_user = login_customer()\n",
-    "            elif choice == 2:\n",
-    "                current_user = register_customer()\n",
-    "            elif choice == 3:\n",
-    "                admin_dashboard()\n",
-    "                input(\"\\nPress Enter to continue...\")\n",
-    "            elif choice == 0:\n",
-    "                print(\"\\nThank you for using Car Modification Studio!\")\n",
-    "                break\n",
-    "            else:\n",
-    "                print(\"\\nPlease select a valid option.\")\n",
-    "        \n",
-    "        else:\n",
-    "            # Main menu for logged in customers\n",
-    "            display_header(f\"WELCOME {current_user}\")\n",
-    "            choice = display_menu([\n",
-    "                (\"Add New Car\", None),\n",
-    "                (\"View My Cars\", None),\n",
-    "                (\"View All Modifications\", None),\n",
-    "                (\"Create New Build\", None),\n",
-    "                (\"View My Profile\", None),\n",
-    "                (\"View Reports & Analytics\", None),\n",
-    "                (\"AI Recommendations\", None),\n",
-    "                (\"Risk Analysis\", None),\n",
-    "                (\"Customer Classification\", None),\n",
-    "                (\"Export My Data\", None),\n",
-    "                (\"Schedule Appointment\", None),\n",
-    "                (\"View Appointments\", None),\n",
-    "                (\"Logout\", None)\n",
-    "            ])\n",
-    "            \n",
-    "            if choice == 1:\n",
-    "                add_car(current_user)\n",
-    "            elif choice == 2:\n",
-    "                list_cars(current_user)\n",
-    "            elif choice == 3:\n",
-    "                list_modifications()\n",
-    "            elif choice == 4:\n",
-    "                create_build(current_user)\n",
-    "            elif choice == 5:\n",
-    "                view_profile(current_user)\n",
-    "            elif choice == 6:\n",
-    "                view_reports(current_user)\n",
-    "            elif choice == 7:\n",
-    "                ai_recommendations(current_user)\n",
-    "            elif choice == 8:\n",
-    "                risk_analysis(current_user)\n",
-    "            elif choice == 9:\n",
-    "                customer_classification(current_user)\n",
-    "            elif choice == 10:\n",
-    "                export_data(current_user)\n",
-    "            elif choice == 11:\n",
-    "                schedule_appointment(current_user)\n",
-    "            elif choice == 12:\n",
-    "                view_appointments(current_user)\n",
-    "            elif choice == 13:\n",
-    "                current_user = None\n",
-    "                print(\"\\nLogged out successfully!\")\n",
-    "                continue\n",
-    "            elif choice == 0:\n",
-    "                print(\"\\nThank you for using Car Modification Studio!\")\n",
-    "                break\n",
-    "            \n",
-    "            input(\"\\nPress Enter to continue...\")\n",
-    "\n",
-    "if __name__ == \"__main__\":\n",
-    "    try:\n",
-    "        main()\n",
-    "    except KeyboardInterrupt:\n",
-    "        print(\"\\n\\nProgram terminated by user.\")\n",
-    "    except Exception as e:\n",
-    "        print(f\"\\nAn unexpected error occurred: {e}\")\n",
-    "        import traceback\n",
-    "        traceback.print_exc()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "95349b58-7d8f-4938-b329-9fc340994731",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3 (ipykernel)",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.13.5"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
-}
+
+# AI Recommendation Engine
+class AIRecommendationEngine:
+    def __init__(self):
+        self.conn = get_db_connection()
+        
+    def get_personalized_recommendations(self, user_email, limit=5):
+        """Get AI-powered personalized recommendations"""
+        cursor = self.conn.cursor()
+        
+        # Get user preferences from purchase history
+        cursor.execute("""
+            SELECT bi.mod_category, COUNT(*) as frequency, 
+                   AVG(bi.price) as avg_spent
+            FROM bill_items bi
+            JOIN bills b ON bi.bill_id = b.bill_id
+            WHERE b.customer_email = ?
+            GROUP BY bi.mod_category
+        """, (user_email,))
+        user_prefs = cursor.fetchall()
+        
+        # Get car info
+        cursor.execute("SELECT car_model, car_make, car_year FROM cars WHERE customer_email = ? LIMIT 1", (user_email,))
+        car_info = cursor.fetchone()
+        
+        # Get all active modifications
+        cursor.execute("SELECT mod_id, name, price, category, description FROM modifications WHERE is_active = 1")
+        all_mods = cursor.fetchall()
+        
+        recommendations = []
+        for mod in all_mods:
+            score = 50  # Base score
+            
+            # 1. Category preference boost
+            for pref in user_prefs:
+                if pref['mod_category'] == mod['category']:
+                    score += pref['frequency'] * 5
+            
+            # 2. Price range suitability
+            if user_prefs:
+                total_spent = sum(p['avg_spent'] for p in user_prefs)
+                avg_spent = total_spent / len(user_prefs) if user_prefs else 0
+                
+                if avg_spent > 0:
+                    price_ratio = mod['price'] / (avg_spent * 1.5)
+                    if 0.5 <= price_ratio <= 1.5:
+                        score += 20
+                    elif price_ratio < 0.5:
+                        score += 10
+                    else:
+                        score -= 10
+            
+            # 3. Car model compatibility
+            if car_info:
+                car_year = car_info['car_year'] or datetime.now().year
+                car_age = datetime.now().year - car_year
+                
+                # Performance mods for newer cars
+                if mod['category'] == 'Performance' and car_age < 5:
+                    score += 10
+                
+                # Safety mods for older cars
+                if mod['category'] == 'Safety' and car_age > 5:
+                    score += 10
+            
+            # Only recommend if score >= 60
+            if score >= 60:
+                recommendations.append({
+                    'mod_id': mod['mod_id'],
+                    'name': mod['name'],
+                    'category': mod['category'],
+                    'price': mod['price'],
+                    'ai_score': min(score, 100),
+                    'description': mod['description']
+                })
+        
+        # Sort by AI score and return top N
+        recommendations.sort(key=lambda x: x['ai_score'], reverse=True)
+        return recommendations[:limit]
+    
+    def get_recommendation_reason(self, mod, user_prefs, car_info, score):
+        """Generate reason for recommendation"""
+        reasons = []
+        
+        for pref in user_prefs:
+            if pref['mod_category'] == mod['category']:
+                reasons.append(f"Matches your preference for {mod['category']} modifications")
+                break
+        
+        if mod['price'] < 1000:
+            reasons.append("Budget-friendly option")
+        elif mod['price'] > 3000:
+            reasons.append("Premium upgrade for enhanced experience")
+        
+        if car_info:
+            if mod['category'] == 'Performance' and (car_info['car_year'] or 0) > 2020:
+                reasons.append("Ideal for newer car models")
+        
+        return " | ".join(reasons[:2]) if reasons else "Great value addition"
+    
+    def __del__(self):
+        self.conn.close()
+
+# Modification Risk Calculator
+class ModificationRiskCalculator:
+    """Calculate risk score for modifications (1-10 scale)"""
+    
+    RISK_FACTORS = {
+        'warranty_void': 3.0,
+        'insurance_impact': 2.5,
+        'installation_complexity': 2.0,
+        'maintenance_cost': 1.5,
+        'resale_impact': 1.0,
+        'legal_compliance': 3.0
+    }
+    
+    @staticmethod
+    def calculate_modification_risk(modification_data, car_data):
+        """Calculate overall risk score (1-10)"""
+        risk_scores = []
+        
+        # 1. Warranty Risk
+        warranty_risk = ModificationRiskCalculator._calculate_warranty_risk(
+            modification_data['category'], 
+            car_data.get('car_year', datetime.now().year) if isinstance(car_data, dict) else (car_data['car_year'] if car_data and car_data['car_year'] else datetime.now().year)
+        )
+        risk_scores.append(warranty_risk * ModificationRiskCalculator.RISK_FACTORS['warranty_void'])
+        
+        # 2. Insurance Impact
+        insurance_risk = ModificationRiskCalculator._calculate_insurance_risk(
+            modification_data['category'], 
+            modification_data.get('price', 0)
+        )
+        risk_scores.append(insurance_risk * ModificationRiskCalculator.RISK_FACTORS['insurance_impact'])
+        
+        # 3. Installation Complexity
+        complexity_risk = ModificationRiskCalculator._calculate_complexity_risk(
+            modification_data['category']
+        )
+        risk_scores.append(complexity_risk * ModificationRiskCalculator.RISK_FACTORS['installation_complexity'])
+        
+        # 4. Maintenance Cost Impact
+        maintenance_risk = ModificationRiskCalculator._calculate_maintenance_risk(
+            modification_data['category']
+        )
+        risk_scores.append(maintenance_risk * ModificationRiskCalculator.RISK_FACTORS['maintenance_cost'])
+        
+        # 5. Resale Value Impact
+        resale_risk = ModificationRiskCalculator._calculate_resale_risk(
+            modification_data['category'], 
+            car_data.get('car_make', '') if isinstance(car_data, dict) else (car_data['car_make'] if car_data else '')
+        )
+        risk_scores.append(resale_risk * ModificationRiskCalculator.RISK_FACTORS['resale_impact'])
+        
+        # 6. Legal Compliance
+        legal_risk = ModificationRiskCalculator._calculate_legal_risk(
+            modification_data['category'], 
+            car_data.get('car_year', datetime.now().year) if isinstance(car_data, dict) else (car_data['car_year'] if car_data and car_data['car_year'] else datetime.now().year)
+        )
+        risk_scores.append(legal_risk * ModificationRiskCalculator.RISK_FACTORS['legal_compliance'])
+        
+        # Calculate weighted average
+        total_weight = sum(ModificationRiskCalculator.RISK_FACTORS.values())
+        weighted_risk = sum(risk_scores) / total_weight
+        
+        # Normalize to 1-10 scale
+        normalized_risk = min(max(weighted_risk * 2, 1), 10)
+        
+        return round(normalized_risk, 1)
+    
+    @staticmethod
+    def _calculate_warranty_risk(mod_category, car_year):
+        """Calculate warranty void risk (0-5 scale)"""
+        warranty_risks = {
+            'Performance': 4.5 if car_year < 3 else 3.0,
+            'Technology': 2.0,
+            'Safety': 1.0,
+            'Comfort': 1.5,
+            'Aesthetic': 0.5,
+            'Color': 0.1
+        }
+        return warranty_risks.get(mod_category, 2.0)
+    
+    @staticmethod
+    def _calculate_insurance_risk(mod_category, price):
+        """Calculate insurance premium impact (0-5 scale)"""
+        if price > 50000:
+            risk = 4.0
+        elif price > 20000:
+            risk = 3.0
+        elif price > 5000:
+            risk = 2.0
+        else:
+            risk = 1.0
+        
+        # Category adjustments
+        if mod_category == 'Performance':
+            risk += 1.0
+        elif mod_category == 'Safety':
+            risk -= 0.5
+        
+        return min(max(risk, 0), 5)
+    
+    @staticmethod
+    def _calculate_complexity_risk(mod_category):
+        """Calculate installation complexity (0-5 scale)"""
+        complexity = {
+            'Performance': 4.0,
+            'Technology': 3.5,
+            'Safety': 3.0,
+            'Comfort': 2.5,
+            'Aesthetic': 2.0,
+            'Color': 1.5
+        }
+        return complexity.get(mod_category, 2.5)
+    
+    @staticmethod
+    def _calculate_maintenance_risk(mod_category):
+        """Calculate maintenance cost impact (0-5 scale)"""
+        maintenance = {
+            'Performance': 3.5,
+            'Technology': 3.0,
+            'Safety': 2.0,
+            'Comfort': 2.5,
+            'Aesthetic': 1.5,
+            'Color': 1.0
+        }
+        return maintenance.get(mod_category, 2.0)
+    
+    @staticmethod
+    def _calculate_resale_risk(mod_category, car_make):
+        """Calculate resale value impact (0-5 scale)"""
+        premium_brands = ['Mercedes', 'BMW', 'Audi', 'Porsche', 'Lexus']
+        is_premium = any(brand.lower() in str(car_make).lower() for brand in premium_brands)
+        
+        resale_impact = {
+            'Performance': 2.5 if is_premium else 3.5,
+            'Technology': 2.0,
+            'Safety': 1.0,
+            'Comfort': 1.5,
+            'Aesthetic': 3.0 if is_premium else 2.0,
+            'Color': 4.0
+        }
+        return resale_impact.get(mod_category, 2.5)
+    
+    @staticmethod
+    def _calculate_legal_risk(mod_category, car_year):
+        """Calculate legal compliance risk (0-5 scale)"""
+        legal_risks = {
+            'Performance': 3.5 if car_year < 10 else 4.0,
+            'Technology': 1.0,
+            'Safety': 0.5,
+            'Comfort': 1.0,
+            'Aesthetic': 2.0,
+            'Color': 3.0
+        }
+        return legal_risks.get(mod_category, 2.0)
+    
+    @staticmethod
+    def get_risk_interpretation(risk_score):
+        """Interpret the risk score"""
+        if risk_score <= 3:
+            return {
+                "level": "Low Risk",
+                "description": "Safe modification with minimal impact",
+                "recommendation": "Recommended for all users"
+            }
+        elif risk_score <= 6:
+            return {
+                "level": "Medium Risk",
+                "description": "Moderate impact on warranty/insurance",
+                "recommendation": "Consult with our experts before proceeding"
+            }
+        else:
+            return {
+                "level": "High Risk",
+                "description": "Significant impact on warranty, insurance, and legality",
+                "recommendation": "Professional consultation mandatory"
+            }
+
+# Customer Classification System
+class CustomerClassifier:
+    """Automatically classify customers into types"""
+    
+    CUSTOMER_TYPES = {
+        0: {
+            "name": "Performance Seeker",
+            "description": "Focuses on speed, power, and handling improvements",
+            "preferred_categories": ["Performance", "Safety"],
+            "avg_spend_range": "High ($50,000+)",
+            "typical_mods": ["Turbocharger", "ECU Remap", "Sports Suspension"]
+        },
+        1: {
+            "name": "Daily Comfort",
+            "description": "Prioritizes comfort, convenience, and reliability",
+            "preferred_categories": ["Comfort", "Technology"],
+            "avg_spend_range": "Medium ($20,000-$50,000)",
+            "typical_mods": ["Premium Seats", "Climate Control", "Audio System"]
+        },
+        2: {
+            "name": "Luxury / Aesthetic",
+            "description": "Focuses on looks, luxury features, and visual appeal",
+            "preferred_categories": ["Aesthetic", "Color", "Comfort"],
+            "avg_spend_range": "High ($50,000+)",
+            "typical_mods": ["Custom Paint", "Body Kits", "Leather Interior"]
+        }
+    }
+    
+    def __init__(self):
+        self.conn = get_db_connection()
+        
+    def extract_customer_features(self, customer_email):
+        """Extract features for classification"""
+        cursor = self.conn.cursor()
+        
+        features = {}
+        
+        # 1. Spending patterns
+        cursor.execute("""
+            SELECT 
+                COUNT(DISTINCT b.bill_id) as total_orders,
+                SUM(b.total) as total_spent,
+                AVG(b.total) as avg_order_value
+            FROM bills b
+            WHERE b.customer_email = ?
+        """, (customer_email,))
+        
+        spending = cursor.fetchone()
+        features['total_orders'] = spending['total_orders'] or 0
+        features['total_spent'] = spending['total_spent'] or 0
+        features['avg_order_value'] = spending['avg_order_value'] or 0
+        
+        # 2. Category preferences
+        cursor.execute("""
+            SELECT 
+                bi.mod_category,
+                COUNT(*) as mod_count,
+                SUM(bi.total_price) as category_spent
+            FROM bill_items bi
+            JOIN bills b ON bi.bill_id = b.bill_id
+            WHERE b.customer_email = ?
+            GROUP BY bi.mod_category
+        """, (customer_email,))
+        
+        categories = cursor.fetchall()
+        
+        # Initialize category features
+        all_categories = ['Performance', 'Aesthetic', 'Technology', 'Safety', 'Comfort', 'Color']
+        for cat in all_categories:
+            features[f'cat_{cat.lower()}_count'] = 0
+            features[f'cat_{cat.lower()}_spent'] = 0
+        
+        # Fill category data
+        for cat in categories:
+            cat_name = cat['mod_category'].lower()
+            features[f'cat_{cat_name}_count'] = cat['mod_count']
+            features[f'cat_{cat_name}_spent'] = cat['category_spent']
+        
+        return features
+    
+    def classify_customer(self, customer_email):
+        """Classify customer using rule-based system"""
+        features = self.extract_customer_features(customer_email)
+        
+        # Rule-based classification
+        total_spent = features.get('total_spent', 0)
+        if total_spent == 0:
+            return self.CUSTOMER_TYPES[1]  # Default to Daily Comfort for new customers
+        
+        performance_ratio = features.get('cat_performance_spent', 0) / total_spent
+        aesthetic_ratio = features.get('cat_aesthetic_spent', 0) / total_spent
+        comfort_ratio = features.get('cat_comfort_spent', 0) / total_spent
+        
+        # Determine dominant preference
+        if performance_ratio > 0.4:
+            return self.CUSTOMER_TYPES[0]  # Performance Seeker
+        elif aesthetic_ratio > 0.3:
+            return self.CUSTOMER_TYPES[2]  # Luxury/Aesthetic
+        else:
+            return self.CUSTOMER_TYPES[1]  # Daily Comfort
+    
+    def get_recommendations_for_type(self, customer_type_idx):
+        """Get modification recommendations based on customer type"""
+        recommendations = {
+            0: {  # Performance Seeker
+                "must_have": ["Turbocharger Kit", "Performance Exhaust", "Sports Suspension"],
+                "recommended": ["ECU Remap", "Advanced Brake System", "Lightweight Wheels"],
+                "budget_friendly": ["Air Intake System", "Performance Chip", "Strut Bar"]
+            },
+            1: {  # Daily Comfort
+                "must_have": ["Premium Leather Seats", "Premium Sound System", "Sunroof"],
+                "recommended": ["Climate Control", "Noise Insulation", "Backup Camera"],
+                "budget_friendly": ["Seat Covers", "Steering Wheel Cover", "Car Organizer"]
+            },
+            2: {  # Luxury / Aesthetic
+                "must_have": ["Ceramic Coating", "Custom Paint Job", "LED Headlight Kit"],
+                "recommended": ["Body Kit", "Carbon Fiber Hood", "Ambient Lighting"],
+                "budget_friendly": ["Window Tinting", "Alloy Wheel Covers", "Dash Cam"]
+            }
+        }
+        
+        return recommendations.get(customer_type_idx, recommendations[1])
+    
+    def __del__(self):
+        self.conn.close()
+
+# Console Interface Functions
+def display_header(title):
+    print("\n" + "="*80)
+    print(f"{title:^80}")
+    print("="*80)
+
+def display_menu(options):
+    print("\nPlease select an option:")
+    for i, (option, _) in enumerate(options, 1):
+        print(f"{i}. {option}")
+    print("0. Exit/Go Back")
+    
+    while True:
+        try:
+            choice = int(input("\nEnter your choice: "))
+            if 0 <= choice <= len(options):
+                return choice
+            else:
+                print(f"Please enter a number between 0 and {len(options)}")
+        except ValueError:
+            print("Please enter a valid number")
+
+def register_customer():
+    display_header("NEW CUSTOMER REGISTRATION")
+    
+    while True:
+        name = input("Full Name: ").strip()
+        if name:
+            break
+        print("Name is required!")
+    
+    while True:
+        email = input("Email: ").strip()
+        if valid_email(email):
+            break
+        print("Invalid email format!")
+    
+    phone = input("Phone (optional): ").strip()
+    if phone and not valid_phone(phone):
+        print("Warning: Phone number format may be invalid")
+    
+    address = input("Address (optional): ").strip()
+    city = input("City (optional): ").strip()
+    state = input("State (optional): ").strip()
+    pincode = input("Pincode (optional): ").strip()
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("""
+            INSERT INTO customers (email, name, phone, address, city, state, pincode) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (email, name, phone, address, city, state, pincode))
+        conn.commit()
+        print(f"\nRegistration successful! Welcome {name}!")
+        return email
+    except sqlite3.IntegrityError:
+        print("\nEmail already registered! Please login instead.")
+        return None
+    finally:
+        conn.close()
+
+def login_customer():
+    display_header("CUSTOMER LOGIN")
+    
+    email = input("Email: ").strip()
+    
+    if not valid_email(email):
+        print("Invalid email format!")
+        return None
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT name FROM customers WHERE email = ?", (email,))
+    customer = cursor.fetchone()
+    conn.close()
+    
+    if customer:
+        print(f"\nWelcome back, {customer['name']}!")
+        return email
+    else:
+        print("\nCustomer not found. Please register first.")
+        return None
+
+def add_car(customer_email):
+    display_header("ADD NEW CAR")
+    
+    while True:
+        car_model = input("Car Model*: ").strip()
+        if car_model:
+            break
+        print("Car Model is required!")
+    
+    car_make = input("Car Make (optional): ").strip()
+    
+    while True:
+        car_year = input("Year (optional, press Enter to skip): ").strip()
+        if not car_year:
+            car_year = None
+            break
+        try:
+            car_year = int(car_year)
+            if 1900 <= car_year <= datetime.now().year + 1:
+                break
+            print(f"Year must be between 1900 and {datetime.now().year + 1}")
+        except ValueError:
+            print("Please enter a valid year")
+    
+    car_color = input("Current Color (optional): ").strip()
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("""
+            INSERT INTO cars (customer_email, car_model, car_make, car_year, car_color) 
+            VALUES (?, ?, ?, ?, ?)
+        """, (customer_email, car_model, car_make, car_year, car_color))
+        conn.commit()
+        print(f"\nCar '{car_model}' added successfully!")
+    except Exception as e:
+        print(f"\nError: {e}")
+    finally:
+        conn.close()
+
+def list_cars(customer_email):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT car_id, car_model, car_make, car_year, car_color 
+        FROM cars 
+        WHERE customer_email = ?
+        ORDER BY car_year DESC
+    """, (customer_email,))
+    cars = cursor.fetchall()
+    conn.close()
+    
+    if cars:
+        display_header("YOUR CARS")
+        print(f"{'ID':<5} {'Model':<20} {'Make':<15} {'Year':<8} {'Color':<15}")
+        print("-"*70)
+        for car in cars:
+            print(f"{car['car_id']:<5} {car['car_model']:<20} {car['car_make'] or 'N/A':<15} "
+                  f"{car['car_year'] or 'N/A':<8} {car['car_color'] or 'N/A':<15}")
+        return cars
+    else:
+        print("\nNo cars found. Please add a car first.")
+        return []
+
+def list_modifications():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT mod_id, name, price, category, description 
+        FROM modifications 
+        WHERE is_active = 1 
+        ORDER BY category, price DESC
+    """)
+    mods = cursor.fetchall()
+    conn.close()
+    
+    display_header("AVAILABLE MODIFICATIONS")
+    
+    categories = {}
+    for mod in mods:
+        category = mod['category']
+        if category not in categories:
+            categories[category] = []
+        categories[category].append(mod)
+    
+    for category, mods_list in categories.items():
+        print(f"\n{category.upper()}:")
+        print("-"*80)
+        for mod in mods_list:
+            print(f"ID: {mod['mod_id']:3d} | ${mod['price']:8,.2f} | {mod['name']:30} | "
+                  f"{mod['description'] or 'No description'}")
+    
+    return mods
+
+def select_modifications():
+    all_mods = list_modifications()
+    selected_mods = []
+    
+    while True:
+        try:
+            mod_id = int(input("\nEnter modification ID to add (0 to finish): "))
+            
+            if mod_id == 0:
+                break
+            
+            selected_mod = next((mod for mod in all_mods if mod['mod_id'] == mod_id), None)
+            if selected_mod:
+                selected_mods.append({
+                    'mod_id': selected_mod['mod_id'],
+                    'name': selected_mod['name'],
+                    'price': selected_mod['price'],
+                    'category': selected_mod['category']
+                })
+                print(f"Added: {selected_mod['name']}")
+            else:
+                print("Invalid modification ID!")
+        except ValueError:
+            print("Please enter a valid number")
+    
+    return selected_mods
+
+def create_build(customer_email):
+    display_header("CREATE NEW BUILD")
+    
+    # List and select car
+    cars = list_cars(customer_email)
+    if not cars:
+        return
+    
+    while True:
+        try:
+            car_choice = int(input("\nSelect car ID: "))
+            selected_car = next((car for car in cars if car['car_id'] == car_choice), None)
+            if selected_car:
+                break
+            print("Invalid car selection!")
+        except ValueError:
+            print("Please enter a valid number")
+    
+    # Select modifications
+    selected_mods = select_modifications()
+    
+    if not selected_mods:
+        print("\nNo modifications selected!")
+        return
+    
+    # Calculate totals
+    totals = calculate_totals(selected_mods, None, customer_email)
+    
+    # Display summary
+    display_header("BUILD SUMMARY")
+    print(f"Car: {selected_car['car_model']}")
+    
+    print("\nSelected Modifications:")
+    for mod in selected_mods:
+        print(f"  • {mod['name']} - ${mod['price']:,.2f}")
+    
+    print(f"\nSubtotal: ${totals['subtotal']:,.2f}")
+    if totals['discount_percent'] > 0:
+        print(f"Discount ({totals['discount_percent']}%): -${totals['discount_amount']:,.2f}")
+        print(f"After Discount: ${totals['subtotal_after_discount']:,.2f}")
+    print(f"GST ({GST_RATE*100}%): ${totals['gst']:,.2f}")
+    print(f"Total: ${totals['total']:,.2f}")
+    
+    # Loyalty points info
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT loyalty_points FROM customers WHERE email = ?", (customer_email,))
+    loyalty_points = cursor.fetchone()['loyalty_points']
+    conn.close()
+    
+    points_to_earn = int(totals['total'] / 100)
+    print(f"\nLoyalty Points:")
+    print(f"  Current: {loyalty_points}")
+    print(f"  To earn: {points_to_earn}")
+    print(f"  Total after purchase: {loyalty_points + points_to_earn}")
+    
+    # Confirm purchase
+    confirm = input("\nComplete purchase? (yes/no): ").strip().lower()
+    if confirm in ['yes', 'y']:
+        save_bill(customer_email, selected_car['car_id'], selected_mods, None, totals)
+        print("\nPurchase completed successfully!")
+    else:
+        print("\nPurchase cancelled.")
+
+def save_bill(customer_email, car_id, mods, color, totals):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Generate bill ID and number
+    bill_id = f"BILL-{datetime.now().strftime('%Y%m%d')}-{str(uuid.uuid4())[:6].upper()}"
+    bill_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    cursor.execute("SELECT MAX(bill_number) FROM bills")
+    result = cursor.fetchone()[0]
+    bill_number = (result or 0) + 1
+    
+    # Get customer name
+    cursor.execute("SELECT name FROM customers WHERE email = ?", (customer_email,))
+    customer_name = cursor.fetchone()['name']
+    
+    # Get car model
+    cursor.execute("SELECT car_model FROM cars WHERE car_id = ?", (car_id,))
+    car_model = cursor.fetchone()['car_model']
+    
+    # Save bill
+    cursor.execute("""
+        INSERT INTO bills (bill_id, customer_email, car_id, bill_date, bill_number, 
+                         subtotal, discount, discount_percent, gst, gst_rate, total, 
+                         payment_method, notes)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (bill_id, customer_email, car_id, bill_date, bill_number,
+         totals['subtotal'], totals['discount_amount'], totals['discount_percent'], 
+         totals['gst'], GST_RATE, totals['total'], "Cash", "Console purchase"))
+    
+    # Save bill items
+    for mod in mods:
+        cursor.execute("""
+            INSERT INTO bill_items (bill_id, mod_id, mod_name, mod_category, price, total_price)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (bill_id, mod['mod_id'], mod['name'], mod['category'], mod['price'], mod['price']))
+    
+    # Update customer
+    cursor.execute("""
+        UPDATE customers 
+        SET total_visits = total_visits + 1,
+            total_spent = total_spent + ?,
+            last_visit = CURRENT_TIMESTAMP,
+            loyalty_points = loyalty_points + ?
+        WHERE email = ?
+    """, (totals['total'], int(totals['total'] / 100), customer_email))
+    
+    conn.commit()
+    
+    # Generate bill file
+    os.makedirs("bills", exist_ok=True)
+    bill_filename = f"bills/{datetime.now().strftime('%Y%m%d')}_{bill_number}_{safe_text(customer_name)}.txt"
+    
+    bill_content = f"""
+{'='*70}
+{'CUSTOM CAR MODIFICATION STUDIO':^70}
+{'='*70}
+{'Bill No:':<15} {bill_number}
+{'Bill ID:':<15} {bill_id}
+{'Date:':<15} {bill_date}
+{'='*70}
+{'Customer:':<15} {customer_name}
+{'Email:':<15} {customer_email}
+{'Car:':<15} {car_model}
+{'Payment:':<15} Cash
+{'='*70}
+{'MODIFICATIONS':^70}
+{'-'*70}
+"""
+    
+    item_no = 1
+    for mod in mods:
+        bill_content += f"{item_no:<5} {mod['name']:<40} ${mod['price']:>8.2f} ${mod['price']:>8.2f}\n"
+        item_no += 1
+    
+    bill_content += f"""
+{'-'*70}
+{'Subtotal:':<55} ${totals['subtotal']:>10.2f}
+{'Discount:':<55} -${totals['discount_amount']:>10.2f}
+{'GST ({GST_RATE*100:.0f}%):':<55} ${totals['gst']:>10.2f}
+{'='*70}
+{'TOTAL AMOUNT:':<55} ${totals['total']:>10.2f}
+{'='*70}
+Thank you for your business!
+Visit again for more modifications!
+"""
+    
+    with open(bill_filename, 'w', encoding='utf-8') as f:
+        f.write(bill_content)
+    
+    conn.close()
+    
+    print(f"\nBill saved to: {bill_filename}")
+    print(f"Bill Number: {bill_number}")
+    print(f"Bill ID: {bill_id}")
+
+def view_profile(customer_email):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+        SELECT name, email, phone, address, city, state, pincode,
+               total_visits, total_spent, loyalty_points,
+               first_visit, last_visit
+        FROM customers
+        WHERE email = ?
+    """, (customer_email,))
+    customer = cursor.fetchone()
+    
+    if customer:
+        display_header("YOUR PROFILE")
+        
+        print("Personal Information:")
+        print("-"*40)
+        print(f"Name: {customer['name']}")
+        print(f"Email: {customer['email']}")
+        print(f"Phone: {customer['phone'] or 'Not provided'}")
+        print(f"Address: {customer['address'] or 'Not provided'}")
+        print(f"City: {customer['city'] or 'Not provided'}")
+        print(f"State: {customer['state'] or 'Not provided'}")
+        print(f"Pincode: {customer['pincode'] or 'Not provided'}")
+        
+        print("\nStatistics:")
+        print("-"*40)
+        print(f"Total Visits: {customer['total_visits']}")
+        print(f"Total Spent: ${customer['total_spent']:,.2f}")
+        print(f"Loyalty Points: {customer['loyalty_points']}")
+        print(f"First Visit: {customer['first_visit']}")
+        print(f"Last Visit: {customer['last_visit']}")
+        
+        # Progress to next loyalty tier
+        progress = min(customer['loyalty_points'] / 100, 1.0)
+        print(f"\nLoyalty Progress: {customer['loyalty_points']}/100 points")
+        print(f"Progress: {'█' * int(progress * 20)}{'░' * (20 - int(progress * 20))} {progress*100:.1f}%")
+    else:
+        print("\nProfile not found!")
+    
+    conn.close()
+
+def view_reports(customer_email):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    display_header("YOUR REPORTS")
+    
+    # Monthly spending
+    cursor.execute("""
+        SELECT strftime('%Y-%m', bill_date) as month,
+               COUNT(*) as bills,
+               SUM(total) as total_spent,
+               AVG(total) as avg_bill
+        FROM bills
+        WHERE customer_email = ? AND bill_date >= DATE('now', '-6 months')
+        GROUP BY strftime('%Y-%m', bill_date)
+        ORDER BY month
+    """, (customer_email,))
+    
+    monthly_data = cursor.fetchall()
+    
+    if monthly_data:
+        print("Monthly Spending (Last 6 months):")
+        print("-"*60)
+        print(f"{'Month':<10} {'Bills':<10} {'Total Spent':<20} {'Avg Bill':<15}")
+        print("-"*60)
+        for data in monthly_data:
+            print(f"{data['month']:<10} {data['bills']:<10} ${data['total_spent']:<19,.2f} ${data['avg_bill']:<14,.2f}")
+        
+        # Statistics
+        total_spent = sum(data['total_spent'] for data in monthly_data)
+        avg_monthly = total_spent / len(monthly_data) if monthly_data else 0
+        max_month = max(monthly_data, key=lambda x: x['total_spent']) if monthly_data else None
+        
+        print(f"\nStatistics:")
+        print(f"  Total Spent (6 months): ${total_spent:,.2f}")
+        print(f"  Average Monthly: ${avg_monthly:,.2f}")
+        if max_month:
+            print(f"  Highest Month: {max_month['month']} (${max_month['total_spent']:,.2f})")
+    else:
+        print("No spending data available for the last 6 months.")
+    
+    # Category preferences
+    cursor.execute("""
+        SELECT bi.mod_category, COUNT(*) as mod_count, 
+               SUM(bi.total_price) as total_spent,
+               AVG(bi.price) as avg_price
+        FROM bill_items bi
+        JOIN bills b ON bi.bill_id = b.bill_id
+        WHERE b.customer_email = ?
+        GROUP BY bi.mod_category
+        ORDER BY total_spent DESC
+    """, (customer_email,))
+    
+    category_data = cursor.fetchall()
+    
+    if category_data:
+        print("\nSpending by Category:")
+        print("-"*60)
+        print(f"{'Category':<15} {'Mods':<10} {'Total Spent':<20} {'Avg Price':<15}")
+        print("-"*60)
+        for data in category_data:
+            print(f"{data['mod_category']:<15} {data['mod_count']:<10} "
+                  f"${data['total_spent']:<19,.2f} ${data['avg_price']:<14,.2f}")
+        
+        total_mods = sum(data['mod_count'] for data in category_data)
+        total_spent = sum(data['total_spent'] for data in category_data)
+        print(f"\nSummary:")
+        print(f"  Total Modifications: {total_mods}")
+        print(f"  Total Spent on Mods: ${total_spent:,.2f}")
+        if total_mods > 0:
+            print(f"  Average per Mod: ${total_spent/total_mods:,.2f}")
+    else:
+        print("\nNo modification history yet.")
+    
+    conn.close()
+
+def ai_recommendations(customer_email):
+    display_header("AI RECOMMENDATIONS")
+    
+    ai_engine = AIRecommendationEngine()
+    recommendations = ai_engine.get_personalized_recommendations(customer_email, limit=5)
+    
+    if recommendations:
+        print("Personalized recommendations for you:")
+        print("-"*80)
+        print(f"{'Name':<30} {'Category':<15} {'Price':<15} {'AI Score':<10}")
+        print("-"*80)
+        
+        for rec in recommendations:
+            print(f"{rec['name']:<30} {rec['category']:<15} ${rec['price']:<14,.2f} {rec['ai_score']:<9}%")
+        
+        print("\nWould you like to add any of these to a new build?")
+        for i, rec in enumerate(recommendations, 1):
+            print(f"{i}. {rec['name']} (${rec['price']:,.2f})")
+        
+        try:
+            choice = int(input("\nSelect recommendation to add (0 to skip): "))
+            if 1 <= choice <= len(recommendations):
+                selected_rec = recommendations[choice-1]
+                print(f"\nAdded {selected_rec['name']} to your build list.")
+                # Here you could implement adding to a build
+        except ValueError:
+            pass
+    else:
+        print("\nWe need more data about your preferences.")
+        print("Make your first purchase to get personalized recommendations!")
+
+def risk_analysis(customer_email):
+    display_header("RISK ANALYSIS")
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Get recent modifications
+    cursor.execute("""
+        SELECT bi.mod_name, bi.mod_category, bi.price
+        FROM bill_items bi
+        JOIN bills b ON bi.bill_id = b.bill_id
+        WHERE b.customer_email = ?
+        ORDER BY b.bill_date DESC
+        LIMIT 10
+    """, (customer_email,))
+    
+    recent_mods = cursor.fetchall()
+    
+    if not recent_mods:
+        print("No modifications found for analysis.")
+        conn.close()
+        return
+    
+    # Get car info
+    cursor.execute("SELECT car_model, car_make, car_year FROM cars WHERE customer_email = ? LIMIT 1", 
+                  (customer_email,))
+    car_data = cursor.fetchone()
+    
+    # Convert sqlite3.Row to dictionary for compatibility
+    car_info = {}
+    if car_data:
+        car_info = {
+            'car_model': car_data['car_model'],
+            'car_make': car_data['car_make'],
+            'car_year': car_data['car_year']
+        }
+    
+    car_model_name = car_info.get('car_model', 'your car') if car_info else 'your car'
+    print(f"Risk Analysis for your modifications on {car_model_name}:")
+    print("-"*80)
+    
+    total_risk = 0
+    high_risk_count = 0
+    risk_details = []
+    
+    for mod in recent_mods:
+        mod_data = {
+            'category': mod['mod_category'],
+            'price': mod['price'],
+            'name': mod['mod_name']
+        }
+        
+        risk_score = ModificationRiskCalculator.calculate_modification_risk(mod_data, car_info)
+        risk_info = ModificationRiskCalculator.get_risk_interpretation(risk_score)
+        
+        risk_details.append({
+            'modification': mod['mod_name'],
+            'category': mod['mod_category'],
+            'risk_score': risk_score,
+            'risk_level': risk_info['level']
+        })
+        
+        total_risk += risk_score
+        if risk_score > 6:
+            high_risk_count += 1
+    
+    # Display risk details
+    print(f"{'Modification':<30} {'Category':<15} {'Risk Score':<12} {'Risk Level':<15}")
+    print("-"*80)
+    for detail in risk_details:
+        print(f"{detail['modification']:<30} {detail['category']:<15} "
+              f"{detail['risk_score']:<11}/10 {detail['risk_level']:<15}")
+    
+    # Overall statistics
+    avg_risk = total_risk / len(recent_mods) if recent_mods else 0
+    print(f"\nOverall Statistics:")
+    print(f"  Average Risk: {avg_risk:.1f}/10")
+    print(f"  High Risk Modifications: {high_risk_count}")
+    print(f"  Total Modifications Analyzed: {len(recent_mods)}")
+    
+    # Risk interpretation
+    if avg_risk <= 3:
+        print("\nOverall Risk Assessment: LOW")
+        print("Your modifications are generally safe with minimal impact.")
+    elif avg_risk <= 6:
+        print("\nOverall Risk Assessment: MEDIUM")
+        print("Some modifications may affect warranty or insurance.")
+    else:
+        print("\nOverall Risk Assessment: HIGH")
+        print("Several modifications have significant impact. Consider consultation.")
+    
+    # Suggestions
+    if high_risk_count > 0:
+        print("\nRecommendations:")
+        if any(d['risk_score'] > 8 for d in risk_details):
+            print("  • Consider removing modifications with risk score > 8")
+        if any(d['category'] == 'Performance' and d['risk_score'] > 6 for d in risk_details):
+            print("  • High-performance mods may void warranty")
+        if any(d['category'] == 'Color' for d in risk_details):
+            print("  • Color changes may require RTO approval")
+    
+    conn.close()
+
+def customer_classification(customer_email):
+    display_header("CUSTOMER CLASSIFICATION")
+    
+    classifier = CustomerClassifier()
+    customer_type = classifier.classify_customer(customer_email)
+    
+    if isinstance(customer_type, dict):
+        # Already got customer type dict
+        pass
+    else:
+        # Get customer type dict from classification result
+        type_idx = next((key for key, value in CustomerClassifier.CUSTOMER_TYPES.items() 
+                        if value['name'] == customer_type), 1)
+        customer_type = CustomerClassifier.CUSTOMER_TYPES.get(type_idx, CustomerClassifier.CUSTOMER_TYPES[1])
+    
+    print(f"Customer Type: {customer_type['name']}")
+    print(f"\nDescription: {customer_type['description']}")
+    
+    print("\nCharacteristics:")
+    print(f"  • Preferred Categories: {', '.join(customer_type['preferred_categories'])}")
+    print(f"  • Average Spend Range: {customer_type['avg_spend_range']}")
+    print(f"  • Typical Modifications: {', '.join(customer_type['typical_mods'][:3])}")
+    
+    # Get recommendations for this type
+    type_idx = next((key for key, value in CustomerClassifier.CUSTOMER_TYPES.items() 
+                    if value['name'] == customer_type['name']), 1)
+    recommendations = classifier.get_recommendations_for_type(type_idx)
+    
+    print("\nRecommended Modifications:")
+    print("  Must Have:")
+    for mod in recommendations['must_have'][:3]:
+        print(f"    • {mod}")
+    
+    print("\n  Recommended:")
+    for mod in recommendations['recommended'][:3]:
+        print(f"    • {mod}")
+    
+    print("\n  Budget Friendly:")
+    for mod in recommendations['budget_friendly'][:3]:
+        print(f"    • {mod}")
+
+def export_data(customer_email):
+    display_header("EXPORT DATA")
+    
+    conn = get_db_connection()
+    
+    print("1. Purchase History (CSV)")
+    print("2. Customer Profile (CSV)")
+    print("3. Complete Data (Excel)")
+    
+    try:
+        choice = int(input("\nSelect data to export: "))
+        
+        os.makedirs("exports", exist_ok=True)
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        
+        if choice == 1:
+            # Purchase History
+            df = pd.read_sql_query("""
+                SELECT b.bill_date, b.bill_id, b.total, b.payment_method,
+                       c.car_model, bi.mod_name, bi.mod_category, bi.price
+                FROM bills b
+                LEFT JOIN cars c ON b.car_id = c.car_id
+                LEFT JOIN bill_items bi ON b.bill_id = bi.bill_id
+                WHERE b.customer_email = ?
+                ORDER BY b.bill_date DESC
+            """, conn, params=(customer_email,))
+            
+            if not df.empty:
+                filename = f"exports/purchase_history_{customer_email}_{timestamp}.csv"
+                df.to_csv(filename, index=False)
+                print(f"\nData exported to: {filename}")
+                print(f"Records: {len(df)}")
+            else:
+                print("\nNo purchase history found.")
+        
+        elif choice == 2:
+            # Customer Profile
+            df = pd.read_sql_query("""
+                SELECT name, email, phone, address, city, state, pincode,
+                       total_visits, total_spent, loyalty_points,
+                       first_visit, last_visit
+                FROM customers
+                WHERE email = ?
+            """, conn, params=(customer_email,))
+            
+            if not df.empty:
+                filename = f"exports/profile_{customer_email}_{timestamp}.csv"
+                df.to_csv(filename, index=False)
+                print(f"\nData exported to: {filename}")
+            else:
+                print("\nProfile not found.")
+        
+        elif choice == 3:
+            # Complete Data (Excel with multiple sheets)
+            try:
+                import openpyxl
+                
+                # Get customer data
+                profile_df = pd.read_sql_query("""
+                    SELECT name, email, phone, address, city, state, pincode,
+                           total_visits, total_spent, loyalty_points,
+                           first_visit, last_visit
+                    FROM customers
+                    WHERE email = ?
+                """, conn, params=(customer_email,))
+                
+                # Get cars data
+                cars_df = pd.read_sql_query("""
+                    SELECT car_model, car_make, car_year, car_color
+                    FROM cars
+                    WHERE customer_email = ?
+                """, conn, params=(customer_email,))
+                
+                # Get bills data
+                bills_df = pd.read_sql_query("""
+                    SELECT b.bill_date, b.bill_id, b.total, b.payment_method, c.car_model
+                    FROM bills b
+                    LEFT JOIN cars c ON b.car_id = c.car_id
+                    WHERE b.customer_email = ?
+                """, conn, params=(customer_email,))
+                
+                # Get modifications data
+                mods_df = pd.read_sql_query("""
+                    SELECT bi.mod_name, bi.mod_category, bi.price, b.bill_date
+                    FROM bill_items bi
+                    JOIN bills b ON bi.bill_id = b.bill_id
+                    WHERE b.customer_email = ?
+                """, conn, params=(customer_email,))
+                
+                # Create Excel file
+                filename = f"exports/complete_data_{customer_email}_{timestamp}.xlsx"
+                with pd.ExcelWriter(filename, engine='openpyxl') as writer:
+                    if not profile_df.empty:
+                        profile_df.to_excel(writer, sheet_name='Profile', index=False)
+                    if not cars_df.empty:
+                        cars_df.to_excel(writer, sheet_name='Cars', index=False)
+                    if not bills_df.empty:
+                        bills_df.to_excel(writer, sheet_name='Purchases', index=False)
+                    if not mods_df.empty:
+                        mods_df.to_excel(writer, sheet_name='Modifications', index=False)
+                
+                print(f"\nData exported to: {filename}")
+                print("Sheets: Profile, Cars, Purchases, Modifications")
+                
+            except ImportError:
+                print("\nError: openpyxl is required for Excel export.")
+                print("Install it using: pip install openpyxl")
+        
+        else:
+            print("\nInvalid choice.")
+    
+    except ValueError:
+        print("\nPlease enter a valid number")
+    
+    conn.close()
+
+def schedule_appointment(customer_email):
+    display_header("SCHEDULE APPOINTMENT")
+    
+    cars = list_cars(customer_email)
+    if not cars:
+        return
+    
+    while True:
+        try:
+            car_choice = int(input("\nSelect car ID: "))
+            selected_car = next((car for car in cars if car['car_id'] == car_choice), None)
+            if selected_car:
+                break
+            print("Invalid car selection!")
+        except ValueError:
+            print("Please enter a valid number")
+    
+    # Get appointment details
+    while True:
+        appointment_date = input("Appointment Date (YYYY-MM-DD): ").strip()
+        try:
+            datetime.strptime(appointment_date, '%Y-%m-%d')
+            break
+        except ValueError:
+            print("Invalid date format! Use YYYY-MM-DD")
+    
+    while True:
+        appointment_time = input("Appointment Time (HH:MM): ").strip()
+        try:
+            datetime.strptime(appointment_time, '%H:%M')
+            break
+        except ValueError:
+            print("Invalid time format! Use HH:MM")
+    
+    service_type = input("Service Type (Modification/Consultation/Maintenance/Repair/Inspection/Other): ").strip()
+    notes = input("Notes (optional): ").strip()
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("""
+            INSERT INTO appointments (customer_email, car_id, appointment_date, 
+                                    appointment_time, service_type, notes, status)
+            VALUES (?, ?, ?, ?, ?, ?, 'Scheduled')
+        """, (customer_email, selected_car['car_id'], appointment_date, 
+             appointment_time, service_type, notes))
+        
+        conn.commit()
+        print(f"\nAppointment scheduled successfully!")
+        print(f"Date: {appointment_date} at {appointment_time}")
+        print(f"Car: {selected_car['car_model']}")
+        print(f"Service: {service_type}")
+    except Exception as e:
+        print(f"\nError: {e}")
+    finally:
+        conn.close()
+
+def view_appointments(customer_email):
+    display_header("YOUR APPOINTMENTS")
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+        SELECT a.appointment_date, a.appointment_time, a.service_type,
+               a.status, a.notes, c.car_model
+        FROM appointments a
+        LEFT JOIN cars c ON a.car_id = c.car_id
+        WHERE a.customer_email = ?
+        ORDER BY a.appointment_date DESC, a.appointment_time DESC
+    """, (customer_email,))
+    
+    appointments = cursor.fetchall()
+    
+    if appointments:
+        print(f"{'Date':<12} {'Time':<8} {'Service':<20} {'Status':<15} {'Car':<15} {'Notes':<20}")
+        print("-"*100)
+        for appt in appointments:
+            print(f"{appt['appointment_date']:<12} {appt['appointment_time']:<8} "
+                  f"{appt['service_type'][:18]:<20} {appt['status']:<15} "
+                  f"{appt['car_model'][:13]:<15} {appt['notes'][:18] if appt['notes'] else 'N/A':<20}")
+    else:
+        print("No appointments found.")
+    
+    conn.close()
+
+def admin_dashboard():
+    display_header("ADMIN DASHBOARD")
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Get statistics
+    cursor.execute("SELECT COUNT(*) as total_customers FROM customers")
+    total_customers = cursor.fetchone()['total_customers']
+    
+    cursor.execute("SELECT COUNT(*) as total_bills FROM bills")
+    total_bills = cursor.fetchone()['total_bills']
+    
+    cursor.execute("SELECT SUM(total) as total_revenue FROM bills")
+    total_revenue = cursor.fetchone()['total_revenue'] or 0
+    
+    cursor.execute("SELECT COUNT(*) as total_mods FROM modifications WHERE is_active = 1")
+    total_mods = cursor.fetchone()['total_mods']
+    
+    cursor.execute("SELECT COUNT(*) as total_appointments FROM appointments WHERE status = 'Scheduled'")
+    active_appointments = cursor.fetchone()['total_appointments']
+    
+    print(f"Total Customers: {total_customers}")
+    print(f"Total Bills: {total_bills}")
+    print(f"Total Revenue: ${total_revenue:,.2f}")
+    print(f"Available Modifications: {total_mods}")
+    print(f"Active Appointments: {active_appointments}")
+    
+    # Recent bills
+    print("\nRecent Bills:")
+    print("-"*60)
+    cursor.execute("""
+        SELECT b.bill_number, b.bill_date, b.total, c.name, ca.car_model
+        FROM bills b
+        JOIN customers c ON b.customer_email = c.email
+        LEFT JOIN cars ca ON b.car_id = ca.car_id
+        ORDER BY b.bill_date DESC
+        LIMIT 10
+    """)
+    
+    recent_bills = cursor.fetchall()
+    if recent_bills:
+        for bill in recent_bills:
+            print(f"Bill #{bill['bill_number']}: {bill['bill_date']} - ${bill['total']:,.2f} - "
+                  f"{bill['name']} - {bill['car_model']}")
+    else:
+        print("No bills found.")
+    
+    conn.close()
+
+# Main Application
+def main():
+    initialize_database()
+    
+    print("\n" + "="*80)
+    print("CAR MODIFICATION STUDIO MANAGEMENT SYSTEM")
+    print("="*80)
+    
+    current_user = None
+    
+    while True:
+        if not current_user:
+            # Main menu for non-logged in users
+            display_header("MAIN MENU")
+            choice = display_menu([
+                ("Customer Login", None),
+                ("Customer Registration", None),
+                ("Admin Dashboard", None),
+                ("Exit", None)
+            ])
+            
+            if choice == 1:
+                current_user = login_customer()
+            elif choice == 2:
+                current_user = register_customer()
+            elif choice == 3:
+                admin_dashboard()
+                input("\nPress Enter to continue...")
+            elif choice == 0:
+                print("\nThank you for using Car Modification Studio!")
+                break
+            else:
+                print("\nPlease select a valid option.")
+        
+        else:
+            # Main menu for logged in customers
+            display_header(f"WELCOME {current_user}")
+            choice = display_menu([
+                ("Add New Car", None),
+                ("View My Cars", None),
+                ("View All Modifications", None),
+                ("Create New Build", None),
+                ("View My Profile", None),
+                ("View Reports & Analytics", None),
+                ("AI Recommendations", None),
+                ("Risk Analysis", None),
+                ("Customer Classification", None),
+                ("Export My Data", None),
+                ("Schedule Appointment", None),
+                ("View Appointments", None),
+                ("Logout", None)
+            ])
+            
+            if choice == 1:
+                add_car(current_user)
+            elif choice == 2:
+                list_cars(current_user)
+            elif choice == 3:
+                list_modifications()
+            elif choice == 4:
+                create_build(current_user)
+            elif choice == 5:
+                view_profile(current_user)
+            elif choice == 6:
+                view_reports(current_user)
+            elif choice == 7:
+                ai_recommendations(current_user)
+            elif choice == 8:
+                risk_analysis(current_user)
+            elif choice == 9:
+                customer_classification(current_user)
+            elif choice == 10:
+                export_data(current_user)
+            elif choice == 11:
+                schedule_appointment(current_user)
+            elif choice == 12:
+                view_appointments(current_user)
+            elif choice == 13:
+                current_user = None
+                print("\nLogged out successfully!")
+                continue
+            elif choice == 0:
+                print("\nThank you for using Car Modification Studio!")
+                break
+            
+            input("\nPress Enter to continue...")
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n\nProgram terminated by user.")
+    except Exception as e:
+        print(f"\nAn unexpected error occurred: {e}")
+        import traceback
+        traceback.print_exc()
